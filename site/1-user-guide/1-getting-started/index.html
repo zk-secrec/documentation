@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Getting Started - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../0-installation/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../2-dev-guide/0-profiling/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#getting-started" class="nav-link">Getting Started</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#a-trivial-factorization-example" class="nav-link">A trivial factorization example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#a-simple-summation-example" class="nav-link">A simple summation example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#a-more-serious-example-of-factorization" class="nav-link">A more serious example of factorization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="getting-started">Getting Started</h1>
+<h2 id="a-trivial-factorization-example">A trivial factorization example</h2>
+<p>In this example, we will write a simple ZK-SecreC program that will read two
+integers from the witness file and prove that these two numbers are factors of
+a publicly known integer.</p>
+<p>First let's create a new ZK-SecreC program:</p>
+<pre><code>// factors.zksc
+// The prover wants to convince the verifier of knowing a factorization of 96
+
+type N : Nat = 0xfffffffb;
+
+fn main() where Field[N] {
+  let n : uint[N] $pre @public = 96;
+  let x : uint[N] $post @prover = wire { get_witness(&quot;x&quot;) };
+  let y : uint[N] $post @prover = wire { get_witness(&quot;y&quot;) };
+  let z : uint[N] $post @prover = (wire { n }) as @prover;
+  assert_zero(x * y - z);
+}
+</code></pre>
+<p>The first two lines, starting with <code>//</code>, are comments. The following code line defines <code>N</code> to be a type-level natural number. Its value 2<sup>32</sup>-5 is given in hexadecimal notation. The program contains one function <code>main</code> which is the starting point of the execution.</p>
+<p>The first line of the body of the <code>main</code> function defines a variable <code>n</code> to hold the public integer 96. The stage qualifier <code>$pre</code> in the type of the variable shows that this value will lie outside the circuit. The next two lines load the values of variables <code>x</code> and <code>y</code> from the witness file using <code>get_witness</code>. We enclose the result of the <code>get_witness</code> function in a <code>wire</code> block, telling that these values should be given to our circuit as inputs. So the stage qualifier of these variables is <code>$post</code>. The fourth line of the body of the function similarly forwards the public integer 96 to the circuit. The <code>as @prover</code> part of the line lifts the number to the prover's domain. This is necessary for the subtraction in the next line to be type correct. Finally, the last line of the body of the <code>main</code> function makes the assertion that the product of the first two inputs equals the last input. Assertions in ZK-SecreC will become the outputs of the circuit.</p>
+<p>The data type <code>uint[N]</code> occurring in the code is the type of elements of the finite field of size previously assigned to the variable <code>N</code>. The head line of the function (after the keyword <code>where</code>) declares <code>N</code> to satisfy the type constraint <code>Field</code>. This is necessary for putting values of type <code>uint[N]</code> on wires. For semantic correctness, the value of <code>N</code> must be a prime number. It is the responsibility of the programmer to ensure this property as ZK-SecreC compiler does not check for primality. </p>
+<p>Note that, although the syntax and type rules of ZK-SecreC allow the order of conversions in the fourth line of the body of the function to be reversed (to obtain <code>wire { n as @prover }</code>), it is crucial for credibility of the ZK proof to have the order of conversions as shown in the code. Namely, <code>(wire { n }) as @prover</code> first passes the number 96 to the circuit and only then lifts it to the prover's domain. Doing things in the opposite order would mean that the circuit will get the input after the value has been lifted to the prover's domain, which enables the prover to replace the value with whatever other value before passing it to the circuit. Hence the prover could choose the factors arbitrarily and feed the circuit with the product of these factors instead of 96. The proof would succeed incorrectly.</p>
+<p>Before we can compile this example code, we also need a <code>.json</code> file containing the secret integers.  Suppose <code>witness.json</code> has the following contents:</p>
+<pre><code>{
+  &quot;x&quot;: &quot;16&quot;,
+  &quot;y&quot;: &quot;6&quot;
+}
+</code></pre>
+<p>Note the double quotes around both keys and values! The program will use the arguments of the <code>get_witness</code> function as keys of the dictionary in the <code>.json</code> file and reads the corresponding values. So the value of the variable <code>x</code> will be 16 and the value of the variable <code>y</code> will be 6.</p>
+<p>To compile the program we have to run</p>
+<pre><code>runrust factors.zksc -w witness.json -o result
+</code></pre>
+<p>This creates files <code>result.rel</code>, <code>result_0.wit</code> and <code>result_0.ins</code>. The <code>.rel</code> file contains a list of wires which make up the arithmetic circuit:</p>
+<pre><code>// File result.rel
+version 2.1.0;
+circuit;
+@type field 4294967291;
+@begin
+  $0 &lt;- @private(0);
+  $1 &lt;- @private(0);
+  $2 &lt;- @mul(0: $0, $1);
+  $3 &lt;- @addc(0: $2, &lt;4294967195&gt;);
+  @assert_zero(0: $3);
+@end
+</code></pre>
+<p>The header (before <code>@begin</code>) contains the used version of Circuit-IR, the keyword <code>circuit</code> confirming the type of the file, and a field declaration. This is the size of the only finite field used in the ZK-SecreC program, now written in decimal. Now let's look at the wires (between <code>@begin</code> and <code>@end</code>).</p>
+<pre><code>  $0 &lt;- @private(0);
+  $1 &lt;- @private(0);
+</code></pre>
+<p>These lines tell us that the values of wires <code>$0</code> and <code>$1</code> are inputs read from the witness stream, i.e., they are not public. There is one witness stream for every field. The argument of <code>@private</code> indicates the index of the field in the order of declaration in the header. In this example, only one field is used and its index is 0.</p>
+<pre><code>  $2 &lt;- @mul(0: $0, $1);
+</code></pre>
+<p>This line declares that the values on wires <code>$0</code> and <code>$1</code> are multiplied in the field number 0 and the result is stored on wire <code>$2</code>. </p>
+<pre><code>  $3 &lt;- @addc(0: $2, &lt;4294967195&gt;);
+</code></pre>
+<p>Here, the value of the expression that is going to be asserted zero is stored on the wire <code>$3</code>. The constant written in angle brackets equals -96 in the finite field in which the computation is performed. So the value on wire <code>$3</code> will be the difference of the value on wire <code>$2</code> and the number 96.</p>
+<pre><code>  @assert_zero(0: $3);
+</code></pre>
+<p>Finally, the value on wire <code>$3</code> is asserted to be zero of the field number 0.</p>
+<p>When we look into the <code>result_0.wit</code> file, we see that it contains the secret values <code>16</code> and <code>6</code>:</p>
+<pre><code>// File result_0.wit
+version 2.1.0;
+private_input;
+@type field 4294967291;
+@begin
+  &lt;16&gt;;
+  &lt;6&gt;;
+@end
+</code></pre>
+<p>The file <code>result_0.ins</code> has an empty body because the verifier's input stream is not used in this example:</p>
+<pre><code>// File result_0.ins
+version 2.1.0;
+public_input;
+@type field 4294967291;
+@begin
+@end
+</code></pre>
+<p>When running the zero-knowledge protocol, the prover would have access to the circuit and both input streams, but the verifier would only have the contents of the <code>.rel</code> file and the <code>.ins</code> file.</p>
+<h2 id="a-simple-summation-example">A simple summation example</h2>
+<p>In the second example, we will write a ZK-SecreC program that will read a list of integers from the instance file and claim that their sum equals the number read from the witness file.</p>
+<p>The ZK-SecreC program looks like this:</p>
+<pre><code>// summation.zksc
+// The prover wants to convince the verifier of knowing the total sum of numbers in the verifier's list
+
+type N : Nat = 1030307;
+type M : Nat = 0x10000000000000000;
+
+fn main() where Field[N] {
+  let n : uint[M] $pre @public = get_public(&quot;n&quot;);
+  let xs_pre : list[uint[N] $pre @verifier] $pre @verifier = get_instance(&quot;xs&quot;);
+  let xs = for i in 0 .. n { wire { xs_pre[i as @verifier] } };
+  let y = wire { get_witness(&quot;y&quot;) };
+  let s = sum(xs);
+  assert_zero(s as @prover - y);
+}
+</code></pre>
+<p>The first line of the body of the function <code>main</code> reads a public constant from a <code>.json</code> file. The possibility to put public constants into a <code>.json</code> file is good for keeping data and program logic separate. Note the parameter <code>M</code> with value 2<sup>64</sup> in the data type. ZK-SecreC requires that all loop indices and list lengths are of the integer type with this module. Besides finite fields of prime size, ZK-SecreC supports 8-, 16-, 32-, 64-, and 128-bit integer types, which are written in the form <code>uint[</code><em>M</em><code>]</code> where <em>M</em> denotes the corresponding modulus 2<sup>8</sup>, 2<sup>16</sup>, 2<sup>32</sup>, 2<sup>64</sup> or 2<sup>128</sup>, and a type <code>uint</code> (without modulus parameter) of integers with unlimited size.</p>
+<p>The second line of the body of the function <code>main</code> reads the verifier's file. It is assumed that the value of the key "xs" is a list of integers. This is reflected in the type annotation. The element type of the list is written in brackets after the <code>list</code> keyword. So the type <code>list[uint[N] $pre @verifier] $pre @verifier</code> establishes that the elements of the list are elements of the finite field of size 1030307 in the verifier's domain outside the circuit, and the list itself is also in the verifier's domain outside the circuit. </p>
+<p>The third line of the body of the function <code>main</code> passes the elements of the list one by one to the circuit as inputs and forms a new list of the values in circuit. The right-hand side of the definition in this line consists of a for loop which constructs the new list. It uses the previously read value of the variable <code>n</code> as the known length of the list. So we assume that, although the list and its elements are in the verifier domain, the length of the list is actually a public value. The length of the list would become public anyway since it will be reflected in the size of the circuit. The fact that <code>n</code> is public forces the loop index <code>i</code> that runs from 0 up to <code>n</code> to be public, too. In the body of the loop, however, the value of <code>i</code> must be lifted to the verifier's domain because, in order to lookup elements of a list, the index and the list must be in the same domain. For the same reason, the resulting list will be in the public domain since it is indexed by <code>i</code> which is public. Hence the type of <code>xs</code> is <code>list[uint[N] $post @verifier] $pre @public</code> but the type is omitted from the code. ZK-SecreC has built-in type inference which enables omitting types of variables if they can be inferred from context.</p>
+<p>The fourth line of the body of the function <code>main</code> reads a value from the prover's file and passes it to the circuit. The next line finds the total sum of the verifier's values in the circuit, using a standalone function <code>sum</code>. The last line of the body of <code>main</code> asserts that the sum equals the prover's input.</p>
+<p>The contents of the <code>.json</code> files could be as follows:</p>
+<p><code>public.json</code>:</p>
+<pre><code>{
+  &quot;n&quot;: &quot;7&quot;
+}
+</code></pre>
+<p><code>instance.json</code>:</p>
+<pre><code>{
+  &quot;xs&quot;: [&quot;11&quot;, &quot;22&quot;, &quot;33&quot;, &quot;44&quot;, &quot;55&quot;, &quot;66&quot;, &quot;77&quot;]
+}
+</code></pre>
+<p><code>witness.json</code>:</p>
+<pre><code>{
+  &quot;y&quot;: &quot;308&quot;
+}
+</code></pre>
+<p>Let's now study several ways of defining the auxiliary function <code>sum</code>.</p>
+<h3 id="using-a-mutable-variable">Using a mutable variable</h3>
+<p>One can introduce a mutable variable that stores the intermediate sums and return its final value:</p>
+<pre><code>fn sum[$S, @D](xs : list[uint[N] $S @D]) -&gt; uint[N] $S @D {
+  let mut s = 0;
+  for i in 0 .. length(xs) { s = s + xs[i] };
+  s
+}
+</code></pre>
+<p>The function returns the sum of its argument list that is denoted by the parameter <code>xs</code>. The first line of the body of the function introduces a new mutable variable <code>s</code>. Mutability is established by the keyword <code>mut</code>. In the loop that follows, each element of the argument list is added to the new variable. The final value of this variable will be the total sum. The last line returns it.</p>
+<p>As it is, the defined function is polymorphic in both stage and domain. The type parameters <code>$S</code> and <code>@D</code> are written in brackets right after the function name. The characters <code>$</code> and <code>@</code> in front of the names indicate that the variables denote a stage and a domain, respectively. The declared type of the parameter <code>xs</code> is <code>list[uint[N] $S @D]</code> meaning that the function can work with lists of elements in the finite field of size 1030307 belonging to whatever domain, regardless of being outside or inside the circuit. One can make <code>N</code> also a type parameter of the function by adding <code>N : Nat</code> into the brackets. Currently, <code>N</code> refers to the global constant 1030307.</p>
+<h3 id="recursive-definition-of-an-auxiliary-list">Recursive definition of an auxiliary list</h3>
+<p>One can recursively define a list of partial sums and return its last element:</p>
+<pre><code>fn sum[$S, @D](xs : list[uint[N] $S @D]) -&gt; uint[N] $S @D {
+  let rec sums = for i in 0 .. length(xs) + 1 {
+    if (i == 0) { 0 } else { sums[i - 1] + xs[i - 1] }
+  };
+  sums[length(xs)]
+}
+</code></pre>
+<p>The signature of the function is the same as in the previous case. Instead of using an auxiliary mutable variable, the body of the function defines a variable <code>sums</code> to hold a list of all partial sums of elements of the original list. The first element is defined to be zero and each of the following elements is defined as the sum of the current element of the new list and the next element of the original list. Recursion in the local definition is allowed by the keyword <code>rec</code>. The last line of the body of the function returns the last element of the new list which contains precisely the total sum of elements of the original list.</p>
+<h3 id="calling-the-library-function">Calling the library function</h3>
+<p>The standard library of ZK-SecreC contains a function <code>sum</code> that finds the total sum of its argument list. Hence it suffices to import the corresponding module <code>Std</code>. For that, the following code line has  to be added to the file <code>summation.zksc</code>:</p>
+<pre><code>use Std::*;
+</code></pre>
+<p>This library module also defines the type synonym <code>u64</code> to denote the type <code>uint[0x10000000000000000]</code>. Hence, when using <code>Std</code>, there is no need to define <code>M</code> in the program, and the type <code>uint[M]</code> can be replaced with <code>u64</code>.</p>
+<h3 id="output">Output</h3>
+<p>To compile the program we might run</p>
+<pre><code>runrust summation.zksc -p public.json -i instance.json -w witness.json -o result
+</code></pre>
+<p>All three variants lead to output files (relation description, verifier's input stream, and prover's input stream) with the following contents:</p>
+<pre><code>// File result.rel
+version 2.1.0;
+circuit;
+@type field 1030307;
+@begin
+  $0 &lt;- @public(0);
+  $1 &lt;- @public(0);
+  $2 &lt;- @public(0);
+  $3 &lt;- @public(0);
+  $4 &lt;- @public(0);
+  $5 &lt;- @public(0);
+  $6 &lt;- @public(0);
+  $7 &lt;- @private(0);
+  $8 &lt;- @addc(0: $0, &lt;0&gt;);
+  $9 &lt;- @add(0: $8, $1);
+  $10 &lt;- @add(0: $9, $2);
+  $11 &lt;- @add(0: $10, $3);
+  $12 &lt;- @add(0: $11, $4);
+  $13 &lt;- @add(0: $12, $5);
+  $14 &lt;- @add(0: $13, $6);
+  $15 &lt;- @mulc(0: $7, &lt;1030306&gt;);
+  $16 &lt;- @add(0: $14, $15);
+  @assert_zero(0: $16);
+@end
+</code></pre>
+<pre><code>// File result_0.ins
+version 2.1.0;
+public_input;
+@type field 1030307;
+@begin
+  &lt;11&gt;;
+  &lt;22&gt;;
+  &lt;33&gt;;
+  &lt;44&gt;;
+  &lt;55&gt;;
+  &lt;66&gt;;
+  &lt;77&gt;;
+@end
+</code></pre>
+<pre><code>// File result_0.wit
+version 2.1.0;
+private_input;
+@type field 1030307;
+@begin
+  &lt;308&gt;;
+@end
+</code></pre>
+<h2 id="a-more-serious-example-of-factorization">A more serious example of factorization</h2>
+<p>In the initial factorization example, the prover might have submitted 1 and 96 as factors of 96 and the proof would still have been successful. Let's study how to update the program in such a way that only non-trivial factorizations would be accepted. This requires checking that neither of the factors is one. Moreover, the initial example allowed the prover to misuse overflow, i.e., cheat by providing two numbers whose product were equal to the verifier's number in the finite field but not in integers. In order to eliminate this possibility, size checks must be added. It is safe to assert that both factor candidates can be represented using less than half of the number of bits in the binary representation of the field size. This excludes overflow when the numbers are multiplied.</p>
+<p>The following program would work:</p>
+<pre><code>use Std::*;
+use Integer::*;
+use Inequalities::*;
+
+type N : Nat = 3647104749702663936044671300410017453855276508776292262406172562348790436137984035021;
+
+fn main() where Field[N] {
+  let z : uint[N] $post @verifier = wire { get_instance(&quot;z&quot;) };
+  let x : uint[N] $post @prover = wire { get_witness(&quot;x&quot;) };
+  let y = wire { z as @prover as $pre / x as $pre };
+  assert(!eq(x, 1));
+  assert(!eq(y, 1));
+  let mut s = sizeasserter_new(((log2(N) - 1) / 2) as u64);
+  let trash = check_size(x, ref s);
+  let trash = check_size(y, ref s);
+  assert_zero(x * y - z as @prover)
+}
+</code></pre>
+<p>The first line of the body of <code>main</code> reads the number to be factorized and passes it to the circuit. The second line similarly reads one factor and passes it to the circuit.</p>
+<p>In the third line, the second input from the prover goes to the circuit. Instead of reading it from the prover's file, the code instructs the prover to compute this input as the ratio of the verifier's input and the prover's first input. This computation must be delegated outside the circuit as the circuit does not support division. Therefore the stage of the operands must be transformed by <code>as $pre</code>. Computing the second factor instead of reading it from the file is a non-essential change that makes the second factor formally an expanded witness, but it does not cause changes in the resulting prover's stream as the latter does not distinguish between witness and expanded witness.</p>
+<p>The fourth and fifth line assert that the factor candidates differ from 1. The built-in ZK-SecreC function <code>assert</code> requires a boolean argument and asserts it being true. The <code>eq</code> library function returns true if its two arguments are equal and false otherwise; the unary operator <code>!</code> negates its boolean argument. This somewhat complicated sequence of operations is necessary since there is no <code>assert_nonzero</code> function.</p>
+<p>The next three lines deal with checking the size of the factor candidates. For that, a size asserter is created. A <em>size asserter</em> is an object that is able to check that binary representations of numbers fit into a fixed number of bits. The number of bits is given as argument when creating the object. Here, the argument is <code>(log2(N) - 1) / 2</code> where <code>log2</code> is the library function that returns the floor of binary logarithm of its argument; note that ZK-SecreC allows the programmer to use type level integers as values of type <code>uint</code>. The result must be cast to type <code>u64</code> as this is the argument type of the function <code>sizeasserter_new</code>. The actual check is triggered by the library function <code>check_size</code> that takes as arguments the number whose size is checked and a size asserter. The <code>let trash =</code> <code></code> is there because the result of <code>check_size</code> is not used (similarly to assertions, if the size check fails then the whole ZK proof fails).</p>
+<p>Note that the size asserter is assigned to a mutable variable, and it is also passed to the function <code>check_size</code> as mutable as indicated by the keyword <code>ref</code>. It is essential to make size asserters mutable since, for computational efficiency, they collect information about the checked numbers throughout the program, thus changing their value at every operation, and do all necessary checks together at the end of their life time.</p>
+<p>Finally, the last line of the body of <code>main</code> asserts that the product of the claimed factors is indeed equal to the number being factorized.</p>
+<p>The resulting files will be much larger than in the case of the first example. Therefore we will not present the contents of the resulting files. The body of the <code>.rel</code> file contains 1580 lines and the body of the <code>.wit</code> file contains 284 lines. The large size of witness is caused by library functions that expand the witness. Most of the size explosion is caused by operations with the size asserter (finding out binary representations requires input from the prover) but <code>eq</code> also has to expand witness since equality check along with returning of the result cannot be performed by the circuit alone. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Installation - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../1-getting-started/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#frontend-and-backend" class="nav-link">Frontend and backend</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#building-locally" class="nav-link">Building locally</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#running-tests" class="nav-link">Running tests</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-the-compiler" class="nav-link">Using the compiler</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-the-compiler-frontend-alone" class="nav-link">Using the compiler frontend alone</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zk-secrec-vscode-extension" class="nav-link">ZK-SecreC vscode extension</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#building-and-using-the-production-docker-image" class="nav-link">Building and using the "production" Docker image</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-visual-studio-code-docker-dev-container" class="nav-link">Using Visual Studio Code Docker dev container</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#emp-backend" class="nav-link">EMP Backend</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#acknowledgements" class="nav-link">Acknowledgements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="installation">Installation</h1>
+<h2 id="frontend-and-backend">Frontend and backend</h2>
+<p>The ZK-SecreC compiler is divided into two parts called the frontend and the backend. The frontend contains a lexer, parser, type and effect checker, and a translator to a simpler intermediate language called Core ZK-SecreC. The frontend has been written in Haskell. The backend compiles the intermediate representation into Circuit-IR. The backend has been written in Rust. An intermediate part of the compiler, written in Haskell, generates Rust functions that, along with the compiler backend code, generate the compiled target code.</p>
+<p>The backend of the ZK-SecreC compiler is also able to interface with ZKP protocol implementations like the EMP toolkit and Mac'n'Cheese.</p>
+<h2 id="building-locally">Building locally</h2>
+<p>Building locally is a good option if you wish to develop ZK-SecreC tools. The following steps
+install the ZK-SecreC compiler and language server (but not Visual Studio Code
+plugin).</p>
+<p>The first step is to install the <code>stack</code> build tool. On Debian based distributions one can write:</p>
+<p><code>$ sudo apt install haskell-stack</code></p>
+<p>On macOS a fast way to get started is also to install <code>haskell-stack</code> using Homebrew:</p>
+<p><code>$ brew install haskell-stack</code></p>
+<p>If this leads to trouble, refer to the troubleshooting/installation guide at
+<code>https://docs.haskellstack.org/en/stable/install_and_upgrade/##macos</code></p>
+<p>ZK-SecreC requires a relatively new version of <code>stack</code> (&gt; 2). If your distribution
+has an older version of <code>stack</code>, you can upgrade it with:</p>
+<p><code>$ stack upgrade</code></p>
+<p>and then add <code>~/.local/bin</code> to your <code>PATH</code>.</p>
+<p>You can now compile and install the ZK-SecreC compiler frontend and language server with:</p>
+<p><code>$ stack install</code></p>
+<p>Stack will locally install the correct version of GHC for you before building.
+If builds inexplicably start to fail during development, it can, in some situations,
+be fixed with:</p>
+<p><code>$ stack clean &amp;&amp; stack install</code></p>
+<p>It is possible to build the compiler frontend without installing using <code>stack build</code>. Repeating this command will recompile the compiler frontend if any code has been changed.</p>
+<p>Using the ZK-SecreC compiler backend requires an installation of the Rust toolchain. The recommended method of installing it is by using <a href="https://rustup.rs/">Rustup</a>.</p>
+<h2 id="running-tests">Running tests</h2>
+<p>Unit tests of the Haskell part of the compiler can be run with:</p>
+<p><code>$ stack test --test-arguments "--color"</code></p>
+<h2 id="using-the-compiler">Using the compiler</h2>
+<p>The entrypoint to invoking the compiler is the script <code>runrust</code> in the 
+repository root. The script generates the Rust source code, compiles it, and
+executes the resulting binary which outputs the IR.</p>
+<p>Usage instructions are provided by running the script without any arguments:</p>
+<p><code>$ ./runrust</code></p>
+<p>For example, to generate the Circuit-IR code out of the ZK-SecreC example code in <code>docs/example_sum.zksc</code>, one can run the command</p>
+<p><code>$ runrust docs/example_sum.zksc -p docs/example_sum_public.json -i docs/example_sum_instance.json -w docs/example_sum_witness.json -c docs/example_sum.ccc -o example_sum</code></p>
+<p>In the <code>.json</code> files, one passes the public, Verifier and Prover inputs to the program. The Verifier and Prover inputs are known as instance and witness, respectively. More precisely, these are non-expanded instance and witness; if expanded instance and witness are necessary, they must be programmed in the ZK-SecreC code. In the <code>.ccc</code> file, one provides configuration information telling the compiler which fields, plugins etc. are supported by the technology that is going to run the Circuit-IR code. Finally, the argument after the <code>-o</code> flag determines the names of the files where the compiler output will be written. In the current example, the Circuit-IR output is written in the file <code>example_sum.rel</code> in the compiler root directory. In addition, the files <code>example_sum_0.ins</code> and <code>example_sum_0.wit</code> will contain the instance and witness stream (if there were expanded instance and witness, the streams would include them, too). The suffix <code>0</code> denotes the index of the field (in the order of declaration in the head of the <code>.rel</code> file). If multiple fields were used then there would be one <code>.ins</code> and <code>.wit</code> file for each of them.</p>
+<p>If public, Verifier an Prover inputs are provided in this order then the corresponding flags <code>-p</code>, <code>-i</code> and <code>-w</code> can be dropped. So the last command can be shortened as</p>
+<p><code>$ runrust docs/example_sum.zksc docs/example_sum_public.json docs/example_sum_instance.json docs/example_sum_witness.json -c docs/example_sum.ccc -o example_sum</code></p>
+<p>or, using regular expressions recognized by the shell, even as</p>
+<p><code>$ runrust docs/example_sum.zksc docs/example_sum_{public,instance,witness}.json -c docs/example_sum.ccc -o example_sum</code></p>
+<h2 id="using-the-compiler-frontend-alone">Using the compiler frontend alone</h2>
+<p>Sometimes one wants to run the compiler frontend alone. This can be done using the command <code>zkscc</code>, provided that the compiler has been installed. Its short manual is output by</p>
+<p><code>$ zkscc --help</code></p>
+<p>For instance, in order to compile the file <code>docs/example_sum.zksc</code> with configuration (CCC) file <code>cfg/permitall.ccc</code> and generate output <code>example_sum.rs</code> into the compiler root directory, run</p>
+<p><code>$ zkscc docs/example_sum.zksc -c cfg/permitall.ccc -o example_sum.rs</code></p>
+<p>To do the same without having installed the compiler, one can write:</p>
+<p><code>$ stack run zkscc -- docs/example_sum.zksc -c cfg/permitall.ccc -o example_sum.rs</code></p>
+<p>Note the double dash which is required to separate arguments of <code>stack</code> from arguments of <code>zkscc</code>. </p>
+<p>This command will recompile the compiler if it has been changed. To do the same without recompiling, use <code>stack exec</code> in otherwise identical manner.</p>
+<h2 id="zk-secrec-vscode-extension">ZK-SecreC vscode extension</h2>
+<p>The vscode extension adds syntax highlighting and language server integration.
+Currently only syntax and typing errors are shown.</p>
+<p>The vscode extension needs the <code>zksc-language-server</code> to be installed (see above).</p>
+<h3 id="building-the-vs-code-extension">Building the VS Code extension</h3>
+<p>Install npm and node using <a href="https://github.com/nvm-sh/nvm">nvm</a>.
+This is necessary as the version of <code>nodejs</code> that Ubuntu supplies is most likely too old.</p>
+<p>Install project dependencies (in the <code>vscode-zksc</code> directory):</p>
+<p><code>$ npm ci</code></p>
+<p>Compile:</p>
+<pre><code class="language-bash">$ export NODE_OPTIONS=--openssl-legacy-provider
+$ npm run package
+</code></pre>
+<p>Note that defining NODE_OPTIONS might not be necessary but it is required
+with some older OpenSSL versions.</p>
+<h3 id="installing">Installing</h3>
+<ol>
+<li>
+<p>Open the extensions manager in VS Code (shortcut: Ctrl + Shift + X).</p>
+</li>
+<li>
+<p>Open the menu with the ellipsis icon (...) on the right of the EXTENSIONS
+   title.</p>
+</li>
+<li>
+<p>Choose "Install from VSIX...".</p>
+</li>
+<li>
+<p>Locate the *.vsix file that you built and click Install.</p>
+</li>
+</ol>
+<h3 id="configuring">Configuring</h3>
+<ol>
+<li>
+<p>Press Ctrl + , to open the settings.</p>
+</li>
+<li>
+<p>Search for "zk-secrec". You will find ZK-SecreC extension configuration
+   options.</p>
+</li>
+<li>
+<p>Change the server path to where your zksc-language-server binary is. Note
+   that there is no variable expansion here.</p>
+</li>
+</ol>
+<h3 id="running-in-vs-code-extension-development-mode">Running in VS Code Extension Development mode</h3>
+<p>This is useful if you are developing the extension.</p>
+<ol>
+<li>
+<p>Open the project in VS Code.</p>
+</li>
+<li>
+<p>Compile the extension using <code>npm run compile</code>.</p>
+</li>
+<li>
+<p>In VS Code press F5 or click Run -&gt; Start Debugging in the menu.</p>
+</li>
+<li>
+<p>Choose VS Code Extension Development from the menu that opened.</p>
+</li>
+</ol>
+<p>Remember to configure the language server path before opening ZK-SecreC files.</p>
+<p>If you make changes to the code you will have to recompile the program or use
+<code>npm run watch</code>.</p>
+<p>You can restart VS Code Extension Development mode using Ctrl + Shift + P and
+searching for "Developer: Reload Window" in the opened menu.</p>
+<h3 id="known-limitations">Known limitations</h3>
+<p>VS Code has a workspace concept. This extension currently only works if you
+have one workspace which is likely to be sufficient for ZK-SecreC
+programming. The extension is untested with multiple workspaces and is likely
+to have bugs in that case.</p>
+<h2 id="building-and-using-the-production-docker-image">Building and using the "production" Docker image</h2>
+<p>The <code>Dockerfile</code> in the top-level directory builds a minimal docker image with
+just the compiler.</p>
+<p>Build the image:</p>
+<p><code>$ docker build -t zkscc .</code></p>
+<p>Save the image as .tar.gz file:</p>
+<p><code>$ docker save zkscc | gzip &gt; zkscc.tar.gz</code></p>
+<p>The image can be re-created from the .tar.gz file using:</p>
+<p><code>$ docker load --input zkscc.tar.gz</code></p>
+<p>When running a container from the image you would probably want to access your
+ZK-SecreC programs in the container. The simplest option for this is to use
+<a href="https://docs.docker.com/storage/bind-mounts/">bind mounts</a>. Let's assume that
+the local directory foo contains ZK-SecreC programs. Run a container using:</p>
+<p><code>$ docker run -it --rm -v "$(pwd)/foo":/zksc/workspace/foo zkscc /bin/bash</code></p>
+<p>The foo directory is now available in the working directory.</p>
+<p>The image is bootstrapped with the Rust toolchain and the <code>runrust</code> script, so
+the Rust compilation pipeline can also be run the same as locally.</p>
+<p>The same container can be restarted if needed with <code>docker start</code> <code></code><em>c</em> followed by <code>docker attach</code> <code></code><em>c</em>, where <em>c</em> is the container identifier.</p>
+<p>The Docker image can also be used non-interactively as a base image for other
+application specific images (e.g. demonstrators).</p>
+<h2 id="using-visual-studio-code-docker-dev-container">Using Visual Studio Code Docker dev container</h2>
+<p>This option is convenient if you wish to use the ZK-SecreC tools but not
+necessarily develop them further. It gives you access to the ZK-SecreC compiler
+and an IDE which you can use to develop proofs.</p>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a>,</li>
+<li><a href="https://docs.docker.com/get-docker/">Docker</a>.</li>
+</ul>
+<h3 id="installation-steps">Installation steps</h3>
+<ol>
+<li>Open VS Code.</li>
+<li>Open the Extensions panel using Ctrl + Shift + <code>X</code> or by clicking
+   on the package icon in the left sidebar.</li>
+<li>Search for "remote containers" and install the "Remote - Containers"
+   extension.</li>
+<li>Run <code>docker build -t zkscc .</code> in the repository root to build and tag the 
+   dev container base image.</li>
+</ol>
+<p>If you open the directory of this repository in VS Code it will now offer you
+to open the directory in the dev container with ZK-SecreC tools.</p>
+<p>After VS Code has opened the dev container it has installed the ZK-SecreC
+extension as well. You can now work on <code>.zksc</code> files in the repository directory.</p>
+<p>Open the panel (Ctrl + <code>J</code> or View -&gt; Appearance -&gt; Show Panel). Click on the
+terminal tab. If no terminal is opened click the plus sign on the right of the
+panel. You now have a shell running inside of the container and the repository
+files are mounted in the container. To use the Rust compilation pipeline,
+call the script included in the environment's path, e.g. <code>runrust</code>.</p>
+<h2 id="emp-backend">EMP Backend</h2>
+<p><a href="https://github.com/emp-toolkit/emp-zk">EMP</a> is a ZK toolkit written in C++ which
+allows a prover and verifier to perform arithmetic and boolean operations.
+The "EMP backend" replaces SIEVE IR generation with calls to the emp backend code
+instead, allowing an interactive execution session of the <code>.zksc</code> code using the emp runtime.</p>
+<p>The way this works is through a small wrapper named <code>emp-wrapper</code> which exposes
+the necessary functionality. Then, Rust bindings are generated for that wrapper using
+<code>bindgen</code> which is then called by the generated Rust code.</p>
+<h3 id="installation_1">Installation</h3>
+<p>To install the EMP backend you need to compile the emp-wrapper library.
+The build instructions for that are in the <code>./emp-wrapper</code> readme.</p>
+<h3 id="usage">Usage</h3>
+<p>The EMP backend can only be called through Rust via the <code>runrust</code> command.
+Calling <code>./runrust</code> will show details of the available flags (notably <code>--emp</code>).
+You will need two run two instances of the program, one with <code>--emp --prover</code>
+and the other with <code>--emp --verifier</code>. Building the two instances of the program
+nearly at the same time can result in them not successfully connecting.</p>
+<p>If running EMP toolkit over the network, use the <code>--emp-addr</code> flag to specify address and port.</p>
+<h3 id="quirks">Quirks</h3>
+<p><code>emp-toolkit</code> has two kinds of integers: bit vectors and fixed-precision integers.
+The current EMP backend as of 2022-08-15 only has bindings for the fixed-precision kind,
+which operates in the Mersenne61 modulus. For larger numbers you can use the <code>BigInt.zksc</code> module from the standard library.</p>
+<p>Booleans are also encoded as M61 integers, and logical operations are done through
+arithmetic ones. This means that in efficiency they are ranked as: <code>and</code>, <code>&gt;&gt;</code>, <code>or</code>, <code>&gt;&gt;&gt;&gt;</code>, <code>xor</code>.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>ZK-SecreC design and tool development has been funded by the Defense Advanced Research Projects Agency (DARPA) under contract HR0011-20-C-0083. The views, opinions, and/or findings expressed are those of the author(s) and should not be interpreted as representing the official views or policies of the Department of Defense or the U.S. Government. Distribution Statement "A" (Approved for Public Release, Distribution Unlimited).</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

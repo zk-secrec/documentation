@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Profiling - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../1-user-guide/1-getting-started/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../3-reference/0-values-and-types/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#profiling" class="nav-link">Profiling</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#profiling-of-generated-rust-code" class="nav-link">Profiling of generated Rust code</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#profiling-the-frontend-haskell-code" class="nav-link">Profiling the frontend Haskell code</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="profiling">Profiling</h1>
+<h2 id="profiling-of-generated-rust-code">Profiling of generated Rust code</h2>
+<p>The <code>runrust</code> script has a <code>--flamegraph</code> flag for generating flamegraphs of
+the execution time. This gives an overview of the execution time broken down by vertices of the
+call graph.  While this does not perfectly reflect the number of IR gates
+generated by particular functions, it shows where the execution time goes.</p>
+<p>This setup has been tested on Ubuntu only (setup instructions below).</p>
+<h3 id="usage">Usage</h3>
+<p>With appropriate setup the usage should be as simple as:</p>
+<pre><code class="language-bash">$ ./runrust --flamegraph \
+  docs/M27-electric-vehicle/ev-inf-mod.zksc \
+  docs/M27-electric-vehicle/pentagon_inputs/public.json \
+  docs/M27-electric-vehicle/pentagon_inputs/{instance,witness}_darpa_pentagon.json \
+  -c docs/M27-electric-vehicle/ev-inf-mod.ccc -o opublic &gt; /dev/null
+</code></pre>
+<p>This call generates file <code>src/Rust/flamegraph.svg</code> that can be viewed with all
+modern browsers. Under linux, profile data are gathered with <code>perf</code> and the data
+are written to <code>src/Rust/perf.data</code>.</p>
+<p>This file can be further transformed and used by other tools like
+<a href="https://profiler.firefox.com/">Firefox profiler</a>.  Make sure to have <code>rustfilt</code>
+installed. The following line also shortens generated functions names to strip
+the internal crate name and unique suffix:</p>
+<pre><code class="language-bash">perf script -i src/Rust/perf.data | sed -E 's/zkscc_rust::generated::(.*)_u[[:digit:]]*/\1/g' | rustfilt &gt; zkscc_rust.perf
+</code></pre>
+<p>The file <code>zkscc_rust.perf</code> can be directly loaded into the profile log viewer.</p>
+<h3 id="installing-dependencies-ubuntu">Installing dependencies (Ubuntu)</h3>
+<p>Install <code>perf</code> and other possible dependencies. Also modify the
+<code>kernel.perf_event_paranoid</code> setting to make sure that <code>perf</code> does not have to
+be run as root:</p>
+<pre><code class="language-bash">sudo apt install linux-tools-common linux-tools-generic linux-tools-`uname -r`
+sudo sysctl -w kernel.kptr_restrict=0
+sudo sysctl -w kernel.perf_event_paranoid=-1
+</code></pre>
+<p>To make these changes persist reboots, add a file <code>/etc/sysctl.d/50-perf.conf</code> with the following contents:</p>
+<pre><code>kernel.kptr_restrict=0
+kernel.perf_event_paranoid=-1
+</code></pre>
+<p>Make sure that cargo install directory (usually <code>~/.cargo/bin</code>) is found in <code>$PATH</code>. Install <a href="https://github.com/flamegraph-rs/flamegraph">cargo-flamegraph</a> as user:</p>
+<pre><code class="language-bash">cargo install flamegraph
+</code></pre>
+<p>Installing <code>rustfilt</code> is not necessary but it will help demangle function names
+to a more readable form:</p>
+<pre><code class="language-bash">cargo install rustfilt
+</code></pre>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<h4 id="its-so-slow">It's so slow!</h4>
+<p>The overhead should be less than twice in time.</p>
+<p>The issue might be that <code>perf</code> shipped with Ubuntu can be <a href="https://michcioperz.com/post/slow-perf-script/">very slow</a>. The solution is to install <code>perf</code> shipped with kernel that is linked against libbfd. We start by installing various dependencies that might be used by <code>perf</code>:</p>
+<pre><code class="language-bash">sudo apt install \
+    flex \
+    bison \
+    libelf-dev \
+    libaudit-dev \
+    libdw-dev \
+    libunwind-dev \
+    python2-dev \
+    binutils-dev \
+    libnuma-dev \
+    libgtk2.0-dev \
+    libbfd-dev \
+    libelf1 \
+    libperl-dev \
+    libnuma-dev \
+    libslang2 libslang2-dev \
+    libunwind8 libunwind8-dev \
+    binutils-multiarch-dev \
+    elfutils \
+    libiberty-dev
+</code></pre>
+<p>The following commands to install <code>perf</code> to <code>~/.local/bin</code> is for my particular kernel version; substitute your own.</p>
+<pre><code class="language-bash">sudo apt install linux-source
+cd &lt;some working directory&gt;
+cp /usr/src/linux-source-5.15.0/linux-source-5.15.0.tar.bz2 .
+tar xvfj linux-source-5.15.0.tar.bz2
+cd linux-source-5.15.0/tools/perf
+make prefix=$HOME/.local install-bin
+</code></pre>
+<h2 id="profiling-the-frontend-haskell-code">Profiling the frontend Haskell code</h2>
+<p>The simplest way to install the ZK-SecreC compiler frontend with profiling enabled is to invoke stack with appropriate profiling flag:</p>
+<p><code>$ stack install --profile</code></p>
+<p>By default, this installs ZK-SecreC compiler frontend with profiling enabled to <code>~/.local/bin</code>
+directory. Make sure that this directory is found in <code>PATH</code> environment variable.</p>
+<p>In order to make the compiler produce profiling output, appropriate flags must be
+passed to the Haskell run time system (RTS). For example, to obtain regular
+profiling output we must add flag <code>+RTS -p</code> to the original command line call.
+After calling</p>
+<p><code>$ zkscc &lt;regular options&gt; +RTS -p</code></p>
+<p>profiling output will be written to a human readable file <code>zkscc.prof</code>.</p>
+<p>Heap profiling output is produced with flag <code>-h</code>:</p>
+<p><code>$ zkscc &lt;regular options&gt; +RTS -h</code></p>
+<p>This produces a file <code>zkscc.hp</code> that must be converted to <code>.ps</code> format using
+<code>hp2ps</code> utility (should be bundled with GHC).</p>
+<p>Much more details about profiling Haskell programs with GHC can be found in the <a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/profiling.html">documentation of GHC</a>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

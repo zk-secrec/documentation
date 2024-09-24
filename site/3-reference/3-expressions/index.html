@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Expressions - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../2-type-level-expressions/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../4-top-level/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#expressions" class="nav-link">Expressions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#primitive-expressions" class="nav-link">Primitive expressions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compound-expressions" class="nav-link">Compound expressions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#statements-and-expressions-with-blocks" class="nav-link">Statements and expressions with blocks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="expressions">Expressions</h1>
+<h2 id="primitive-expressions">Primitive expressions</h2>
+<p>This subsection describes expressions that are primitive w.r.t. the Dijkstra shunting yard algorithm. This means that the structure within them does not affect parsing of parts of the expression outside of them. These parts may nevertheless have their own inner structure.</p>
+<h3 id="literals">Literals</h3>
+<p>Integer literals can stand for values of any type <code>uint[</code><em>N</em><code>]</code> and also values of type <code>uint</code>, regardless of the stage and domain. If the number expressed by the literal equals or exceeds the modulus then the value of the literal equals the reminder of this number upon division by the modulus. Similarly, Boolean literals can stand for values of any type <code>bool[</code><em>N</em><code>]</code> and also values of type <code>bool</code>, regardless of the stage and domain.</p>
+<p>String literals can be in any of the three domains but the stage can be <code>$pre</code> only.</p>
+<h3 id="tuples-structs-stores">Tuples, structs, stores</h3>
+<p>The tuple of expressions <em>e</em><sub>1</sub>, ..., <em>e</em><sub><em>n</em></sub>, in this order, is written as <code>(</code><em>e</em><sub>1</sub><code>,</code>...<code>,</code> <em>e</em><sub><em>n</em></sub><code>)</code>. The value of the latter expression is the tuple of values of the component expressions, in the given order.</p>
+<p>New structs can be created by the expression <em>S</em><code>{</code><em>x</em><sub>1</sub><code>:</code><em>e</em><sub>1</sub><code>,</code>...<code>,</code><em>x</em><sub>1</sub><code>:</code><em>e</em><sub><em>n</em></sub><code>}</code>, where <em>S</em> is the name of the struct type, <em>x</em><sub>1</sub>,...,<em>x</em><sub><em>n</em></sub> are names of fields in structs of this type, and <em>e</em><sub>1</sub>,...,<em>e</em><sub><em>n</em></sub> are expressions. Every field that the struct type requires must occur in the expression. The value of this expression is the struct containing precisely all the named fields, the value of each field being the value of the subexpression corresponding to the name of the field. </p>
+<p>Since the time stores were first introduced into ZK-SecreC as a builtin feature, stores can be written using the delimiters <code>{#</code> ... <code>}</code>. Non-empty stores are written by providing some initial key-value pairs in the form <code>{#</code><em>k</em><sub>1</sub><code>=&gt;</code><em>v</em><sub>1</sub><code>,</code>...<code>,</code><em>k</em><sub>n</sub><code>=&gt;</code><em>v</em><sub>n</sub><code>}</code> whereas empty stores are written as <code>{#}</code>. Here, both <em>k</em><sub><em>i</em></sub> and <em>v</em><sub>i</sub> may be any expressions. Although stores in the post stage are no more builtin, the old builtin store syntax is still usable for creating them. Stores in the pre stage can be created similarly using the delimiters <code>{##</code> ... <code>}</code>.</p>
+<h3 id="lists">Lists</h3>
+<p>Lists with a known constant length can be created by expressions of the form <code>[</code><em>e</em><sub>1</sub><code>,</code>...<code>,</code><em>e</em><sub><em>n</em></sub><code>]</code>. The value of this expression is the list whose elements are the values of expressions <em>e</em><sub>1</sub>,...,<em>e</em><sub><em>n</em></sub> in this order. An empty list is written as <code>[]</code>.</p>
+<p>To create a new list whose all elements are equal, one can write an expression <code>[</code><em>e</em><code>;</code><em>n</em><code>]</code> where <em>e</em> is an expression whose value is the repeating element and <em>n</em> is an expression whose value equals the number of repetitions.</p>
+<h3 id="parenthesized-expressions">Parenthesized expressions</h3>
+<p>Expressions in the form <code>(</code><em>e</em><code>)</code> where <em>e</em> is any expression evaluate to the same value as <em>e</em>.</p>
+<h2 id="compound-expressions">Compound expressions</h2>
+<p>This subsection surveys expressions composed from smaller expressions using function and operator applications and other similar constructs.</p>
+<h3 id="operator-application">Operator application</h3>
+<p>Expressions can be composed using unary and binary operators. In the case of builtin operators, predefined precedences are used to determine the right syntax tree of expressions.</p>
+<p>If another syntax tree is desired, subexpressions have to be parenthesized. For example, <code>1 + 2 * 3</code> is evaluated to 7 as multiplication binds tighter than addition, whereas <code>(1 + 2) * 3</code> evaluates to 9 because now addition in parentheses is done before multiplication.</p>
+<p>If more than two subexpressions are connected by binary operators of the same precedence then the leftmost one takes precedence. Equality and comparisons are exceptions as applying them in sequence without specifying the order by parentheses is a syntax error.</p>
+<p>Currently, precedences do not work with user-defined operators. Hence one must show the order of operations with parentheses, except when only builtin operators are involved.</p>
+<h3 id="function-applications">Function applications</h3>
+<p>Monomorphic function applications are written as expressions of the form <em>f</em><code>(</code><em>a</em><sub>1</sub><code>,</code>...<code>,</code><em>a</em><sub><em>n</em></sub><code>)</code>, where <em>f</em> is the name of the function and <em>a</em><sub>1</sub>, ..., <em>a</em><sub><em>n</em></sub> are the argument expressions. In a larger expression, function applications bind tighter than any unary or binary operator.</p>
+<p>Polymorphic functions usually can be called in the same way without specifying the actual type arguments, but if the actual type arguments cannot be inferred then they have to be specified before the ordinary argument sequence as a comma-separated list in brackets. The function identifier and the opening bracket must be separated by double colon. For instance, if the function <code>sum</code> assumes a stage and a domain as type level parameters like in the examples <a href="../../1-user-guide/1-getting-started.html">Getting Started</a> and this function is called with an actual (data level) parameter <code>xs</code> that fixes the stage and domain to be <code>$post</code> and <code>@verifier</code>, respectively, then the programmer can make the type level arguments explicit by writing the call as</p>
+<p><code>sum::[$post,@verifier](xs)</code>.</p>
+<p>Function arguments can be passed by value or by reference; the particular way is fixed for every function and its argument. An argument that is passed by value is written as just an expression whose value is to be passed to the function. A pass-by-reference argument must be preceded by keyword <code>ref</code> and it must be a mutable variable or a (direct or indirect) lookup into a mutable data structure. The function may change the value of such arguments in general.</p>
+<p>Pass-by-value parameters are immutable. Behind the scene, pass-by-value parameters may actually be passed by reference. Immutability guarantees that this does not change the semantics. So one may pass by value large data structures without the risk of wasting time and space for copying the data structure. The only difference between pass-by-value and pass-by-reference is the ability to mutate the parameter in the latter case.</p>
+<p>Functions that do not have pass-by-reference parameters are allowed to be applied partially. This means that one can provide less arguments than the function is able to take. The value of such expression is a function that can take the remaining arguments. A function with at least one pass-by-reference parameter cannot be applied partially.</p>
+<h3 id="vectorized-applications">Vectorized applications</h3>
+<p>ZK-SecreC allows the programmer to syntactically lift functions and operators to vectors. Vectorized application is identified by a period.</p>
+<p>For example, applying function <em>f</em> to arguments <em>a</em><sub>1</sub>, ..., <em>a</em><sub><em>n</em></sub> in vectorized way is denoted by <em>f</em><code>.(</code><em>a</em><sub>1</sub><code>,</code>...<code>,</code><em>a</em><sub><em>n</em></sub><code>)</code>, i.e., using <code>.(</code> as the delimiter opening the sequence of arguments. The value of this expression is well defined only if the values of all argument expressions are vectors of identical length. Evaluation of the vectorized application produces a new vector of the same length by applying function <em>f</em> pointwise.</p>
+<p>To apply an operator in vectorized way, dot is written after the operator without space, e.g., the value of the expression <em>x</em><code>*.</code><em>y</em> is the pointwise product of the values of expressions <em>x</em> and <em>y</em> (provided that they are vectors of identical length).</p>
+<p>In addition to 1-dimensional vectors, vectorized applications can also be used with higher-dimensional tensors. In this case, <em>a</em><sub>1</sub>,...,<em>a</em><sub>n</sub> must be tensors with the same shape and the result of the application also has this shape.</p>
+<p>If the <code>iter</code> plugin of Circuit-IR is supported by CCC then the compiler translates vectorized applications via the <code>iter</code> plugin operations. If the <code>iter</code> plugin is not supported, vectorized applications are compiled via unrolling.</p>
+<h3 id="assertions">Assertions</h3>
+<p>The <code>assert</code> builtin function is used to declare a new output node of the circuit. The assertion succeeds if the value of its argument is true. Similarly, <code>assert_zero</code> builtin function declares a new output node of the circuit. It succeeds if the value of its argument is zero. Both these functions must take its argument at the post stage.</p>
+<p>Besides these assertion functions, ZK-SecreC provides assertion functions <code>dbg_assert</code> and <code>dbg_assert_eq</code> without circuit output for debugging. The former assert succeeds if the value of its argument is true. The latter one assumes two arguments of integer types with possibly different modules and succeeds if the integer values (i.e., remainders upon division by the corresponding modules) are equal. These functions assume that their arguments are in the pre stage. These functions do not contribute to the circuit, but the program halts with an error message whenever any of these assertions fail.</p>
+<h3 id="builtin-operators-and-functions">Builtin operators and functions</h3>
+<p>The following builtin operators are available:</p>
+<table>
+<thead>
+<tr>
+<th>Operators</th>
+<th>Arity</th>
+<th>Precedence</th>
+<th>Associativity</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!</code></td>
+<td>1</td>
+<td>90</td>
+<td></td>
+<td>negation</td>
+</tr>
+<tr>
+<td><code>*</code> <code>/</code> <code>%</code></td>
+<td>2</td>
+<td>80</td>
+<td>left</td>
+<td>product, quotient, remainder</td>
+</tr>
+<tr>
+<td><code>+</code> <code>-</code></td>
+<td>2</td>
+<td>70</td>
+<td>left</td>
+<td>sum, difference</td>
+</tr>
+<tr>
+<td><code>&lt;=</code> <code>&gt;=</code> <code>&lt;</code> <code>&gt;</code></td>
+<td>2</td>
+<td>50</td>
+<td>none</td>
+<td>comparisons</td>
+</tr>
+<tr>
+<td><code>==</code></td>
+<td>2</td>
+<td>40</td>
+<td>none</td>
+<td>equality</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>2</td>
+<td>30</td>
+<td>left</td>
+<td>conjunction</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>2</td>
+<td>20</td>
+<td>left</td>
+<td>xor</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>2</td>
+<td>10</td>
+<td>left</td>
+<td>disjunction</td>
+</tr>
+</tbody>
+</table>
+<p>The higher the precedence, the more tightly the operator binds its arguments.</p>
+<p>The builtin functions are described in the <a href="../../4-api/builtins.html">Builtins</a> subsection of this documentation.</p>
+<h3 id="lookups-and-slices">Lookups and slices</h3>
+<p>Components of tuples, structs and stores, as well as elements of lists and vectors, can be accessed using the corresponding lookup syntax.</p>
+<p>A tuple component can be accessed by index. The value of an expression of the form <em>e</em><code>.</code><em>i</em>, where <em>e</em> is an expression and <em>i</em> is an integer literal, is the <em>i</em>-th component of the tuple that <em>e</em> evaluates to. As the index must be a literal rather than an arbitrary expression, the compiler can decide if the index falls into the bounds required by the type of the tuple and give a static error otherwise. Indexing starts from zero.</p>
+<p>A struct component can be accessed with a similar syntax but using a field name instead of an index. The value of an expression of the form <em>e</em><code>.</code><em>x</em>, where <em>e</em> is an expression and <em>x</em> is a field name, is the component associated to the name <em>x</em> in the struct that <em>e</em> evaluates to. Again, the compiler can decide if the access is correct as available field names are determined by the struct type.</p>
+<p>Store elements can be accessed by expressions of the form <em>e</em><code>{#</code><em>k</em><code>}</code>. Here, <em>e</em> and <em>k</em> are expressions whose values are the store and a key, respectively.</p>
+<p>An element in a list or vector can be accessed using its index in square brackets, i.e., with an expression of the form <em>e</em><code>[</code><em>i</em><code>]</code> where <em>e</em> and <em>i</em> are expressions. Provided that the value of <em>e</em> is a list or vector and the value of <em>i</em> is a non-negative integer falling into the bounds of the list or vector, the value of the lookup expression is the corresponding element of the data structure. The compiler does not make sure that the index indeed falls between the bounds. If not, the computation halts abnormally. This is considered equivalent to ZK proof failure.</p>
+<p>ZK-SecreC allows using the square bracket syntax for extracting slices. To this end, one must specify a <em>range</em> of indices rather than a single index within brackets. The range is specified in terms of its lower bound and upper bound; the range contains all indices not less than the lower bound and less than the upper bound.</p>
+<p>The bounds of the range can be specified by any expressions and these expressions are separated by the double dot token. For example, <em>e</em><code>[</code><em>a</em><code>..</code><em>b</em><code>]</code>, where <em>e</em>, <em>a</em> and <em>b</em> are expressions, is a slice expression. Provided that the value of <em>e</em> is a list or vector and the values of both <em>a</em> and <em>b</em> are integers within the index bounds of the list or vector, the value of the slice expression is a new data structure of the same type as the original one (list or vector) and its elements are precisely the elements of the original data structure whose index falls into the range determined by the two integers (the first one being the lower bound).</p>
+<p>ZK-SecreC allows one to omit either of the two bounds. In this case, the corresponding bound is that of the original data structure. If both bounds are omitted, the result is a copy of the original data structure.</p>
+<p>A higher-dimensional tensor can also be sliced but only according to the first dimension as slicing by any other dimension would leave the elements on non-consecutive wires, which is not supported by Circuit-IR. Slicing an <em>n</em>-dimensional tensor uses the same syntax as vector slicing and returns another <em>n</em>-dimensional tensor.</p>
+<h3 id="assignments">Assignments</h3>
+<p><em>Assignment</em> is denoted by <code>=</code> in ZK-SecreC. For instance,</p>
+<pre><code>ix = ix + 1
+</code></pre>
+<p>increases the value of the variable <code>ix</code> by one. For a variable to be assigned to, it must be a mutable local variable or a pass-by-reference parameter of function.</p>
+<p>If a variable can be assigned to, and its value is whatever data structure except a vector, then its components, components of components etc., can be assigned to one by one if necessary. Such assignment uses the same notation as lookup. For instance,</p>
+<pre><code>t.1 = 30
+</code></pre>
+<p>is syntactically correct, provided that <code>t</code> can be assigned to. For type correctness, the type of variable <code>t</code> must be a tuple type with at least 2 components, the second of which is an integer type. As the result, the value of <code>t</code> will be the same tuple as before with the second component redefined as 30. Struct components can be redefined likewise. If the value of <code>s</code> is a store then the component under some key <code>k</code> can be changed to 10 by</p>
+<pre><code>s{#k} = 10
+</code></pre>
+<p>Similarly, if the value of the variable <code>l</code> is a list and the value of the variable <code>i</code> is an integer marking an existing position in the list then, for instance,</p>
+<pre><code>l[i] = l[i-1]
+</code></pre>
+<p>redefines the value of the element in the list at position <em>i</em>, where <em>i</em> is the value of <code>i</code>, to be the same as the previous element. However, if <code>l</code> is a vector rather than a list then this assignment is illegal since vectors can be assigned as a whole only.</p>
+<p>If the values of <code>v</code> and <code>w</code> are vectors and <code>v</code> can be assigned to then one can assign to it in vectorized way using</p>
+<pre><code>v =. w
+</code></pre>
+<h3 id="type-annotations">Type annotations</h3>
+<p>The compiler tries to infer the types for each value automatically. However, sometimes there is not enough information and it may be necessary to declare the types of some subexpressions manually. This can be done with <em>e</em><code>:</code><em>q</em> where <em>e</em> is an expression and <em>q</em> is its qualified type. It is also allowed to declare the type partially, for example <em>e</em><code>:uint</code> or <em>e</em><code>: uint @prover</code>. A type annotation, if given, must always contain the data type, both qualifiers (stage and domain) are optional.</p>
+<h3 id="casts">Casts</h3>
+<p>Providing a type annotation to an expression does not change the type of the expression. If the compiler discovers that the expression is actually not of the annotated type then a type error occurs.</p>
+<p>A cast expression can be used to change the type of an expression. In a cast expression, the <code>as</code> keyword is used to separate the expression and the type. For instance, if the value of <em>e</em> is an expression of whatever integer type then <em>e</em> <code>as uint[3]</code> is a cast expression whose value is the same value in the finite field of size 3. If the value of <em>e</em> is larger than 3 then remainder of it upon division by 3 is found.</p>
+<p>All integer types can be cast to each other; so can all boolean types. It is also possible to cast a boolean to an integer of the same modulus. However, casting integers to booleans is not allowed as a builtin operation since it would require deciding if an integer is zero or not and being able to continue computing (rather than halting on non-zero value like <code>assert_zero</code>). This would involve non-trivial algorithms in the circuit computation model of ZK that we assume.</p>
+<p>Casts can be done on domains and stages as well. Such cast must respect the corresponding subtyping order. Hence it is always possible to cast from the public domain to the verifier and prover domains and from the verifier domain to the prover domain but not the other way round. A value at the post stage can be cast to the pre stage but not vice versa.</p>
+<p>If a domain cast is applied to a list or vector then a <em>deep cast</em> is performed. This term means that the cast is applied to all constituents of the list or vector that are in a domain lower than the new domain of the list or vector. For instance, suppose that <em>x</em> is of type <code>list[list[uint $pre @prover] $pre @verifier] $pre @public</code>, i.e., the value of <em>x</em> is a list of lists of integers in the prover's domain, whereby the intermediate list structures are in the verifier's domain and the outermost list structure is public. Then the type of the expression <code>x as @prover</code> will be <code>list[list[uint $pre @prover] $pre @prover] $pre @prover</code> which means that the intermediate list structures are also raised to the prover's domain. On the other hand, the type of the expression <code>x as @verifier</code> will be <code>list[list[uint $pre @prover] $pre @verifier] $pre @verifier</code> since the integers inside the innermost lists are in a higher domain already.</p>
+<p>It is not possible to change both qualifiers or the data type and a qualifier within one cast. For instance, <em>x</em> <code>as $pre @prover</code> is incorrect; instead, one must perform two casts by writing <em>x</em> as <code>$pre</code> <code>as</code> <code>@prover</code>.</p>
+<h2 id="statements-and-expressions-with-blocks">Statements and expressions with blocks</h2>
+<p>To explain the remaining constructs for building expressions, the notions of statements and blocks must be introduced.</p>
+<h3 id="statements">Statements</h3>
+<p><em>Statements</em> form a syntactic category distinct from expressions but still close to expressions as most statements contain expressions and are themselves necessary for building larger expressions. Informally, statements could be described as syntactic constructs that have a side effect rather than a meaningful return value. All statements end in a semicolon.</p>
+<p>In particular, any expression of the unit type can be used as a statement. Other statements include the <code>break</code> and <code>continue</code> statements and new variable definitions.</p>
+<p>The <code>break</code> and <code>continue</code> statements can be used in the body of a loop and have roughly the same meaning as in C. That is, <code>continue</code> starts a new iteration of the loop body and break jumps out of the loop.</p>
+<p>New variable definitions are written in one of the following forms:</p>
+<p><code>let</code> <em>x</em><code>:</code><em>t</em><code>=</code><em>e</em><code>;</code></p>
+<p><code>let mut</code> <em>x</em><code>:</code><em>t</em><code>=</code><em>e</em><code>;</code></p>
+<p><code>let rec</code> <em>x</em><code>:</code><em>t</em><code>=</code><em>e</em><code>;</code></p>
+<p>Here <em>x</em> is the new variable, <em>t</em> is a type expression that denotes the type of <em>x</em> and <em>e</em> is an expression. The variable <em>x</em> is initialized to the value of the expression <em>e</em>. The modifier <code>mut</code> makes <em>x</em> mutable. Mutability in ZK-SecreC is a property of variable and propagates to all components of the value of the variable if the value is a data structure. The modifier <code>rec</code> allows the definition to be recursive, i.e., <em>x</em> to occur in <em>e</em>. This can be used only for defining a list by expressing its elements in terms of previous elements. A variable definition without modifiers does not allow recursive definition nor mutating the value of the new variable later.</p>
+<p>The type expression along with the preceding colon can be omitted if ZK-SecreC is able to infer the type of <em>e</em>. Often it is not the case. For instance, the return type of a vectorized application must usually be explicitly given like in</p>
+<pre><code>let t3 = ...;
+let trash : arr[() $pre @public] = assert_zero.(t3);
+...
+</code></pre>
+<h3 id="blocks">Blocks</h3>
+<p>A <em>block</em> is a sequence of statements, possibly followed by an expression, in braces. If the content of a block ends with an expression then the value of the block equals the value of the expression. If the block does not end with an expression then the block returns the single value of the unit type. One can make this difference according to whether the last item in the block ends with a semicolon or not. All statements and the final expression, if any, are executed in order before the final value is returned.</p>
+<p>The sequence of statements in a block may be empty. An totally empty block <code>{}</code> is also allowed. The latter is the easiest way to denote the single value of the unit type.</p>
+<h3 id="lambda-expressions">Lambda expressions</h3>
+<p>Lambda expressions enable one to introduce new functions locally rather than at the top level.</p>
+<p>The simplest form of a <em>lambda expression</em> is <code>fn (</code><em>x</em><sub>1</sub><code>,</code>...<code>,</code><em>x</em><sub><em>n</em></sub><code>)</code> <em>b</em> where <em>x</em><sub>1</sub>,...,<em>x</em><sub><em>n</em></sub> are variables standing for formal parameters and <em>b</em> is a block that constitutes the body of the new function. The scope of the formal parameters extends over the block <em>b</em>. The lambda expression denotes the function that evaluates its body after assigning the values of actual parameters to the corresponding formal parameters.</p>
+<p>Arguments of functions defined by lambda expressions are passed by value (immutable). The formal parameters of a lambda expression can be annotated with their types but this is not mandatory. Likewise, one can annotate the return type just after the parameter sequence in the form <code>-&gt;</code> <em>t</em>. Omitting the return type does not restrict the return type in any way. For instance, <code>fn (x) { x*x+1 }</code> denotes the function that returns the number one larger than the square of the argument. The same function can be written also as <code>fn (x : uint) -&gt; uint { x*x+1 }</code>. This restricts the unqualified type to be <code>uint</code> while leaves the stage and domain unspecified. Note that a lambda expression cannot be polymorphic, implying that a function defined by a lambda expression cannot have different types of arguments in different applications.</p>
+<p>A function defined by lambda expression can be declared a <em>sieve function</em> by adding the keyword <code>sieve</code> at the beginning of the expression. This forces the function to be compiled to a function gate in Circuit-IR and applications of the function to be compiled to calls of that function gate. Applications of functions not declared as sieve functions are inlined. Declaring a user-defined function as a sieve function is required if the function has vectorized applications.</p>
+<h3 id="conditional-expressions">Conditional expressions</h3>
+<p>A standard <em>conditional expression</em> is of the form <code>if</code> (<em>e</em>) <em>b</em><sub>1</sub> <code>else</code> <em>b</em><sub>2</sub> where <em>e</em> is an expression whereas <em>b</em><sub>1</sub> and <em>b</em><sub>2</sub> are blocks. When evaluating this expression, the expression <em>e</em> is evaluated first. Depending on the value of <em>e</em>, either <em>b</em><sub>1</sub> or <em>b</em><sub>2</sub> is evaluated and the value of that block becomes the value of the conditional expression.</p>
+<p>One can also use a type constraint <em>c</em> instead of condition <em>e</em>. Then <em>b</em><sub>1</sub> or <em>b</em><sub>2</sub> is evaluated, depending on if the type constraint holds or not.</p>
+<p>For instance, it is possible to use the following syntax in a control flow to change the function behaviour based on the actual value of a domain parameter <code>@D</code>:</p>
+<pre><code>if (@D &lt;= @verifier) {
+  ...  // Operations if the domain is `@public` or `@verifier`
+} else {
+  ...  // Operations if the domain is `@prover`
+}
+</code></pre>
+<p>Similarly, it is possible to do different things depending on the actual value of a stage parameter:</p>
+<pre><code>if (post $S) {
+  ...  // Operations if the stage is $post
+} else {
+  ...  // Operations if the stage is $pre
+}
+</code></pre>
+<p>The else branch can be omitted. In this case, an else branch <code>else {}</code> is internally added by the compiler. The program is not type correct if the conditional expression fails to type after this addition.</p>
+<h3 id="for-loops">For loops</h3>
+<p>For loops are written as <code>for</code> <em>x</em> <code>in</code> <em>e</em><sub>1</sub><code>..</code><em>e</em><sub>2</sub> <em>b</em>, where <em>x</em> is a fresh variable, <em>e</em><sub>1</sub> and <em>e</em><sub>2</sub> are expressions and <em>b</em> is a block. The expressions must evaluate to integer bounds. The scope of the variable <em>x</em> embraces the block <em>b</em> but not the expressions <em>e</em><sub>1</sub> and <em>e</em><sub>2</sub>. The block <em>b</em> is executed for all values of the variable <em>x</em> within the range determined by the bounds, in the increasing order of these values. The lower bound is included in the range while the upper bound is excluded from it. Hence the number of iterations equals the difference of the upper and lower bounds. The value of the for loop is the list of all values returned by the body of the loop during all iterations, in the order of evaluation.</p>
+<p>If the value of <em>e</em><sub>2</sub> is smaller than the value of <em>e</em><sub>1</sub> then the body of the loop is executed no times. Note that the bounds are interpreted as 64-bit unsigned integers. Therefore, if <em>e</em><sub>2</sub> is, e.g., <code>-1</code> then the loop runs until the loop index becomes 2<sup>64</sup>-1.</p>
+<p>When defining a list with a for loop, the body of the loop is allowed to refer to the elements with a smaller index in the list. Referring to the same list is possible only if the for loop is the right-hand side of a definition of a new variable and the definition starts with <code>let rec</code>. For instance, the following piece of code is a legal content of a block and computes the sum of integers 1, 2, 3:</p>
+<pre><code>let xs : list[uint $pre @public] = [1, 2, 3];
+let rec sums_xs : list[uint $pre @public] = for i in 0..length(xs) {
+  if (i == 0) {
+    xs[i]
+  } else {
+    sums_xs[i-1] + xs[i]
+  }
+};
+sums_xs[length(xs) - 1]
+</code></pre>
+<h3 id="zip-expressions">Zip expressions</h3>
+<p>There is also a construct in ZK-SecreC that enables one to build new vectors from existing ones by doing the same operations on the corresponding elements. The construct is of the form <code>zip</code> <em>x</em><sub>1</sub> <code>in</code> <em>e</em><sub>1</sub><code>,</code> ... <code>,</code> <em>x</em><sub><em>n</em></sub> <code>in</code> <em>e</em><sub><em>n</em></sub> <code>with</code> <em>b</em> where <em>x</em><sub>1</sub>,...,<em>x</em><sub><em>n</em></sub> are fresh variables, <em>e</em><sub>1</sub>,...,<em>e</em><sub><em>n</em></sub> are expressions and <em>b</em> is a block. The expressions must evaluate to vectors. For each evaluation of the body, the variables are assigned corresponding elements of the vectors and the value of the body <em>b</em> will be the corresponding element of the result vector.</p>
+<p>Note that the scope of all local variables <em>x</em><sub>1</sub>,...,<em>x</em><sub><em>n</em></sub> equals the block <em>b</em> regardless of their position before the keyword <code>with</code>, i.e., variables introduced by the zip expression cannot be used in any of expressions <em>e</em><sub>1</sub>,...,<em>e</em><sub><em>n</em></sub> (even in those that follow the location where the variable is bound). This restriction is necessary for allowing the result to be computed by vectorized function application.</p>
+<p>Technically, this construct creates a local sieve function with the iterator variables as parameters and the body of the zip construct as the body, and applies it in vectorized way to the given vectors. Hence all the vectors in the zip construct must have the same length and the result is again a vector of the same length. For instance,</p>
+<pre><code>let zs = zip x in xs, y in ys with { x * y + 1 };
+</code></pre>
+<p>is equivalent to</p>
+<pre><code>let f = sieve fn (x, y) { x * y + 1 };
+let zs = f.(xs, ys);
+</code></pre>
+<h3 id="wire-expression">Wire expression</h3>
+<p>With a type cast, one can convert a value at the post stage to the pre stage but not vice versa. To specify circuit inputs, values at the pre stage must be converted to the post stage. This is done using <em>wire expressions</em> of the form <code>wire</code> <em>b</em> where <em>b</em> is a block whose value is to be converted. Wire expressions can be used to cast an integer or a boolean value from the pre stage to the post stage. In either case, the modulus must be finite.</p>
+<p>As a wire expression brings values from the unreliable world to the circuit which should be kept reliable, it is potentially a dangerous operation, especially if the value belongs to the prover's domain. Bringing a value in the prover's domain from the pre stage to the post stage means that the prover is asked to input the value to the circuit, but a malicious prover can provide incorrect values. Hence, whenever a value in the prover's domain is put on a wire using a wire expression, the programmer should provide subsequent correctness checks of the value.</p>
+<p>In particular, when bringing public or the verifier's values to the stage <code>$post</code> and casting them to the domain <code>@prover</code>, it is important to pay attention to the order in which the conversions are performed. In the following example, we cannot be sure whether the resulting value is taken from the iterator or chosen arbitrarily by the prover:</p>
+<pre><code>for i in 0..100 {
+  let j = wire { i as uint[N] as @prover };
+  /* j is used in some place which expects a value in domain @prover */
+}
+</code></pre>
+<p>Here the value of <code>i</code> was cast to the domain <code>@prover</code> <em>before</em> it was brought into <code>$post</code>. This means that the prover has total control over the value stored in the circuit. The correct way is to first bring the value of <code>i</code> to the stage <code>$post</code> and then cast to the domain <code>@prover</code>:</p>
+<pre><code>for i in 0..100 {
+  let j = (wire { i as uint[N] }) as @prover;
+  /* same as before */
+}
+</code></pre>
+<p>(In both cases, we assume that <code>N</code> has been defined as a supported field size.)</p>
+<h3 id="match-expressions">Match expressions</h3>
+<p>ZK-SecreC supports match expressions that serve the purpose of performing oblivious choices depending on values on wires. Match expressions are of the form <code>match</code> <em>e</em> { <em>p</em><sub>1</sub> <code>=&gt;</code> <em>b</em><sub>1</sub>, ......, <em>p</em><sub><em>n</em></sub> <code>=&gt;</code> <em>b</em><sub><em>n</em></sub> }, where <em>e</em> is an expression, <em>p</em><sub>1</sub>,...,<em>p</em><sub><em>n</em></sub> are patterns and <em>b</em><sub>1</sub>,...,<em>b</em><sub><em>n</em></sub> are blocks. A <em>pattern</em> is an integer literal or a variable or an underscore.</p>
+<p>The expression <em>e</em> is evaluated first and the result should be a value on wire. After that, the first block <em>b</em><sub><em>i</em></sub> such that the value of <em>e</em> matches the corresponding pattern <em>p</em><sub><em>i</em></sub> is evaluated. A value matches a literal pattern if it equals the value of the literal; a variable and an underscore are matched by any value. If a pattern is a variable then that variable can be used in the corresponding block and its value equals the value of <em>e</em>. Unlike variables, the underscore cannot be used in the right-hand side for referring to the value.</p>
+<p>In a standard arithmetic circuit, an oblivious choice that evaluates only the right branch is impossible. A choice function implemented in a standard arithmetic circuit would evaluate all branches and combine the results obliviously. Compiling of match expressions according to the intended semantics relies on the <code>disjunction</code> plugin of Circuit-IR that implements a corresponding extension of arithmetic circuit.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

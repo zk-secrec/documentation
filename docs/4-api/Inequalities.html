@@ -1,0 +1,729 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.08
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Inequalities</h1>
+</div>
+<div>
+  <h2>Function assert_ge</h2>
+</div>
+<code>
+pub  fn assert_ge
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two Prover’s values on wires is greater than or equal to the second one. Fails also if the numbers do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_ge’</h2>
+</div>
+<code>
+pub  fn assert_ge’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two checked Prover’s values on wires is greater than or equal to the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_gt</h2>
+</div>
+<code>
+pub  fn assert_gt
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two Prover’s values on wires is greater than the second one. Fails also if the numbers do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_gt’</h2>
+</div>
+<code>
+pub  fn assert_gt’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two checked Prover’s values on wires is greater than the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_le</h2>
+</div>
+<code>
+pub  fn assert_le
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two Prover’s values on wires is less than or equal to the second one. Fails also if the numbers do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_le’</h2>
+</div>
+<code>
+pub  fn assert_le’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two checked Prover’s values on wires is less than or equal to the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_lt</h2>
+</div>
+<code>
+pub  fn assert_lt
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two Prover’s values on wires is less than the second one. Fails also if the numbers do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_lt’</h2>
+</div>
+<code>
+pub  fn assert_lt’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first of the given two checked Prover’s values on wires is less than the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_sorted</h2>
+</div>
+<code>
+pub  fn assert_sorted
+[
+N : Nat
+]
+(   xs : list[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the list of Prover’s values on wires is non-decreasing. Fails also if not all the values fit into the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function check_size</h2>
+</div>
+<code>
+pub  fn check_size
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Checked[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the given integer fits into the number of bits given by the SizeAsserter object. Returns a Checked object for the given integer.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function checked_prover</h2>
+</div>
+<code>
+pub  fn checked_prover
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Checked[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Checked[N, $S, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given Checked object to the Prover’s domain.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge</h2>
+</div>
+<code>
+pub  fn ge
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values in <code>$pre</code> is greater than or equal to the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge3</h2>
+</div>
+<code>
+pub  fn ge3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values is greater than or equal to the second one. Triggers assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge3’</h2>
+</div>
+<code>
+pub  fn ge3’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two checked Prover’s values on wires is greater than or equal to the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt</h2>
+</div>
+<code>
+pub  fn gt
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values in <code>$pre</code> is greater than the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt3</h2>
+</div>
+<code>
+pub  fn gt3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values is greater than the second one. Triggers assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt3’</h2>
+</div>
+<code>
+pub  fn gt3’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two checked Prover’s values on wires is greater than the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function is_sorted</h2>
+</div>
+<code>
+pub  fn is_sorted
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the list of values in <code>$pre</code> is non-decreasing.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function is_sorted3</h2>
+</div>
+<code>
+pub  fn is_sorted3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the list of values is non-decreasing. Triggers assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and not all of them fit into the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le</h2>
+</div>
+<code>
+pub  fn le
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values in <code>$pre</code> is less than or equal to the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le3</h2>
+</div>
+<code>
+pub  fn le3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values is less than or equal to the second one. Triggers assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le3’</h2>
+</div>
+<code>
+pub  fn le3’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two checked Prover’s values on wires is less than or equal to the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt</h2>
+</div>
+<code>
+pub  fn lt
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values in <code>$pre</code> is less than the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt3</h2>
+</div>
+<code>
+pub  fn lt3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two values is less than the second one. Triggers assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and do not fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt3’</h2>
+</div>
+<code>
+pub  fn lt3’
+[
+N : Nat
+]
+(   xc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yc : Checked[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first of the given two checked Prover’s values on wires is less than the second one. Assumes that the numbers have been checked to fit the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function max</h2>
+</div>
+<code>
+pub  fn max
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Maximum of the given two values in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function max3</h2>
+</div>
+<code>
+pub  fn max3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Maximum of the given two values. Triggers an assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and not both of them fit into the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function min</h2>
+</div>
+<code>
+pub  fn min
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Minimum of the given two values in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function min3</h2>
+</div>
+<code>
+pub  fn min3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Minimum of the given two values. Triggers an assertion failure if the numbers are in <code>$post</code> <code>@prover</code> and not both of them fit into the number of bits given by the SizeAsserter object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sizeasserter_new</h2>
+</div>
+<code>
+pub  fn sizeasserter_new
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   bw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>A new SizeAsserter object for the given number of bits. The number of bits must be less than binary logarithm of half of the modulus.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sizeasserters_new</h2>
+</div>
+<code>
+pub  fn sizeasserters_new
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   bwlim : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>A list of new SizeAsserter objects, one for every number of bits less than the given limit. The limit must be less than binary logarithm of the modulus.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

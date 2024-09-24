@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Top Level - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../3-expressions/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../5-type-system.html" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#top-level-declarations" class="nav-link">Top-Level Declarations</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#imports" class="nav-link">Imports</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#type-definitions" class="nav-link">Type definitions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#struct-declarations" class="nav-link">Struct declarations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#function-definitions" class="nav-link">Function definitions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-declarations" class="nav-link">Implementation declarations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#default-declarations" class="nav-link">Default declarations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="top-level-declarations">Top-Level Declarations</h1>
+<p>A ZK-SecreC program is a collection of top-level declarations. The order of the declarations is not important. The declarations can be spread over many files sometimes called <em>modules</em> after modules of code in other programming languages. But please be aware that this term has a potential to be confused with modulus.</p>
+<h2 id="imports">Imports</h2>
+<p>An <em>import</em> brings names exported by another ZK-SecreC module in scope. Otherwise, names defined in a file are visible only throughout the file. For instance, the declaration</p>
+<pre><code>use Std::*;
+</code></pre>
+<p>imports all names exported by the ZK-SecreC module with name <code>Std</code>. To be found, the module must be in file with name <code>Std.zksc</code> either in the same directory as the calling module or in the standard library of ZK-SecreC. Despite the syntax, there is currently no way to import names one-by-one.</p>
+<p>Names defined at the top level must be unique throughout all the program, including the imported names.</p>
+<h2 id="type-definitions">Type definitions</h2>
+<p>One can define <em>type synonyms</em> at the top level. The kind of the defined type must be given explicitly. For instance, the declaration</p>
+<pre><code>type N : Nat = 0x1fffffffffffffff;
+</code></pre>
+<p>defines <code>N</code> as a new type synonym that refers to the type-level natural number expressed by the literal <code>0x1fffffffffffffff</code> (the value of this hexadecimal literal is the Mersenne prime 2<sup>61</sup>-1).</p>
+<p>Type synonyms can take type arguments, in which case they are in principle functions on types. In a type definition, type parameters are introduced by a comma-separated list in brackets. Any formal type parameter must normally be equipped with its kind using the notation <em>p</em><code>:</code><em>k</em> where <em>p</em> is the parameter (a type variable) and <em>k</em> is its kind. However, parameter kinds <code>Stage</code> and <code>Domain</code> can be settled by <code>$</code> and <code>@</code>, respectively, preceding the parameter name, in which case the kind name is not written.</p>
+<p>If the definition starts with the keyword <code>pub</code> then the defined name is exported by the module. Otherwise, the defined name is visible within the current file only, regardless of the imports occurring in other files. For instance, the library file <code>Std.zksc</code> contains the following definitions that introduce type synonyms for types of integers of 8, 16, 32, 64 and 128 bits:</p>
+<pre><code>pub type u8 : Unqualified = uint[0x100];
+pub type u16 : Unqualified = uint[0x10000];
+pub type u32 : Unqualified = uint[0x100000000];
+pub type u64 : Unqualified = uint[0x10000000000000000];
+pub type u128 : Unqualified = uint[0x100000000000000000000000000000000];
+</code></pre>
+<h2 id="struct-declarations">Struct declarations</h2>
+<p>New struct types can also be defined at the top level. A <em>struct declaration</em> introduces the name of the struct type and lists the names of all fields of the structs in this type along with the field types. Type parameters are allowed here, too. For instance, dates are introduced in the standard library with the following struct declaration:</p>
+<pre><code>pub struct Date[$S, @D, N : Nat] { 
+  year : uint[N] $S @D,
+  month : uint[N] $S @D,
+  day : uint[N] $S @D,
+  code : uint[N] $S @D
+}
+</code></pre>
+<p>This declaration introduces a new type with name <code>Date</code> which is parametrized in a stage <code>$S</code>, a domain <code>@D</code> and a type level natural number <code>N</code>. Each element in this type is a data structure containing four fields with names <code>year</code>, <code>month</code>, <code>day</code> and <code>code</code>. All the fields must have the same type <code>uint[N] $S @D</code>, where <code>N</code>, <code>$S</code> and <code>@D</code> are the real types associated to the type parameters. The keyword <code>pub</code> indicates that the name of the type and the names of the fields are exported.</p>
+<h2 id="function-definitions">Function definitions</h2>
+<p>Like most programming languages, ZK-SecreC allows programmers to define functions. </p>
+<h3 id="native-functions">Native functions</h3>
+<p>The usual native function definitions have the following syntax:</p>
+<pre><code>Function = 'pub'? 'sieve'? 'fn' Identifier TypeParams? '(' Params ')' RetType? Constraints? Body
+RetType = '-&gt;' Type
+Constraints = 'where' TypePreds
+</code></pre>
+<p>The modifier <code>pub</code> indicates that the function is exported from the file. Like in the case of functions defined locally, the modifier <code>sieve</code> instructs the function to be compiled as a function gate in Circuit-IR. Without the modifier, no corresponding function in Circuit-IR is created, all calls of this function are inlined, and vectorized applications of the function are impossible.</p>
+<p>Like type parameters of type synonyms, type parameters of functions are written as a comma separated list in brackets. They introduce polymorphism, i.e., the function can be called with different types (without having to indicate the actual type arguments). The kinds of all type parameters must be explicit. In the case of stage and domain parameters, kind is reflected by the initial character (<code>$</code> or <code>@</code>, respectively). In other cases, kind must be indicated after colon like in <code>N : Nat</code>. A sieve function is not allowed to be stage polymorphic.</p>
+<p>Ordinary parameters are written as a comma separated list in parentheses. The parameters must be given together with their types. These types can depend on the type parameters introduced earlier.</p>
+<p>Vectorized application of user defined functions is allowed only if they have been declared as sieve functions, still sieve functions can also be applied in non-vectorized way like usual functions. Parameters of sieve functions that are called in vectorized way must have sized types in order to be put into vectors, and such sieve functions must have at least one parameter. If a sieve function is only called in non-vectorized way then arguments and result values can also be lists whose length is in the public domain. Such function is allowed to have no parameters.</p>
+<p>The result of applying a sieve function partially non-vectorized is considered a new sieve function:</p>
+<pre><code>sieve fn f(x : uint[N] $pre @public, y : uint[N] $post @prover) where Field[N] {
+  ...
+}
+
+fn main() where Field[N], Vectorization { 
+  let x : uint[N] $pre @public = ...;
+  let ys : arr[uint[N] $post @prover] = ...;
+  let g = f(x);
+  let trash : arr[() $pre @public] = g.(ys);
+}
+</code></pre>
+<p>Note the difference between the <code>sieve</code> modifier and the <code>Vectorization</code> constraint: The former is necessary for the function to be called in vectorized way, whereas the latter is required for the function to be able to call other functions in vectorized way.</p>
+<p>A function parameter can be preceded by the keyword <code>ref</code>, in which case it is a pass-by-reference parameter, i.e., mutable in the body of the function. Parameters without the keyword <code>ref</code> are immutable.</p>
+<p>A function with no return type given is assumed to have the return type <code>()</code>.</p>
+<p>A function may have constraints imposed on its type. If any, constraints are written as a comma-separated list of type predicates after the keyword <code>where</code>. Each type predicate is a condition imposed on types. Standard examples are <code>@D &lt;= @verifier</code> and <code>Field[N]</code>. The former requires the domain-kinded type variable <code>@D</code> to be <code>@verifier</code> at highest, i.e., either <code>@public</code> or <code>@verifier</code>. The latter requires <code>N</code> to be a modulus allowed by the associated CCC file as a field. Note that type predicates do not have to mention type parameters of the function. For instance, <code>N</code> in the last example may be defined as an integer constant outside the function, and even can be replaced with an integer literal in the predicate. Constraints such as <code>ObliviousChoice</code> and <code>Vectorization</code> do not have a parameter at all. Such predicates are reasonable as their truth value can depend on a CCC file which is not part of the ZK-SecreC program.</p>
+<p>The body of a function must be a block.</p>
+<p>Throughout the program (including imported modules), there must be exactly one function with name <code>main</code>. The program starts execution from the body of this function. The type of the main function must not contain free type variables, except those of kind <code>Nat</code>.</p>
+<h3 id="foreign-functions">Foreign functions</h3>
+<p>One can call Rust functions in ZK-SecreC. To this end, the Rust function must be given a corresponding signature in ZK-SecreC. The signature of a foreign function has the same shape as that of a native function, but the keyword <code>extern</code> must occur immediately before the keyword <code>fn</code>. The body must be omitted, e.g.,</p>
+<p><code>extern fn sqr[@D](x : u64 $pre @D) -&gt; u64 $pre @D;</code></p>
+<p>A foreign function cannot be declared as <code>sieve</code>.</p>
+<p>The Rust functions must be implemented in a Rust file. The <code>-e</code> parameter of runrust specifies the Rust file that implements the foreign functions declared in the ZK-SecreC file. Any Rust compiler errors from that Rust file will reference <code>src/Rust/zksc-app-lib/src/externs.rs</code>, which is where the Rust file is copied to, but the line numbers in the error messages are correct.</p>
+<p>The following table shows the correspondence between ZK-SecreC and Rust types; here <code>T'</code> denotes the Rust type corresponding to the ZK-SecreC type <code>T</code>:</p>
+<table>
+<thead>
+<tr>
+<th>ZK-SecreC</th>
+<th>Rust</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>() $pre @D</code></td>
+<td><code>()</code></td>
+</tr>
+<tr>
+<td><code>bool $pre @D</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>bool[N] $pre @D</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>u8 $pre @D</code></td>
+<td><code>u8</code></td>
+</tr>
+<tr>
+<td><code>u16 $pre @D</code></td>
+<td><code>u16</code></td>
+</tr>
+<tr>
+<td><code>u32 $pre @D</code></td>
+<td><code>u32</code></td>
+</tr>
+<tr>
+<td><code>u64 $pre @D</code></td>
+<td><code>u64</code></td>
+</tr>
+<tr>
+<td><code>u128 $pre @D</code></td>
+<td><code>u128</code></td>
+</tr>
+<tr>
+<td><code>uint $pre @D</code></td>
+<td><code>BigInt</code></td>
+</tr>
+<tr>
+<td><code>uint[N] $pre @D</code></td>
+<td><code>Value</code> if <code>N</code> is finite and other than 2<sup><em>n</em></sup> with <em>n</em>=8,16,32,64,128</td>
+</tr>
+<tr>
+<td><code>string $pre @D</code></td>
+<td><code>String</code></td>
+</tr>
+<tr>
+<td><code>T : Qualified</code></td>
+<td><code>Value</code></td>
+</tr>
+<tr>
+<td><code>list[() $pre @D]</code></td>
+<td><code>Value</code></td>
+</tr>
+<tr>
+<td><code>arr[() $pre @D]</code></td>
+<td><code>Value</code></td>
+</tr>
+<tr>
+<td><code>list[T] or arr[T]</code></td>
+<td><code>Vec&lt;T'&gt;</code> if <code>T'</code> is <code>bool</code>, <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code></td>
+</tr>
+<tr>
+<td><code>list[T] or arr[T]</code></td>
+<td><code>Vec&lt;Value&gt;</code> if <code>T'</code> is not <code>()</code>, <code>bool</code>, <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code></td>
+</tr>
+<tr>
+<td><code>tuple[T1,T2]</code></td>
+<td><code>(T1',T2')</code> if not a pass-by-reference argument</td>
+</tr>
+<tr>
+<td><code>tuple[T1,T2,T3]</code></td>
+<td><code>(T1',T2',T3')</code> if not a pass-by-reference argument</td>
+</tr>
+<tr>
+<td><code>tuple[T1,T2,T3,T4]</code></td>
+<td><code>(T1',T2',T3',T4')</code> if not a pass-by-reference parameter</td>
+</tr>
+<tr>
+<td><code>tuple[T1,T2,T3,T4,T5]</code></td>
+<td><code>(T1',T2',T3',T4',T5')</code> if not a pass-by-reference parameter</td>
+</tr>
+<tr>
+<td><code>tuple[T1,...,Tn]</code></td>
+<td><code>Box&lt;[Value]&gt;</code></td>
+</tr>
+<tr>
+<td><code>struct</code></td>
+<td><code>Box&lt;[Value]&gt;</code></td>
+</tr>
+<tr>
+<td><code>store[T1,T2] $S @D</code></td>
+<td><code>Value</code></td>
+</tr>
+</tbody>
+</table>
+<p>For non-primitive Rust types other than tuples, i.e. for <code>Value</code>, <code>Vec</code>, <code>Box</code>, <code>BigInt</code>, <code>String</code>,
+the Rust type must be prefixed by <code>&amp;</code> when used for an argument of an foreign function (e.g. <code>&amp;Value</code> instead of <code>Value</code>) but not when used for a return value. The prefix is also used inside tuples (e.g. (<code>&amp;Value</code>, <code>&amp;BigInt</code>)). Primitive Rust types and Rust tuples are not prefixed when used as non-ref parameters.</p>
+<p>For pass-by-reference parameters, the prefix is <code>&amp;mut</code>. Rust tuples (e.g. (<code>&amp;mut Value</code>, <code>&amp;mut BigInt</code>)) cannot be used for pass-by-reference parameters, instead <code>&amp;mut Box&lt;[Value]&gt;</code> (or <code>&amp;mut Value</code>) must be used regardless of the number of components. Primitive Rust types are prefixed with <code>&amp;mut</code> when used as pass-by-reference parameters.</p>
+<p>All the prefixed (borrowed) values can be cloned (using the method <code>clone()</code> in Rust) to get the non-prefixed (owned) value. This cloning is constant-time for <code>Value</code> (only increasing the reference count) but makes a copy of the whole data structure for <code>Vec</code>, <code>Box</code>, <code>BigInt</code>, and <code>String</code>. To avoid this copying, it is also possible to use <code>Value</code> (<code>&amp;Value</code> for pass-by-value parameters, <code>&amp;mut Value</code> for pass-by-reference parameters) instead of these types when defining the Rust function. The <code>Value</code>, <code>&amp;Value</code>, and <code>&amp;mut Value</code> can be converted to/from the corresponding Rust types using the <code>From</code> and <code>Into</code> traits.</p>
+<p>The <code>into()</code> method is essential when implementing external functions on multidimensional lists/arrays or lists/arrays of tuples/BigInts/strings, as lists/arrays with non-primitive elements are always represented as <code>Vec&lt;Value&gt;</code> and the <code>into()</code> method needs to be used to convert the elements to/from the corresponding Rust types. It is also needed for tuples translated as <code>Box&lt;[Value]&gt;</code>.</p>
+<p>Slices cannot be passed to foreign functions. They can be removed (copying the elements of the slice to a new list/array) using the builtin function <code>unslice</code> (e.g., <code>unslice(xs[1..])</code> instead of <code>xs[1..]</code>).</p>
+<h3 id="implementing-external-rust-functions">Implementing external Rust functions</h3>
+<p>The module <code>crate::externs_header</code>, which re-exports some essential types, needs to be imported in every Rust file implementing functions used as ZK-SecreC foreign functions:</p>
+<p><code>use crate::externs_header::*;</code></p>
+<p>External function implementations must use the <code>pub</code> keyword, so that they can be used from the ZK-SecreC code. The first two parameters must be of types <code>&amp;ContextRef</code> and <code>&amp;mut Stack</code>, the variables can be <code>_</code> as they are usually not needed. The next parameters are the type parameters (other than <code>Unqualified</code>) of the ZK-SecreC function, the Rust type depends on the kind of the ZK-SecreC type parameter according to the following table:</p>
+<table>
+<thead>
+<tr>
+<th>ZK-SecreC</th>
+<th>Rust</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain (<code>@</code>)</td>
+<td><code>DomainType</code></td>
+</tr>
+<tr>
+<td>stage (<code>$</code>)</td>
+<td><code>StageType</code></td>
+</tr>
+<tr>
+<td><code>Nat</code></td>
+<td><code>&amp;NatType</code></td>
+</tr>
+<tr>
+<td><code>Qualified</code></td>
+<td><code>QualifiedType</code></td>
+</tr>
+<tr>
+<td><code>Unqualified</code></td>
+<td>(no parameter)</td>
+</tr>
+</tbody>
+</table>
+<p>After that, there will be the ordinary parameters of the ZK-SecreC function.</p>
+<p>For the example foreign function <code>sqr</code>, we can have the following Rust implementation:</p>
+<pre><code>pub fn sqr(_: &amp;ContextRef, _: &amp;mut Stack, _d: DomainType, x: u64) -&gt; u64 {
+  x * x
+}
+</code></pre>
+<p>Here, we have <code>_d: DomainType</code> corresponding to the <code>@D</code> in ZK-SecreC and <code>x: u64</code> corresponding to <code>x : u64 $pre @D</code> in ZK-SecreC. The variable names do not have to be the same as in ZK-SecreC.</p>
+<h3 id="effect-declarations">Effect declarations</h3>
+<p>For guaranteeing preservation of privacy, static types are not enough. Besides types, the compiler of ZK-SecreC must keep track of <em>effects</em>. One can read more about effects in the <a href="../5-type-system.html">Type system</a> subsection. In brief, effects encode any medium (a word chosen to be maximally abstract) where an operation can cause observable changes (apart from the return value).  Here, we need to know that there are <em>stage effects</em> and <em>domain effects</em> (besides others).</p>
+<p>In most cases, the compiler is able to infer effects, but sometimes (typically in the case of recursive functions) it fails to do it. The programmer can document effects of any functions in an <em>effect declaration</em>. If present, the effect declaration must be put directly before the function declaration. An effect declaration has the following syntax:</p>
+<pre><code>EffectDecl = 'unchecked' 'eff' EffType '!' Effs
+Effs = Eff | Eff '+' Effs
+Eff = Stage | Domain
+</code></pre>
+<p>Here, <code>EffType</code> is a sketch of the type of the function and <code>Effs</code> is a list of effects potentially arising during an execution of the function body. Only stage effects and domain effects can be given, with plus sign separating them. The type parameters of the function can be used in the effects.</p>
+<p>For instance, the auxiliary function <code>sum</code> in the subsection <a href="../../1-user-guide/1-getting-started.html">Getting Started</a> of this documentation could have the following effect declaration:</p>
+<pre><code>unchecked eff * -&gt; * ! $S
+</code></pre>
+<p>Lists and vectors can be indicated by brackets, so one could make the type sketch more precise by writing</p>
+<pre><code>unchecked eff [*] -&gt; * ! $S
+</code></pre>
+<p>Similarly, a tuple type can be indicated by comma-separated sketches of the component types in brackets.</p>
+<h2 id="implementation-declarations">Implementation declarations</h2>
+<p>An <em>implementation declaration</em> introduces functions associated to a struct type. It is of the form <code>impl</code> <em>s</em> <code>{ ... }</code> where <em>s</em> is a struct type name (that must be defined separately by a struct declaration) and the braces contain definitions of functions associated to the struct type. The function definitions in an implementation declaration have the same syntax and semantics as function definitions at the top level.</p>
+<p>The designers of implementation declarations initially had the aim of introducing object-oriented features into ZK-SecreC. Functions associated to struct types should have played the role of methods. Currently, these aims are not fully implemented. Functions defined in implementation declarations cannot be called explicitly. However, as a builtin feature, the function with name <code>finalize</code>, if present in the implementation declaration, is called on each struct of that type when it goes out of scope. The function <code>finalize</code> must take one parameter which has the corresponding struct type and its return type must be <code>() $pre @public</code>.</p>
+<p>This special feature firstly serves the aim of code modularization. A programmer can specify all boring checks concerning the struct in the finalizer where they do not disturb understanding the logic of the main functionality. Secondly, postponing all checks concerning a data item to the end of its lifetime sometimes enables the checks to be performed more efficiently because checking correctness of many operations together may allow optimizations compared to the checking of every operation separately.</p>
+<p>This is so in the case of store operations (reads and writes) and also in the case of inequalities of integers. This is the reason why comparison operations at the post stage implemented in the standard library require a supplementary data structure, a size asserter. The size asserter is a struct that collects information about numbers for which it must be checked that their binary representation uses at most a certain number of bits. Checking this for many integers together can be performed more efficiently than checking this for each number separately.</p>
+<h2 id="default-declarations">Default declarations</h2>
+<p>Using a <em>default declaration</em>, a prorammer can specify a set of natural numbers from which the compiler must choose moduli if a fixed modulus cannot be inferred from the program. If there is no default declaration and the type of the main function contains type variables of kind <code>Nat</code> then a type error occurs as all moduli must be known for compiling and executing the program. Default declarations provide a backdoor to successful compilation even if the main function does not fix all moduli.</p>
+<p>For instance, suppose that a program contains the following type and default declarations:</p>
+<pre><code>type N : Nat = 1030307;
+type M : Nat = 0x1fffffffffffffff;
+default(127,M,N);
+</code></pre>
+<p>The default declaration provides three moduli, one of which is expressed by a literal and others are expressed by type synonyms.</p>
+<p>The compiler assigns one of the default moduli to each free type variable (all of which are of the kind Nat) of the main function in such a way that all type constraints of the main function meet the predicates of the CCC file that accompanies the compilation. If no such assignment is possible then the compilation fails with a type error.</p>
+<p>A default declaration must be located in the same file as the main function and there may be at most one of them.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

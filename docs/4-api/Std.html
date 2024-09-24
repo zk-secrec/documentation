@@ -1,0 +1,1228 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.08
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Std</h1>
+</div>
+<div>
+  <h2>Function ++</h2>
+</div>
+<code>
+pub  fn ++
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : string $pre <span class="citation" data-cites="D">@D</span>,
+   y : string $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Synonym for string append.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function all</h2>
+</div>
+<code>
+pub  fn all
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>True iff all elements of the given list with boolean elements are true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function all_pre</h2>
+</div>
+<code>
+pub  fn all_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>,
+N : Nat
+]
+(   xs : list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D1">@D1</span> &lt;= <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>True iff all elements of the given list with boolean elements in <code>$pre</code> are true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function any</h2>
+</div>
+<code>
+pub  fn any
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>True iff at least one element of the given list with boolean elements is true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function any_pre</h2>
+</div>
+<code>
+pub  fn any_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>,
+N : Nat
+]
+(   xs : list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D1">@D1</span> &lt;= <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>True iff at least one element of the given list with boolean elements in <code>$pre</code> is true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function append</h2>
+</div>
+<code>
+pub  fn append
+[
+T : Qualified
+]
+(   x : list[T] $pre <span class="citation" data-cites="public">@public</span>,
+   y : list[T] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[T] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Concatenating of two lists.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_cond</h2>
+</div>
+<code>
+unchecked eff * -&gt; * -&gt; * -&gt; * ! &lt;$S&gt;<br>
+pub  fn bool_cond
+[
+M : Nat,
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : bool[M] $S <span class="citation" data-cites="D">@D</span>,
+   x : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Convertible[M,N]
+</code>
+<div>
+  <blockquote>
+  <p>Choice between two booleans. Oblivious in <code>$post @prover</code>, evaluating both branches.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_downcast</h2>
+</div>
+<code>
+unchecked eff * -&gt; * ! &lt;$S&gt;<br>
+pub  fn bool_downcast
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : bool[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Downcasting the elements of the given list of booleans in the stage <code>$pre</code> into the given stage. If the given stage is <code>$pre</code> then does nothing, otherwise applies <code>wire</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_ensure_post</h2>
+</div>
+<code>
+pub  fn bool_ensure_post
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Ensuring that the elements of the given list of booleans are in <code>$post</code>. If they are then does nothing, otherwise applies <code>wire</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_list_to_post</h2>
+</div>
+<code>
+pub  fn bool_list_to_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Putting the elements of the given list with boolean elements in <code>$pre</code> on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_list_to_pre</h2>
+</div>
+<code>
+pub  fn bool_list_to_pre
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Converting the elements of the given list of booleans to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_list_to_prover</h2>
+</div>
+<code>
+pub  fn bool_list_to_prover
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $S <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Converting the elements of the given list of booleans to the domain <code>@prover</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bool_list_to_uint</h2>
+</div>
+<code>
+pub  fn bool_list_to_uint
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Converting the elements of the given list of booleans to integers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function concat</h2>
+</div>
+<code>
+pub  fn concat
+[
+T : Qualified
+]
+(   xss : list[list[T] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[T] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Concatenating of all element lists of the given list of lists. Assumes that all element lists have the same length.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function concat_non_rectangle</h2>
+</div>
+<code>
+pub  fn concat_non_rectangle
+[
+T : Qualified
+]
+(   xss : list[list[T] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[T] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Concatenating of all element lists of the given list of lists.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function conditional_assert</h2>
+</div>
+<code>
+pub  fn conditional_assert
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   c : bool[N] $post <span class="citation" data-cites="D">@D</span>,
+   b : bool[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion, provided that the given condition is true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function conditional_assert_zero</h2>
+</div>
+<code>
+pub  fn conditional_assert_zero
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   c : bool[N] $post <span class="citation" data-cites="D">@D</span>,
+   x : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of equality to zero, provided that the given condition is true.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function count</h2>
+</div>
+<code>
+pub  fn count
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+X : Qualified,
+N : Nat
+]
+(   l : list[X] $pre <span class="citation" data-cites="public">@public</span>,
+   p : X -&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The number of elements satisfying the given predicate in the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function count_pre</h2>
+</div>
+<code>
+pub  fn count_pre
+[
+T : Unqualified,
+N : Nat,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>
+]
+(   l : list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D">@D</span>,
+   p : T $pre <span class="citation" data-cites="D">@D</span> -&gt; bool[N] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D1">@D1</span>
+</code>
+<div>
+  <blockquote>
+  <p>The number of elements satisfying the given predicate in the given list with elements in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function duplicate_indices</h2>
+</div>
+<code>
+pub  fn duplicate_indices
+(   amounts : list[uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Replacing of each element of the given list of numbers with the corresponding index replicated that many times.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function equiv</h2>
+</div>
+<code>
+pub  fn equiv
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   a : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   b : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Logical equivalence.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function error</h2>
+</div>
+<code>
+pub  fn error
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(   msg : string $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Halting immediately with an assertion failure.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function foldl</h2>
+</div>
+<code>
+pub  fn foldl
+[
+A : Qualified,
+B : Qualified
+]
+(   f : B -&gt; A -&gt; B,
+   x : B,
+   xs : list[A] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; B
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic left fold of the given list with the given operation and the given initial value.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function foldl_pre</h2>
+</div>
+<code>
+pub  fn foldl_pre
+[
+B : Unqualified,
+$SB,
+<span class="citation" data-cites="DB">@DB</span>,
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>
+]
+(   f : B $SB <span class="citation" data-cites="DB">@DB</span> -&gt; T $pre <span class="citation" data-cites="D">@D</span> -&gt; B $SB <span class="citation" data-cites="DB">@DB</span>,
+   x : B $SB <span class="citation" data-cites="DB">@DB</span>,
+   xs : list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; B $SB <span class="citation" data-cites="DB">@DB</span>
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic left fold of list with elements in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function foldr</h2>
+</div>
+<code>
+pub  fn foldr
+[
+A : Qualified,
+B : Qualified
+]
+(   f : A -&gt; B -&gt; B,
+   x : B,
+   xs : list[A] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; B
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic right fold of the given list with the given operation and the given initial value.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function foldr_pre</h2>
+</div>
+<code>
+pub  fn foldr_pre
+[
+B : Qualified,
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>
+]
+(   f : T $pre <span class="citation" data-cites="D">@D</span> -&gt; B -&gt; B,
+   x : B,
+   xs : list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; B
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic right fold of list with elements in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function group</h2>
+</div>
+<code>
+pub  fn group
+[
+T : Qualified
+]
+(   xs : list[T] $pre <span class="citation" data-cites="public">@public</span>,
+   l : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[list[T] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Splitting of elements of the given list into groups of the given length.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function id</h2>
+</div>
+<code>
+pub  fn id
+[
+T : Qualified
+]
+(   x : T
+) 
+-&gt; T
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic identity function.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function impli</h2>
+</div>
+<code>
+pub  fn impli
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   a : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   b : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Logical implication.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function list_push</h2>
+</div>
+<code>
+unchecked eff [*] -&gt; * -&gt; * ! &lt;<span class="citation" data-cites="D">@D</span>&gt;<br>
+pub extern fn list_push
+[
+Q : Qualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(  ref xs : list[Q] $pre <span class="citation" data-cites="D">@D</span>,
+   x : Q
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Appending the given element to the end of the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function list_to_public_length</h2>
+</div>
+<code>
+pub  fn list_to_public_length
+[
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D">@D</span>,
+   n : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Truncating the given list at the given public length.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function map</h2>
+</div>
+<code>
+pub  fn map
+[
+T : Qualified,
+U : Qualified
+]
+(   f : T -&gt; U,
+   l : list[T] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[U] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic map of elements of the given list with the given function.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function merge</h2>
+</div>
+<code>
+pub  fn merge
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Merging two lists that are assumed to be sorted into a new sorted list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function nonzero_challenge</h2>
+</div>
+<code>
+unchecked eff * -&gt; [*] ! &lt;<span class="citation" data-cites="public">@public</span>&gt;<br>
+pub  fn nonzero_challenge
+[
+P : Nat
+]
+(   n : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[P] $pre <span class="citation" data-cites="verifier">@verifier</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[P],
+<br>&nbsp;&nbsp;Challenge[P]
+</code>
+<div>
+  <blockquote>
+  <p>Generating a list of the given length and consisting of random non-zero field elements.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function pre_uint_list_to_post_array</h2>
+</div>
+<code>
+pub  fn pre_uint_list_to_post_array
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D">@D</span>,
+   n : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Truncating the given list with elements in <code>$pre</code> at the given public length and converting the result to a vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function prod</h2>
+</div>
+<code>
+pub  fn prod
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat,
+A : Qualified -&gt; Unqualified
+]
+(   xs : A[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Array[A]
+</code>
+<div>
+  <blockquote>
+  <p>Product of all elements of the given list or vector.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function prod_pre</h2>
+</div>
+<code>
+pub  fn prod_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>,
+N : Nat,
+A : Qualified -&gt; Unqualified
+]
+(   xs : A[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D1">@D1</span> &lt;= <span class="citation" data-cites="D">@D</span>,
+<br>&nbsp;&nbsp;Array[A]
+</code>
+<div>
+  <blockquote>
+  <p>Product of all elements of the given list or vector with elements in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function reverse</h2>
+</div>
+<code>
+pub  fn reverse
+[
+X : Qualified
+]
+(   l : list[X] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[X] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The given list reversed.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function reverse_pre</h2>
+</div>
+<code>
+pub  fn reverse_pre
+[
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>
+]
+(   l : list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; list[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D">@D</span> &lt;= <span class="citation" data-cites="D1">@D1</span>
+</code>
+<div>
+  <blockquote>
+  <p>The given list with elements in <code>$pre</code> reversed.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function scalar_prod</h2>
+</div>
+<code>
+pub  fn scalar_prod
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   lim : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Scalar (dot) product of the initial parts of the given two lists up to the given position.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sort</h2>
+</div>
+<code>
+pub  fn sort
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Merge sort of the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sq_sum</h2>
+</div>
+<code>
+pub  fn sq_sum
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Sum of squares of all elements of the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sum</h2>
+</div>
+<code>
+pub  fn sum
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat,
+A : Qualified -&gt; Unqualified
+]
+(   xs : A[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Array[A]
+</code>
+<div>
+  <blockquote>
+  <p>Sum of all elements of the given list or vector.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sum_pre</h2>
+</div>
+<code>
+pub  fn sum_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="D1">@D1</span>,
+N : Nat,
+A : Qualified -&gt; Unqualified
+]
+(   xs : A[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="D1">@D1</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D1">@D1</span> &lt;= <span class="citation" data-cites="D">@D</span>,
+<br>&nbsp;&nbsp;Array[A]
+</code>
+<div>
+  <blockquote>
+  <p>Sum of all elements of the given list or vector with elements in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_cond</h2>
+</div>
+<code>
+unchecked eff * -&gt; * -&gt; * -&gt; * ! &lt;$S&gt;<br>
+pub  fn uint_cond
+[
+M : Nat,
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : bool[M] $S <span class="citation" data-cites="D">@D</span>,
+   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Convertible[M,N]
+</code>
+<div>
+  <blockquote>
+  <p>Choice between two integers. Oblivious in <code>$post @prover</code>, evaluating both branches.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_downcast</h2>
+</div>
+<code>
+unchecked eff * -&gt; * ! &lt;$S&gt;<br>
+pub  fn uint_downcast
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Downcasting the elements of the given list of integers in the stage <code>$pre</code> into the given stage. If the given stage is <code>$pre</code> then does nothing, otherwise applies <code>wire</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_ensure_post</h2>
+</div>
+<code>
+pub  fn uint_ensure_post
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Ensuring that the elements of the given list of integers are in <code>$post</code>. If they are then does nothing, otherwise applies <code>wire</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_list_to_post</h2>
+</div>
+<code>
+pub  fn uint_list_to_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Putting the elements of the given list with integral elements in <code>$pre</code> on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_list_to_pre</h2>
+</div>
+<code>
+pub  fn uint_list_to_pre
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Converting the elements of the given list of integers to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_list_to_prover</h2>
+</div>
+<code>
+pub  fn uint_list_to_prover
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xs : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $S <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Converting the elements of the given list of integers to the domain <code>@prover</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function undefined</h2>
+</div>
+<code>
+pub  fn undefined
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+() 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>An assertion failure along with an infinite loop.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function univ_assert</h2>
+</div>
+<code>
+unchecked eff * -&gt; * ! &lt;<span class="citation" data-cites="D">@D</span>&gt; + &lt;$S&gt;<br>
+pub  fn univ_assert
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that does not depend on stage.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function univ_assert_zero</h2>
+</div>
+<code>
+unchecked eff * -&gt; * ! &lt;<span class="citation" data-cites="D">@D</span>&gt; + &lt;$S&gt;<br>
+pub  fn univ_assert_zero
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of equality to zero that does not depend on stage.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function univ_conditional_assert</h2>
+</div>
+<code>
+pub  fn univ_conditional_assert
+[
+<span class="citation" data-cites="D">@D</span>,
+$S,
+N : Nat
+]
+(   c : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   b : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion, provided that the given condition is true. Does not depend on stage.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function univ_conditional_assert_zero</h2>
+</div>
+<code>
+pub  fn univ_conditional_assert_zero
+[
+<span class="citation" data-cites="D">@D</span>,
+$S,
+N : Nat
+]
+(   c : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   x : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of equality to zero, provided that the given condition is true. Does not depend on stage.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function zip_with</h2>
+</div>
+<code>
+pub  fn zip_with
+[
+T1 : Qualified,
+T2 : Qualified,
+T3 : Qualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(   f : T1 -&gt; T2 -&gt; T3,
+   xs : list[T1] $pre <span class="citation" data-cites="D">@D</span>,
+   ys : list[T2] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; list[T3] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic zip of corresponding elements of two lists with the given operation. The lists must be of the same length.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function zip_with_upto</h2>
+</div>
+<code>
+pub  fn zip_with_upto
+[
+T1 : Qualified,
+T2 : Qualified,
+T3 : Qualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(   f : T1 -&gt; T2 -&gt; T3,
+   xs : list[T1] $pre <span class="citation" data-cites="D">@D</span>,
+   ys : list[T2] $pre <span class="citation" data-cites="D">@D</span>,
+   lim : uint[18446744073709551616] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; list[T3] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The polymorphic zip of corresponding elements of two lists with the given operation, up to the given position.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

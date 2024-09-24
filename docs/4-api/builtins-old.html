@@ -1,0 +1,1636 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.07
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values And Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed And Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/Integer.html">Api</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/builtins-old.html">Builtins Old</a>
+          <a class="toc-level-2" href="/4-api/builtins.html">Builtins</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h2>Function +</h2>
+</div>
+<code>
+pub  fn +
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Modular addition of the given two integers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function -</h2>
+</div>
+<code>
+pub  fn -
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Modular subtraction of the second given integer from the first one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function *</h2>
+</div>
+<code>
+pub  fn *
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Modular multiplication of the given two integers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function /</h2>
+</div>
+<code>
+pub  fn /
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Integral division of the first given integer by the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mod_div</h2>
+</div>
+<code>
+pub  fn mod_div
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Modular division of the first given integer by the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function %</h2>
+</div>
+<code>
+pub  fn %
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The remainder upon division of the first given integer by the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ^</h2>
+</div>
+<code>
+pub  fn ^
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function &amp;</h2>
+</div>
+<code>
+pub  fn &amp;
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The logical and of the given two booleans.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function |</h2>
+</div>
+<code>
+pub  fn |
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The logical or of the given two booleans.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function !</h2>
+</div>
+<code>
+pub  fn !
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The logical negation of the given boolean.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ==</h2>
+</div>
+<code>
+pub  fn ==
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The equality of the given two integers as a boolean.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function !=</h2>
+</div>
+<code>
+pub  fn !=
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the given two integers are distinct.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function &lt;</h2>
+</div>
+<code>
+pub  fn &lt;
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is less than the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function &lt;=</h2>
+</div>
+<code>
+pub  fn &lt;=
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is less than or equal to the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function &gt;</h2>
+</div>
+<code>
+pub  fn &gt;
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is greater than the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function &gt;=</h2>
+</div>
+<code>
+pub  fn &gt;=
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is greater than or equal to the second one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function xor</h2>
+</div>
+<code>
+pub  fn xor
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   x2 : bool[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The logical xor of the given two booleans.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function call</h2>
+</div>
+<code>
+pub  fn call
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Calling a circuit <code>x1</code> with <code>x2</code> as input. The circuit search path can be specified via the <code>--circuits</code> argument when compiling the program. Each element in the outer list of <code>x2</code> corresponds to one input in the circuit and the inner list corresponds to the bits of that input. The return value is a list of bit arrays corresponding to the outputs of the circuit.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function callu</h2>
+</div>
+<code>
+pub  fn callu
+[
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[uint[18446744073709551616] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[18446744073709551616] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Calling a circuit <code>x1</code> with <code>x2</code> as input. The circuit search path can be specified via the <code>--circuits</code> argument when compiling the program. This variant of the <code>call</code> function assumes the inputs as 64-bit integers and produces outputs in the same form.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_to_bools</h2>
+</div>
+<code>
+pub  fn uint_to_bools
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function bools_to_uint</h2>
+</div>
+<code>
+pub  fn bools_to_uint
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert</h2>
+</div>
+<code>
+pub  fn assert
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(
+   x1 : bool[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Checks if the given boolean is true. If this check fails then the whole proof fails.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_eq</h2>
+</div>
+<code>
+pub  fn assert_eq
+[
+<span class="citation" data-cites="D">@D</span>,
+T1 : Unqualified,
+T2 : Unqualified
+]
+(
+   x1 : T1 $post <span class="citation" data-cites="D">@D</span>,
+   x2 : T2 $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;assert-eq[T1,T2]
+</code>
+<div>
+  <blockquote>
+  <p>Checks if the given two field elements are equal as integers. If this check fails then the whole proof fails.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_eq_uints_uints</h2>
+</div>
+<code>
+pub  fn assert_eq_uints_uints
+[
+N1 : Nat,
+N2 : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[uint[N1] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[uint[N2] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N1],
+<br>&nbsp;&nbsp;Field[N2]
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_eq_uints_bools</h2>
+</div>
+<code>
+pub  fn assert_eq_uints_bools
+[
+N1 : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[uint[N1] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[bool[2] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N1],
+<br>&nbsp;&nbsp;Field[2]
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_zero</h2>
+</div>
+<code>
+pub  fn assert_zero
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Checks if the given field element equals zero. If this check fails then the whole proof fails.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function get_instance</h2>
+</div>
+<code>
+pub  fn get_instance
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;instance-input[T,$S,<span class="citation" data-cites="D">@D</span>]
+</code>
+<div>
+  <blockquote>
+  <p>Loads a value from the instance json file. The instance file can be passed to the compiler via the <code>--instance</code> argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function get_public</h2>
+</div>
+<code>
+pub  fn get_public
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;public-input[T,$S,<span class="citation" data-cites="D">@D</span>]
+</code>
+<div>
+  <blockquote>
+  <p>Loads a value from the public json file. The public file can be passed to the compiler via the <code>--public</code> argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function get_witness</h2>
+</div>
+<code>
+pub  fn get_witness
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;witness-input[T,$S,<span class="citation" data-cites="D">@D</span>]
+</code>
+<div>
+  <blockquote>
+  <p>Loads a value from the witness json file. The witness file can be passed to the compiler via the <code>--witness</code> argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function challenge</h2>
+</div>
+<code>
+pub  fn challenge
+[
+N : Nat
+]
+(
+   x1 : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="verifier">@verifier</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Challenge[N]
+</code>
+<div>
+  <blockquote>
+  <p>Producing a list of random field elements.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function length</h2>
+</div>
+<code>
+pub  fn length
+[
+TC : Qualified -&gt; Unqualified,
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : TC[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; uint[18446744073709551616] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Array[TC]
+</code>
+<div>
+  <blockquote>
+  <p>The length of the list or vector.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function unslice</h2>
+</div>
+<code>
+pub  fn unslice
+[
+TC : Qualified -&gt; Unqualified,
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : TC[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; TC[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Array[TC]
+</code>
+<div>
+  <blockquote>
+  <p>Converting a slice of a list or vector to a new list or vector.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function array_to_post</h2>
+</div>
+<code>
+pub  fn array_to_post
+[
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[T $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[T $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Putting all elements of the given vector onto wires in a consecutive range.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function array_to_prover</h2>
+</div>
+<code>
+pub  fn array_to_prover
+[
+N : Nat
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="verifier">@verifier</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Lifting all elements of the given vector to the prover’s domain.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function freeze</h2>
+</div>
+<code>
+pub  fn freeze
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : list[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Converting a list to a vector of the same values in the same order.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function thaw</h2>
+</div>
+<code>
+pub  fn thaw
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; list[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Converting a vector to a list of the same values in the same order.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function flatten</h2>
+</div>
+<code>
+pub  fn flatten
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T]
+</code>
+<div>
+  <blockquote>
+  <p>Converting a tensor to a one-dimensional vector.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function unflatten</h2>
+</div>
+<code>
+pub  fn unflatten
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>,
+   x2 : list[uint[18446744073709551616] $pre <span class="citation" data-cites="DL">@DL</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T]
+</code>
+<div>
+  <blockquote>
+  <p>Converting a given vector <code>x1</code> to a tensor of dimensions given by the list <code>x2</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function index_tensor</h2>
+</div>
+<code>
+pub  fn index_tensor
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>,
+   x2 : list[uint[18446744073709551616] $pre <span class="citation" data-cites="DL">@DL</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T]
+</code>
+<div>
+  <blockquote>
+  <p>Lookup of an element at position <code>x2</code> in the tensor <code>x1</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function index_tensor_1</h2>
+</div>
+<code>
+pub  fn index_tensor_1
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>,
+   x2 : uint[18446744073709551616] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T]
+</code>
+<div>
+  <blockquote>
+  <p>Subtensor of the tensor <code>x1</code> corresponding to the index value <code>x2</code> of its first dimension.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function size</h2>
+</div>
+<code>
+pub  fn size
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : arr[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+) 
+-&gt; list[uint[18446744073709551616] $pre <span class="citation" data-cites="DL">@DL</span>] $pre <span class="citation" data-cites="DL">@DL</span>
+<br>where
+<br>&nbsp;&nbsp;Sized[T]
+</code>
+<div>
+  <blockquote>
+  <p>The list of dimensions of the given tensor.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __make_waksman_network</h2>
+</div>
+<code>
+pub  fn __make_waksman_network
+(
+   x1 : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Constructing a Waksman permutation network of the given order.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __get_sorting_permutation</h2>
+</div>
+<code>
+pub  fn __get_sorting_permutation
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[uint $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[18446744073709551616] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The permutation that sorts the input.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __permutation_switches</h2>
+</div>
+<code>
+pub  fn __permutation_switches
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[uint[18446744073709551616] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Producing switches which, when input to the Waksman network of the order of the length of the given permutation, lead to the given permutation.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function field_bit_width</h2>
+</div>
+<code>
+pub  fn field_bit_width
+(
+   x1 : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The number of bits required to represent the given integer.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function dbg_print</h2>
+</div>
+<code>
+pub  fn dbg_print
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Printing the given string to standard output.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function string_append</h2>
+</div>
+<code>
+pub  fn string_append
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : string $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : string $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Concatenating the given two strings.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function to_string</h2>
+</div>
+<code>
+pub  fn to_string
+[
+T : Unqualified,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : T $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;ToString[T]
+</code>
+<div>
+  <blockquote>
+  <p>A string representation of the value.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __default_value</h2>
+</div>
+<code>
+pub  fn __default_value
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : () $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;has-default-value[T $S <span class="citation" data-cites="D">@D</span>]
+</code>
+<div>
+  <blockquote>
+  <p>The default value of given type. For integers the value is 0, for booleans the value is false, default containers are empty, and structured types are filled recursively with default values.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __mod_invert</h2>
+</div>
+<code>
+pub  fn __mod_invert
+[
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The inverse of <code>x1</code> modulo <code>x2</code></p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __list_push_unsafe</h2>
+</div>
+<code>
+pub  fn __list_push_unsafe
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>,
+<span class="citation" data-cites="DL">@DL</span>
+]
+(
+   x1 : list[T $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="DL">@DL</span>,
+   x2 : T $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Appending the value <code>x2</code> to the end of the list <code>x1</code> as a side effect. This function is meant to be used by library writers only. Other developers should use the library function <code>list_push</code> instead.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __reference_count</h2>
+</div>
+<code>
+pub  fn __reference_count
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : T $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function __make_shallow_copy</h2>
+</div>
+<code>
+pub  fn __make_shallow_copy
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : T $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function __set_store_default_unsafe</h2>
+</div>
+<code>
+pub  fn __set_store_default_unsafe
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : store[uint[N], uint[N]] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : bool $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Setting the boolean <code>x2</code> as the default flag of the store <code>x1</code> as a side effect. This function is meant to be used by library writers only. Other developers should use the library function <code>set_store_default</code> instead.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bitextract_pre_uint</h2>
+</div>
+<code>
+pub  fn bitextract_pre_uint
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   x2 : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The little endian binary representation of the integer <code>x1</code>. The result list contains <code>x2</code> elements. If this number of bits is not enough to represent <code>x1</code> then a run time error occurs.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bitextract_vec_helper</h2>
+</div>
+<code>
+pub  fn bitextract_vec_helper
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The little endian binary representations of the integers in the list <code>x1</code>. The result list contains <code>x2</code> elements. Every element in the resulting list is a vector that contains the corresponding bit in each representation. If any of the integers cannot be represented by the expected number of bits then a run time error occurs.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function make_unknown</h2>
+</div>
+<code>
+pub  fn make_unknown
+[
+T : Unqualified,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : T $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; T $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Forgetting the $pre copy of the value in order to save memory and time.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function make_not_unknown</h2>
+</div>
+<code>
+pub  fn make_not_unknown
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Associating a new $pre value, given in the second argument, to an unknown value given in the first argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_n_pre_matrix_prod</h2>
+</div>
+<code>
+pub  fn uint_n_pre_matrix_prod
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Multiplying the matrix <code>x1</code> with the transposed matrix <code>x2</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_n_pre_matrix_prod_i128</h2>
+</div>
+<code>
+pub  fn uint_n_pre_matrix_prod_i128
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+
+  </blockquote>
+</div>
+<div>
+  <h2>Function __lt</h2>
+</div>
+<code>
+pub  fn __lt
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;ExtendedArithmetic
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is less than the second one. Makes use of the <code>extended_arithmetic</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __le</h2>
+</div>
+<code>
+pub  fn __le
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;ExtendedArithmetic
+</code>
+<div>
+  <blockquote>
+  <p>The boolean indicating if the first of the given two integers is less than or equal to the second one. Makes use of the <code>extended_arithmetic</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __div</h2>
+</div>
+<code>
+pub  fn __div
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;ExtendedArithmetic
+</code>
+<div>
+  <blockquote>
+  <p>Integral division of the first given integer by the second one. Makes use of the <code>extended_arithmetic</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __divmod</h2>
+</div>
+<code>
+pub  fn __divmod
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; tuple[uint[N] $post <span class="citation" data-cites="D">@D</span>, uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;ExtendedArithmetic
+</code>
+<div>
+  <blockquote>
+  <p>Integral division of the first given integer by the second one, producing the quotient and the remainder together in a pair. Makes use of the <code>extended_arithmetic</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __bitextract</h2>
+</div>
+<code>
+pub  fn __bitextract
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;ExtendedArithmetic
+</code>
+<div>
+  <blockquote>
+  <p>The big endian binary representation of the given integer, with the minimal length that can accommodate all elements of the field. Makes use of the <code>extended_arithmetic</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __assert_perm</h2>
+</div>
+<code>
+pub  fn __assert_perm
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;PermutationCheck
+</code>
+<div>
+  <blockquote>
+  <p>Checks if the given two vectors are permutations of each other. If the check fails then the whole proof fails. Makes use of the <code>permutation_check</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __add</h2>
+</div>
+<code>
+pub  fn __add
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise modular addition of the given two vectors. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __mul</h2>
+</div>
+<code>
+pub  fn __mul
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise modular multiplication of the given two vectors. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __addc</h2>
+</div>
+<code>
+pub  fn __addc
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Modular addition of the constant <code>x2</code> to every element of the vector <code>x1</code>. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __mulc</h2>
+</div>
+<code>
+pub  fn __mulc
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Modular multiplication of every element of the vector <code>x1</code> with the constant <code>x2</code>. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __add_scalar</h2>
+</div>
+<code>
+pub  fn __add_scalar
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Modular addition of the value <code>x2</code> to every element of the vector <code>x1</code>. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __mul_scalar</h2>
+</div>
+<code>
+pub  fn __mul_scalar
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>Modular multiplication of every element of the vector <code>x1</code> with the value <code>x2</code>. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __sum</h2>
+</div>
+<code>
+pub  fn __sum
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>The sum of all elements of the given vector. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __prod</h2>
+</div>
+<code>
+pub  fn __prod
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>The product of all elements of the given vector. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function __dotprod</h2>
+</div>
+<code>
+pub  fn __dotprod
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(
+   x1 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x2 : arr[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectors
+</code>
+<div>
+  <blockquote>
+  <p>The scalar product of the given two vectors. Makes use of the <code>vectors</code> plugin.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

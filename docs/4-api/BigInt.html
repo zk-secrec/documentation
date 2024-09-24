@@ -1,0 +1,753 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.08
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module BigInt</h1>
+</div>
+<div>
+  <h2>Function BigIntBlock_to_post</h2>
+</div>
+<code>
+pub  fn BigIntBlock_to_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigIntBlock[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigIntBlock[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of a block of a BigInt object in the stage <code>$pre</code> to the stage <code>$post</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigIntBlock_to_pre</h2>
+</div>
+<code>
+pub  fn BigIntBlock_to_pre
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigIntBlock[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigIntBlock[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of a block of a BigInt object in the stage <code>$post</code> to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_add</h2>
+</div>
+<code>
+pub  fn BigInt_add
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The sum of the given two BigInt objects. The result is not normalized. Fails if the numbers of bits per block differ in the given BigInt objects or the public bound of some block exceeds half of the modulus.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_eq</h2>
+</div>
+<code>
+pub  fn BigInt_assert_eq
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the given two BigInt objects have equal values. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_le</h2>
+</div>
+<code>
+pub  fn BigInt_assert_le
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the value of the first given BigInt object is less than or equal to that of the second one. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_lt</h2>
+</div>
+<code>
+pub  fn BigInt_assert_lt
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the value of the first given BigInt object is less than that of the second one. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_nonneg</h2>
+</div>
+<code>
+pub  fn BigInt_assert_nonneg
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xn : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the value of the given BigInt object is non-negative. Assumes that the given BigInt object is normalized. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_normalization</h2>
+</div>
+<code>
+pub  fn BigInt_assert_normalization
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the given BigInt object in <code>$post</code> is normalized, i.e., the number in each block or its absolute value fits to the required number of bits. Fails if the given list does not contain a SizeAsserter object for that number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_assert_zero</h2>
+</div>
+<code>
+pub  fn BigInt_assert_zero
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xn : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the value of the given BigInt object is zero. Assumes that the given BigInt object is normalized.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_bit_width</h2>
+</div>
+<code>
+pub  fn BigInt_bit_width
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The total number of bits in the given BigInt object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_cast</h2>
+</div>
+<code>
+pub  fn BigInt_cast
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D1">@D1</span>,
+<span class="citation" data-cites="D2">@D2</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D1">@D1</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D2">@D2</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;<span class="citation" data-cites="D1">@D1</span> &lt;= <span class="citation" data-cites="D2">@D2</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of a BigInt object to a higher domain.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_choose</h2>
+</div>
+<code>
+pub  fn BigInt_choose
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   t : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   f : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Oblivious choice according to the given boolean between the given two BigInt objects. The result is normalized, provided that the givens are normalized. Fails if the numbers of bits per block differ in the given BigInt objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_conditional_swap</h2>
+</div>
+<code>
+pub  fn BigInt_conditional_swap
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   t : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   f : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; tuple[BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>, BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Oblivious choice according to the given boolean between the pair of the given two BigInt objects and the pair with components swapped. The result is normalized, provided that the givens are normalized. The function can be used in the field <code>cond_swap</code> of the struct <code>Waksman::ApplySwitchingNetworkInterface</code>. Fails if the numbers of bits per block differ in the given BigInt objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_constmul</h2>
+</div>
+<code>
+pub  fn BigInt_constmul
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   c : uint $pre <span class="citation" data-cites="public">@public</span>,
+   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given constant in <code>$pre</code> and the given BigInt object in <code>$post</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_eq</h2>
+</div>
+<code>
+pub  fn BigInt_eq
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given two BigInt objects have equal values. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_from_bitarray</h2>
+</div>
+<code>
+pub  fn BigInt_from_bitarray
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   bs : list[bool[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   bpb : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new BigInt object whose value is represented by the given list of booleans (assuming little-endian representation), using the given number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_from_bool2_array</h2>
+</div>
+<code>
+pub  fn BigInt_from_bool2_array
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   bs : list[bool[2] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   bpb : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Convertible[2,N]
+</code>
+<div>
+  <blockquote>
+  <p>A new BigInt object whose value is represented by the given list of booleans (assuming little-endian representation), using the given number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_from_uint</h2>
+</div>
+<code>
+pub  fn BigInt_from_uint
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint $pre <span class="citation" data-cites="D">@D</span>,
+   nblocks : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   bpb : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>A new BigInt object with the given value and parameters (the number of blocks; the number of bits per block). If the allowed number of blocks is not enough to fit the number, the higher blocks are omitted.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_from_uint_select</h2>
+</div>
+<code>
+pub  fn BigInt_from_uint_select
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint $pre <span class="citation" data-cites="public">@public</span>,
+   nblocks : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   bpb : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   sel : uint[N] $post <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new BigInt object with the given value or zero value (depending on the fourth argument) and the given parameters (the number of blocks; the number of bits per block). Assumes that the fourth argument is either 0 or 1 (the first option forcing the result to be zero). If the allowed number of blocks is not enough to fit the number, the higher blocks are omitted.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_is_zero</h2>
+</div>
+<code>
+pub  fn BigInt_is_zero
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xn : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the value of the given BigInt object is zero. Assumes that the given BigInt object is normalized.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_mod</h2>
+</div>
+<code>
+pub  fn BigInt_mod
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The remainder of the first given BigInt object upon division by the second one. Fails if the numbers of bits per block differ in the given BigInt objects or the given list does not contain a SizeAsserter object for the number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_mod_div</h2>
+</div>
+<code>
+pub  fn BigInt_mod_div
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   p : uint $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Division of the first given BigInt object by the second given BigInt object in the residue class ring modulo the integer given as the third argument. The result is normalized but the integrity of normalization is not checked. Fails if the numbers of bits per block differ in the given BigInt objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_modconst</h2>
+</div>
+<code>
+pub  fn BigInt_modconst
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : uint $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The remainder of the value of the given BigInt object upon division by the given integer. The result is a normalized BigInt object. Fails if the given list does not contain a SizeAsserter object for the number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_mul</h2>
+</div>
+<code>
+pub  fn BigInt_mul
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two BigInt objects. The result is not normalized. Fails if the numbers of bits per block differ in the given BigInt objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_mul_post</h2>
+</div>
+<code>
+pub  fn BigInt_mul_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two BigInt objects in <code>$post</code>. The result is not normalized. This computation is more efficient than that of <code>BigInt_mul</code> in <code>$post</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_neg</h2>
+</div>
+<code>
+pub  fn BigInt_neg
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Negation of the given BigInt object.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_normalize_post</h2>
+</div>
+<code>
+pub  fn BigInt_normalize_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The normal form of the given BigInt object in <code>$post</code>. Fails if the given list does not contain a SizeAsserter object for the used number of bits per block.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_sub</h2>
+</div>
+<code>
+pub  fn BigInt_sub
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The difference of the given two BigInt objects. The result is not normalized. Fails if the numbers of bits per block differ in the given BigInt objects or the public bound of some block exceeds half of the modulus.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_to_bitarray</h2>
+</div>
+<code>
+pub  fn BigInt_to_bitarray
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A little-endian representation of the value of the given BigInt object. Fails if the given BigInt object is not normalized or its value is negative.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_to_post</h2>
+</div>
+<code>
+pub  fn BigInt_to_post
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of a BigInt object in the stage <code>$pre</code> to the stage <code>$post</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_to_pre</h2>
+</div>
+<code>
+pub  fn BigInt_to_pre
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; BigInt[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of a BigInt object in the stage <code>$post</code> to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_to_string</h2>
+</div>
+<code>
+pub  fn BigInt_to_string
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>A string representation of the given BigInt object (for debugging).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function BigInt_to_uint</h2>
+</div>
+<code>
+pub  fn BigInt_to_uint
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : BigInt[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given BigInt object to an unsigned integer.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

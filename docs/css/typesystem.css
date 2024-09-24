@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css?family=Miltonian");
+
+tr.axiom {
+  background-color: white;
+  border-top: double black;
+}
+
+tr.proof {
+  background-color: white;
+}
+
+table tr.proof:nth-child(even) {
+  border-top: 1pt solid black;
+}
+
+tr.proof:nth-child(odd) {
+  border-left: 10px solid white;
+  border-right: 10px solid white;
+}
+
+span.bold {
+  font-weight: bold;
+}
+
+span.lit {
+  text-decoration: overline;
+}
+
+span.mathfun {
+  font-family: sans;
+  font-style: normal;
+}
+
+var {
+  font-family: sans;
+}
+
+var.meta {
+  font-family: times;
+}
+
+var.numfamily {
+  font-family: "Miltonian";
+  font-style: normal;
+}
+
+div.formula {
+  padding-left: 48pt;
+  padding-top: 16pt;
+  padding-bottom: 16pt;
+  display: block;
+}

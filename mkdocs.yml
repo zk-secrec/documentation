@@ -1,0 +1,48 @@
+site_name: The ZK-SecreC Language Documentation
+nav:
+  - Home: 'index.md'
+  - 'User Guide':
+    - 'Installation': '1-user-guide/0-installation.md'
+    - 'Getting Started': '1-user-guide/1-getting-started.md'
+  - 'Developer Guide':
+    - 'Profiling': '2-dev-guide/0-profiling.md'
+  - 'Reference':
+    - 'Values and Types': '3-reference/0-values-and-types.md'
+    - 'Lexical Structure': '3-reference/1-lexical-structure.md'
+    - 'Type Level Expressions': '3-reference/2-type-level-expressions.md'
+    - 'Expressions': '3-reference/3-expressions.md'
+    - 'Top Level': '3-reference/4-top-level.md'
+    - 'Type System': '3-reference/5-type-system.html'
+    - 'Boxed and Unboxed Types': '3-reference/6-boxed-and-unboxed-types.md'
+  - 'API':
+    - 'BigInt': '4-api/BigInt.html'
+    - 'Bitextract': '4-api/Bitextract.html'
+    - 'Builtin': '4-api/Builtin.html'
+    - 'Char': '4-api/Char.html'
+    - 'CheVec': '4-api/ChrVec.html'
+    - 'Date': '4-api/Date.html'
+    - 'DFA': '4-api/DFA.html'
+    - 'EC': '4-api/EC.html'
+    - 'FastFixedPoint': '4-api/FastFixedPoint.html'
+    - 'FastFixedPointVec': '4-api/FastFixedPointVec.html'
+    - 'FixedPoint': '4-api/FixedPoint.html'
+    - 'Inequalities': '4-api/Inequalities.html'
+    - 'Integer': '4-api/Integer.html'
+    - 'IsFromFirst': '4-api/IsFromFirst.html'
+    - 'OldInequalities': '4-api/OldInequalities.html'
+    - 'Perm': '4-api/Perm.html'
+    - 'Poseidon': '4-api/Poseidon.html'
+    - 'Prob': '4-api/Prob.html'
+    - 'SetOp': '4-api/SetOp.html'
+    - 'Std': '4-api/Std.html'
+    - 'Store': '4-api/Store.html'
+    - 'StoreVec': '4-api/StoreVec.html'
+    - 'String': '4-api/String.html'
+    - 'Text': '4-api/Text.html'
+    - 'Vec': '4-api/Vec.html'
+    - 'Waksman': '4-api/Waksman.html'
+  - 'Backend Interface':
+    - 'Interfacing a New Backend': '5-backend-interface/0-interfacing-a-new-backend.md'
+    - 'Trait Methods': '5-backend-interface/1-trait-methods.md'
+extra_css:
+  - css/typesystem.css

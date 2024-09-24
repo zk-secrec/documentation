@@ -1,0 +1,765 @@
+<html>
+<head>
+<title>
+Type system
+</title>
+<link rel="stylesheet" type="text/css" href="../../css/site.css" />
+<link rel="stylesheet" type="text/css" href="../../css/typesystem.css" />
+</head>
+<body>
+<h1>Type System</h1>
+
+<p>The security guarantees of ZK-SecreC are reflected by its type system. Types are checked (and inferred in certain cases) during compile time, hence the type system is part of the static semantics of ZK-SecreC. We describe a static semantics that traces also effects (e.g., assertions and mutable variable updates) that expression evaluation can cause. Therefore it is really a type and effect system.
+The type system makes sure that the program can be translated into the circuit, and into Prover's and Verifier's local computations.</p>
+
+<p>ZK-SecreC supports first-order polymorphism only. Therefore we can avoid explicit quantification in type rules. Most of the typing rules handle types as monomorphic.</p>
+
+<p>We also do not discuss type synonyms here for simplicity, and omit some complicated issues of structs. Similarly, we ignore higher-order functions (functions that take functions as parameters) and data structures with functions stored in them because of complicated issues regarding effects of the involved functions. Nevertheless, ZK-SecreC actually allows the programmer to define and use higher-order functions and store functions in data structures. For programs involving these features, ZK-SecreC fails to provide the usual privacy guarantees.</p>
+
+<h2>Notation</h2>
+
+<h3>Choice of symbols</h3>
+
+<p>We use the following Latin and Greek letters in type rules (often with numeric indices):</p>
+
+<table class="notation">
+<thead>
+<tr><th>Symbol</th><th>Denotation</th></tr></thead>
+<tbody class="description">
+<tr class="description"><td><var>a</var></td><td class="description">Type (of whatever kind)</td></tr>
+<tr class="description"><td><var>b</var></td><td class="description">Boolean</td></tr>
+<tr class="description"><td><var>c</var></td><td class="description">Type constraint</td></tr>
+<tr class="description"><td><var>d</var></td><td class="description">Domain</td></tr>
+<tr class="description"><td><var>D</var></td><td class="description">Upward closed set of domains</td></tr>
+<tr class="description"><td><var>e</var></td><td class="description">Expression, statement</td></tr>
+<tr class="description"><td><var>f</var></td><td class="description">Function name</td></tr>
+<tr class="description"><td><var>l</var></td><td class="description">Field label</td></tr>
+<tr class="description"><td><var>o</var></td><td class="description">Effect (triple)</td></tr>
+<tr class="description"><td><var>p</var></td><td class="description">Pattern</td></tr>
+<tr class="description"><td><var>q</var></td><td class="description">Qualified type</td></tr>
+<tr class="description"><td><var>r</var></td><td class="description">Struct (record) name</td></tr>
+<tr class="description"><td><var>s</var></td><td class="description">Stage</td></tr>
+<tr class="description"><td><var>t</var></td><td class="description">Unqualified data type</td></tr>
+<tr class="description"><td><var>w</var></td><td class="description">Function type</td></tr>
+<tr class="description"><td><var>x</var></td><td class="description">Variable</td></tr>
+<tr class="description"><td><var>z</var></td><td class="description">Offset variable</td></tr>
+<tr class="description"><td>&Gamma;</td><td class="description">Variable environment</td></tr>
+<tr class="description"><td>&Kappa;</td><td class="description">Constraint environment</td></tr>
+<tr class="description"><td>&Pi;</td><td class="description">Global function environment</td></tr>
+<tr class="description"><td>&rho;</td><td class="description">Substitution for type variables</td></tr>
+<tr class="description"><td>&Sigma;</td><td class="description">Struct environment</td></tr>
+<tr class="description"><td>&Phi;</td><td class="description">Local group function environment</td></tr>
+</tbody>
+</table>
+
+<p>The notions referred to are mostly explained in the next subsubsection.</p>
+
+<p>We denote the set of all natural numbers by <var class="numfamily">N</var>, the set of all integers by <var class="numfamily">Z</var>, the set of all truth values by <var class="numfamily">B</var>, and the set of all Unicode characters by <var class="numfamily">C</var>. If <var>A</var> is any set of characters then <var>A</var><sup>*</sup> denotes the set of all finite strings over alphabet <var>A</var>. Stated formally:</p>
+
+<div class="formula">
+<var class="numfamily">N</var> = {0,1,2,&hellip;};<br/>
+<var class="numfamily">Z</var> = {&hellip;,&minus;2,&minus;1,0,1,2,&hellip;};<br/>
+<var class="numfamily">B</var> = {<span class="bold">tt</span>,<span class="bold">ff</span>};<br/>
+<var class="numfamily">C</var> = {&hellip;,A,B,C,&hellip;,a,b,c,&hellip;};<br/>
+<var>A</var><sup>*</sup> = {<var>a</var><sub>0</sub>&hellip;<var>a</var><sub><var class="meta">n</var>&minus;1</sub> | <var class="meta">n</var>&in;<var class="numfamily">N</var>, <var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">n</var>&minus;1</sub>&in;<var>A</var>}.
+</div>
+
+<h3>Notions</h3>
+
+<p>Recall that <dfn>qualified types</dfn> are triples of the form <var>t</var> <var>s</var> <var>d</var> consisting of a data type, a stage and a domain. <dfn>Effects</dfn> in our type system also consist of three parts: a stage effect, a domain effect and a boolean effect. A stage effect is just a stage where the effect arises. A domain effect is an upward closed set of domains. A set of domains is called <dfn>upward closed</dfn> if, whenever a domain belongs to it, all higher domains also belong to it, assuming the ordering <code>@public</code> &lt; <code>@verifier</code> &lt; <code>@prover</code> of growing privacy. There are four upward closed sets of domains, ordered by inclusion as &emptyset; &sub; &langle;<code>@prover</code>&rangle; &sub; &langle;<code>@verifier</code>&rangle; &sub; &langle;<code>@public</code>&rangle;, where &langle;<var>d</var>&rangle; denotes the set consisting of the domain <var>d</var> and all higher domains. Boolean effects are type level booleans, denoted by <span class="bold">tt</span> and <span class="bold">ff</span>. They are needed for keeping track of statements that are forbidden in the right-hand sides of match expressions. We write effect triples with commas in the form <var>s</var>,<var>D</var>,<var>b</var>.</p>
+
+<p><dfn>Function types</dfn> in ZK-SecreC are of the form <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> where <var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub> are the argument types and <var>q</var> is the result type. Data types in qualified types cannot be function types, so we do not have mutual dependencies here. In our type system, function types are equipped with the effect an execution of the function body can trigger and the vectorizability status of the function. So our function types <var>w</var> end up in the form <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>.</p>
+
+<p>Function signatures can also incorporate a tuple of constraints imposed on the argument types or the result type of the function or on the constituents of them (data types, stages, domains). <dfn>Type constraints</dfn> are conditions imposed on types. Atomic type constraints can be:</p>
+
+<ul>
+<li>Stage identities of the form <code>pre</code> <var>s</var> or <code>post</code> <var>s</var> where <var>s</var> is a stage variable;</li>
+<li>Domain inequalities of the form <var>d</var><sub>1</sub> &le; <var>d</var><sub>2</sub> where <var>d</var><sub>1</sub> and <var>d</var><sub>2</sub> are type level expressions that denote domains;</li>
+<li>Applications of type predicates to 0 or more type level expressions, e.g., <code>Field</code> <var>N</var>.</li>
+</ul>
+
+<p>Only atomic type constraints can occur in function signatures. A type constraint is either an atomic type constraint or the negation of an atomic type constraint. We denote the negation of a type constraint <var>c</var> as &#x2053;<var>c</var>. Negation carries its standard meaning in the case of stage identites and domain inequalities where negation applications can be reduced. For example, the negation of <code>pre</code> <var>s</var> is <code>post</code> <var>s</var> and vice versa, the negation of <code>@prover</code> &le; <var>d</var> is <var>d</var> &le; <code>@verifier</code>. In the case of other atomic predicates, negation is equivalent to absence of the constraint in constraint solving.</p>
+
+<p>ZK-SecreC allows assignments to variables and also to particular cells of existing data structures. Hence in the left-hand sides of assignments, <dfn>offset variables</dfn> can occur which are variables with an empty or a non-empty finite sequence of lookups, e.g., <code>y</code> or <code>a[i].2</code>.</p>
+
+<p>A <dfn>variable environment</dfn> is a finite set of associations of the following kinds of components:</p>
+
+<ul>
+<li>Variable typings written in the form <var>x</var> : <var>q</var>;</li>
+<li>Variable mutability statements in the form <code>mut</code> <var>x</var> : <var>b</var> where the boolean indicates if the variable is mutable or not.</li>
+</ul>
+
+<p>Likewise, a <dfn>local group function environment</dfn> is a finite set of function typings in the form <var>f</var> : <var>w</var>. It is intended to contain only functions in the same group of mutually recursive functions with the current function, besides functions defined locally by lambda expressions and partial evaluation. A <dfn>constraint environment</dfn> is a set of type constraints. Usually, the constraints come from the signature of the current function. If the current code comes from a branch of a conditional expression where the condition is a type constraint then this constraint can also contribute to the environment. Depending on the branch, it contributes with itself or its negation.</p>
+
+<p>A <dfn>global function environment</dfn> consists of all functions in the program. Finally, a <dfn>struct environment</dfn> associates types to pairs consisting of a struct application and a field label. The struct environment is determined by the struct definitions in the program. The types can be parametrized. As parameters of ZK-SecreC struct definitions scope over the whole definition, all field types of the same struct type must have the same parameters.</p>
+
+<h3>Auxiliary functions</h3>
+
+<p>Recall that we use the ordering <code>@public</code> &lt; <code>@verifier</code> &lt; <code>@prover</code> of growing privacy on domains. The corresponding greatest lower bound operation &wedge; and least upper bound operation &vee; find the minimum and maximum, respectively, of two domains. We use &le; on upward closed sets of domains to denote the superset order, and &wedge; and &vee; to denote the corresponding greatest lower bound and least upper bound operations, i.e.,</p>
+
+<div class="formula">
+<var>D</var><sub>1</sub>&le;<var>D</var><sub>2</sub> &hArr; <var>D</var><sub>1</sub>&supseteq;<var>D</var><sub>2</sub>;<br/>
+<var>D</var><sub>1</sub>&wedge;<var>D</var><sub>2</sub> = <var>D</var><sub>1</sub>&cup;<var>D</var><sub>2</sub>.<br/>
+<var>D</var><sub>1</sub>&vee;<var>D</var><sub>2</sub> = <var>D</var><sub>1</sub>&cap;<var>D</var><sub>2</sub>.</div>
+
+<p>Recall that &langle;<var>d</var>&rangle; denotes the set consisting of the domain <var>d</var> and all higher domains. This way, &le; on upward closed domain sets respects the order on domains, i.e., &langle;<var>d</var><sub>1</sub>&rangle; &le; &langle;<var>d</var><sub>2</sub>&rangle; if and only if <var>d</var><sub>1</sub> &le; <var>d</var><sub>2</sub>. We also order stages as <code>$post</code> &lt; <code>$pre</code>, reflecting the fact that data computed in the circuit are also computed locally in the corresponding domain in order to be ready to provide expanded instances/witnesses to the circuit. This subtyping relation is reasonable also in the trustability aspect: Leaking trustable data (<code>$post</code>) into the untrustable world (<code>$pre</code>) causes no harm. For conciseness, we extend the &langle;&sdot;&rangle; notation to stages by</p>
+
+<div class="formula">&langle;<code>$pre</code>&rangle; = &emptyset;,<br/>
+&langle;<code>$post</code>&rangle; = &langle;<code>@public</code>&rangle;.
+</div>
+<!--, and also to data types by &langle;<var>t</var>&rangle;=&emptyset; if <var>t</var> is a primitive type and &langle;t&rangle;=&langle;<var>t'</var>&rangle;&cup;&langle;<var>s'</var>&rangle;&cup;&langle;d'&rangle; if <var>t</var>=<code>list</code>[<var>t'</var> <var>s'</var> <var>d'</var>]-->
+
+<p>This is reasonable since computations in the stage <code>$post</code> contribute to building of the circuit and the circuit is public. We extend the operator &wedge; to tuples pointwise.</p>
+
+<p>We write &Gamma;(<var>x</var>) for lookup of the type of variable <var>x</var> and &Gamma;(<code>mut</code> <var>x</var>) for lookup of the mutability status of the variable <var>x</var> in the variable environment &Gamma;. Likewise, &Phi;(<var>f</var>) denotes the type of <var>f</var> in the local group function environment &Phi;. We also denote the definition of function <var>f</var> in the global function environment &Pi; by &Pi;(<var>f</var>). Mutability flags are not explicitly inserted into global function environment but they can be found in the signature of functions; therefore we denote the mutability status of the <var class="meta">i</var>th parameter (counting from 0) of function <var>f</var> by &Pi;(<code>ref</code>(<var>f</var>.<var class="mut">i</var>)). Locally defined functions are not in &Pi;; but as locally defined functions cannot have mutable parameters, we consider &Pi;(<code>ref</code>(<var>f</var>.<var class="mut">i</var>)) to be false if <var>f</var> is not in &Pi;. We write &Sigma;(<var>r</var>)(<var>l</var>) for the possibly parametrized type associated to struct name <var>r</var> and field label <var>l</var>, and by <span class="mathfun">dom</span>(&Sigma;(<var>r</var>)), we denote the set of all field labels defined in the struct type <var>r</var>.</p>
+
+<p>If &Pi; is the global function environment then <span class="mathfun">scc</span> &Pi; denotes the set of groups of mutually recursive functions in the environment. Each function is represented by its name in <span class="mathfun">scc</span> &Pi;. Ways of computing <span class="mathfun">scc</span> &Pi; are out of scope of this document.</p>
+
+<p>By convention, we denote integer, boolean and string literals by <span class="lit"><var class="meta">n</var></span>, <span class="lit"><var class="meta">b</var></span> and <span class="lit"><var class="meta">s</var></span>, respectively, where <var class="meta">n</var>, <var class="meta">b</var> and <var class="meta">s</var> are the mathematical values. For instance, if <var class="meta">n</var>=103 (the number) then <span class="lit"><var class="meta">n</var></span>=<code>103</code> (the numeral).</p>
+
+<p>In ZK-SecreC, mutability of a variable propagates to all constituents of its value (if it is a data structure). Therefore, for deciding if an assignment is legal, one must find the variable whose mutability implies feasibility of the assignment. We denote this function by <span class="mathfun">var</span>. The formal definition goes as follows:</p>
+
+<div class="formula">
+<span class="mathfun">var</span> <var>x</var> = <var>x</var> if <var>x</var> is a variable;<br/>
+<span class="mathfun">var</span>(<var>z</var>[<var>e</var>]) = <span class="mathfun">var</span> <var>z</var> for list lookups;<br/>
+<span class="mathfun">var</span>(<var>z</var><code>.</code><span class="lit"><var class="meta">i</var></span>) = <span class="mathfun">var</span> <var>z</var> for tuple lookups;<br/>
+<span class="mathfun">var</span>(<var>z</var><code>.</code><var>l</var>) = <span class="mathfun">var</span> <var>z</var> for struct lookups.<br/>
+</div>
+
+<p>For other syntactic forms, <span class="mathfun">var</span> is undefined. Such forms (e.g., list slices and vector lookups and slices) are not allowed in the left-hand side of assignment.</p>
+
+<h3>Well-structured types</h3>
+
+<p>ZK-SecreC does not allow arbitrary combinations of stages and domains in qualified types. The acceptable combinations are those we call well-structured types. This notion basically means three conditions:</p>
+
+<ul>
+<li>The domain of a data structure cannot be higher than that of its constituents;</li>
+<li>The domain of a data structure that involves constituents at the stage <code>$post</code> must be <code>@public</code>.</li>
+</ul>
+
+<p>Formally, the notion can be defined as follows: Let <var>q</var>=<var>t</var> <var>s</var> <var>d</var> be a qualified type. Then <var>q</var> is called <dfn>well-structured</dfn> if all the following conditions hold:</p>
+
+<ul>
+<li>If <var>t</var>=<code>uint</code> or <var>t</var>=<code>bool</code> (with infinite modulus) then <var>s</var>=<code>$pre</code>;</li>
+<li>If <var>t</var>=<code>()</code> or <var>t</var> is a tuple type or <var>t</var> is a struct type then <var>s</var>=<code>$pre</code> and, whenever <var>t'</var> <var>s'</var> <var>d'</var> is its field type, &langle;<var>d</var>&rangle; &le; &langle;<var>s'</var>&rangle;&wedge;&langle;<var>d'</var>&rangle; and <var>t'</var> <var>s'</var> <var>d'</var> is well-structured;</li>
+<li>If <var>t</var>=<code>list</code>[<var>t'</var> <var>s'</var> <var>d'</var>] or <var>t</var>=<code>arr</code>[<var>t'</var> <var>s'</var> <var>d'</var>] for some qualified type <var>t'</var> <var>s'</var> <var>d'</var> then <var>s</var>=<code>$pre</code> and &langle;<var>d</var>&rangle; &le; &langle;<var>s'</var>&rangle;&wedge;&langle;<var>d'</var>&rangle; and <var>t'</var> <var>s'</var> <var>d'</var> is well-structured.</li>
+</ul>
+
+<p>The notion of well-structuredness establishes interaction between domains and stages. In addition, ZK-SecreC applies a restriction that all (direct or indirect) constituents of integer and boolean types within the same vector must be at the same stage.</p>
+
+<p>Deep cast is the means for ensuring well-structured types in the process of domain casts. Formally, changing of types in the case of deep cast is defined by functions <span class="mathfun">dcast</span> and <span class="mathfun">ddcast</span> which are defined as follows, using the least upper bound operation (&vee;) for conciseness:</p>
+
+<div class="formula">
+<span class="mathfun">dcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <var>t</var> <var>s</var> <var>d</var> if <var>d'</var>=<code>@public</code><br/>
+<span class="mathfun">dcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>uint</code>[<var>N</var>] <var>s</var> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>uint</code>[<var>N</var>] and <var>d'</var>&gt;<code>@public</code><br/>
+<span class="mathfun">dcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>bool</code>[<var>N</var>] <var>s</var> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>bool</code>[<var>N</var>] and <var>d'</var>&gt;<code>@public</code><br/>
+<span class="mathfun">dcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) in all other cases
+</div>
+
+<div class="formula">
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>uint</code>[<var>N</var>] <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>uint</code>[<var>N</var>]<br/>
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>bool</code>[<var>N</var>] <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>bool</code>[<var>N</var>]<br/>
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>()</code> <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>()</code><br/>
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>tuple</code>[<span class="mathfun">ddcast</span>(<var>q</var><sub>0</sub>,<var>d'</var>),&hellip;,<span class="mathfun">ddcast</span>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>,<var>d'</var>)] <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>]<br/>
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>list</code>[<span class="mathfun">ddcast</span>(<var>q</var>,<var>d'</var>)] <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>list</code>[<var>q</var>]<br/>
+<span class="mathfun">ddcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) = <code>arr</code>[<span class="mathfun">ddcast</span>(<var>q</var>,<var>d'</var>)] <code>$pre</code> (<var>d</var>&vee;<var>d'</var>) if <var>t</var>=<code>arr</code>[<var>q</var>]<br/>
+</div>
+
+<p>The most important difference between <span class="mathfun">dcast</span> and <span class="mathfun">ddcast</span> is in handling stages. While <span class="mathfun">dcast</span> leaves stages unchanged in the case of primitive types, <span class="mathfun">ddcast</span> replaces all stages with <code>$pre</code>. This difference is essential as changing the domain of an isolated value of a primitive type to a higher one always results in a well-structured type but this is not the case if the primitive type lies inside a structural type.</p>
+
+<h3>Sized types</h3>
+
+<p>A function can be declared vectorizable only if all its argument types and the result type are sized. A data type is called <dfn>sized</dfn> if all values in the type occupy the same amount of memory, i.e., are of the same size. More formally, a data type is sized if it is <code>uint</code>[<var>N</var>] or <code>bool</code>[<var>N</var>] for some (finite or infinite) modulus <var>N</var>, or a tuple type with all component types being sized, or a struct type where all component types are sized. Note that list types and vector types, as well as all types having such types as constituents, are not sized. The type constraint <code>Sized</code> of ZK-SecreC captures the notion of sized types.</p>
+<!--
+<ul>
+<li><var>t</var>=<code>uint</code>[<var>N</var>] for some (finite or infinite) modulus <var>N</var>;</li>
+<li><var>t</var>=<code>bool</code>[<var>N</var>] for some (finite or infinite) modulus <var>N</var>;</li>
+<li><var>t</var>=<code>()</code></li>'
+<li><var>t</var>=<code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] and <var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub> are sized;</li>
+<li><var>t</var>=<code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] and <var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub> are sized.</li>
+</ul>-->
+
+<p>A qualified type <var>t</var> <var>s</var> <var>d</var> is called sized if its data type <var>t</var> is sized. There are more restrictions the qualified types of function parameters must meet for vectorizability. For expressing them, several auxiliary notions of the highest stage or domain of atomic constituents are needed. They are measured in terms of upward closed sets of domains. The first one can be formally defined as</p>
+
+<div class="formula">
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = &langle;<var>s</var>&rangle; if <var>t</var>=<code>uint</code>[<var>N</var>] or <var>t</var>=<code>bool</code>[<var>N</var>] for some (finite or infinite) modulus <var>N</var>;<br/>
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = &langle;<code>@public</code>&rangle; if <var>t</var>=<code>()</code>;<br/>
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) if <var>t</var>=<code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>];<br/>
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) if <var>t</var>=<var>r</var>[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>] and <span class="mathfun">dom</span>(&Sigma;(<var>r</var>))={<var>l</var><sub>0</sub>,&hellip;,<var>l</var><sub><var class="meta">n</var>&minus;1</sub>} and &Sigma;(<var>r</var>)(<var>l</var><sub>0</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>]=<var>q</var><sub>0</sub>,&hellip;,&Sigma;(<var>r</var>)(<var>l</var><sub><var class="meta">n</var>&minus;1</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>]=<var>q</var><sub><var class="meta">n</var>&minus;1</sub>.
+</div>
+
+<p>The second one differs by the base case which takes domains instead of stages into account but falls into &emptyset; immediately if a value at the stage <code>$post</code> is encountered:</p>
+
+<div class="formula">
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = &langle;<var>d</var>&rangle; if <var>s</var>=<code>$pre</code> and either <var>t</var>=<code>uint</code>[<var>N</var>] or <var>t</var>=<code>bool</code>[<var>N</var>] for some (finite or infinite) modulus <var>N</var>;<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = &emptyset; if <var>s</var>=<code>$post</code> and either <var>t</var>=<code>uint</code>[<var>N</var>] or <var>t</var>=<code>bool</code>[<var>N</var>] for some modulus <var>N</var>;<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = &langle;<code>@public</code>&rangle; if <var>t</var>=<code>()</code>;<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = <span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) if <var>t</var>=<code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>];<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>t</var> <var>s</var> <var>d</var>) = <span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) if <var>t</var>=<var>r</var>[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>] and <span class="mathfun">dom</span>(&Sigma;(<var>r</var>))={<var>l</var><sub>0</sub>,&hellip;,<var>l</var><sub><var class="meta">n</var>&minus;1</sub>} and &Sigma;(<var>r</var>)(<var>l</var><sub>0</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>]=<var>q</var><sub>0</sub>,&hellip;,&Sigma;(<var>r</var>)(<var>l</var><sub><var class="meta">n</var>&minus;1</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>]=<var>q</var><sub><var class="meta">n</var>&minus;1</sub>.<br/>
+</div>
+
+<p>The definitions above assume that qualified types passed as argument to <span class="mathfun">atomstglub</span> and <span class="mathfun">atomdomlub</span> are sized since, due to the intended use cases, defining them on other types does not make sense. They are parametrized by the struct environment, as is actually the notion of sized type, too. These two notions are joined in the third one that finds the lowest of the two:</p>
+
+<div class="formula">
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var>)&wedge;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var>)
+</div>
+
+<p>Both <span class="mathfun">atomstglub</span><sub>&Sigma;</sub> and <span class="mathfun">atomlub</span><sub>&Sigma;</sub> are extended to function types (without effects etc.) in a similar way by</p>
+
+<div class="formula">
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>)&vee;<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var>)<br/>
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>) = <span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&vee;&hellip;&vee;<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>)&vee;<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var>)
+</div>
+
+<p>Depending on the particular case, function types must satisfy either <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code> or <span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code>; the former restriction is stronger since it requires all atomic types throughout the function type to be at stage <code>$post</code> while the latter one allows some argument types or the result type to have atomic types qualified as <code>$pre @public</code>.</p>
+
+<p>For an instance, consider the type <var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var> where</p>
+
+<div class="formula">
+<var>q</var><sub>0</sub> = <code>tuple</code>[<code>uint</code>[<var>N</var>] <code>$post</code> <code>@prover</code>, <code>bool</code>[<var>N</var>] <code>$post</code> <code>@verifier</code>],<br/>
+<var>q</var><sub>1</sub> = <code>uint</code> <code>$pre</code> <code>@public</code>,<br/>
+<var>q</var> = <code>()</code> <code>$pre</code> <code>@public</code>.
+</div>
+
+<p>We obtain</p>
+
+<div class="formula">
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<code>uint</code>[<var>N</var>] <code>$post</code> <code>@prover</code>)&vee;<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<code>bool</code>[<var>N</var>] <code>$post</code> <code>@verifier</code>) = <code>@public</code>&vee;<code>@public</code> = <code>@public</code>,<br/>
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>1</sub>) = &emptyset;,<br/>
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var>) = <code>@public</code>,
+</div>
+
+<p>whence</p>
+
+<div class="formula">
+<span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var>) = <code>@public</code>&vee;&emptyset;&vee;<code>@public</code> = &emptyset;.
+</div>
+
+<p>Similarly, we obtain</p>
+
+<div class="formula">
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>) = <span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<code>uint</code>[<var>N</var>] <code>$post</code> <code>@prover</code>)&vee;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<code>bool</code>[<var>N</var>] <code>$post</code> <code>@verifier</code>) = &emptyset;&vee;&emptyset; = &emptyset;,<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>1</sub>) = <code>@public</code>,<br/>
+<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var>) = <code>@public</code>.
+</div>
+
+<p>Thus</p>
+
+<div class="formula">
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>)&wedge;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub>) = <code>@public</code>&wedge;&emptyset; = <code>@public</code>,<br/>
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>1</sub>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>1</sub>)&wedge;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>1</sub>) = &emptyset;&wedge;<code>@public</code> = <code>@public</code>,<br/>
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var>) = <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var>)&wedge;<span class="mathfun">atomdomlub</span><sub>&Sigma;</sub>(<var>q</var>) = <code>@public</code>&wedge;<code>@public</code> = <code>@public</code>,
+</div>
+
+<p>giving</p>
+
+<div class="formula">
+<span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var>) = <code>@public</code>&vee;<code>@public</code>&vee;<code>@public</code> = <code>@public</code>.
+</div>
+
+<h2>Typing assertions</h2>
+
+<h3>Assertions of expression and statement typing</h3>
+
+<p>Technically, statements in ZK-SecreC are also expressions. Therefore we shall talk about expressions only.</p>
+
+<p>Assertions of expression typing are of one of the forms</p>
+
+<div class="formula">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var>;<br/>
+&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>w</var> ! <var>o</var>.
+</div>
+
+<p>This assertion states that, in the context of environments &Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma;, the expression <var>e</var> has either a qualified type <var>q</var> or a function type <var>w</var> and computing the expression can trigger an effect <var>o</var>. Note that the function type also contains an effect which is unrelated to the effect <var>o</var> produced by computing the expression (that in the function type is produced by executing the function body when arguments will be provided). Likewise, the stage in the qualified type and that in the effect are not necessarily the same.  The stage in the qualified type associates to the return value whereas that in the effect associates to the computation process. For example, an assertion expression causes an effect at the stage <code>$post</code> since it affects construction of the circuit but its return value is of type <code>()</code> <code>$pre</code> <code>@public</code>. Although stage effects can be translated to domain effects via &langle;&sdot;&rangle;, we have to keep stage and domain effects separate because in branches of match expressions stage effects are suppressed whereas domain effects have their usual impact. The boolean effects do not relate to domains. Instead, they indicate if all operations needed for evaluating the expression are those allowed in branches of match expressions.</p>
+
+<p>The behaviour of data types in the type rules is standard. The purpose of effects is to propagate knowledge about incumbrances down the proof tree. For instance, the boolean effect <span class="bold">ff</span> propagates from any premise to consequences transitively. The transitive propagation is achieved by the greatest lower bound operation (&wedge;) connecting the effects of premises. In stage effects, it follows the stage ordering defined above, and in boolean effects, it means conjunction. In the case of domain effects, it means union of upward closed sets of domains which corresponds to the minimum operation on the underlying generator domains. By pointwise lifting of the greatest lower bound operation to triples, we can express greatest lower bound of effects <var>o</var><sub>1</sub>, <var>o</var><sub>2</sub> as <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub>.</p>
+<!--<p>In discussions, we will sometimes omit effects from type assertions if the effects are not important.</p>
+-->
+
+<h3>Assertions of function typing</h3>
+
+<p>Assertions of function typing used in the rules of expression typing are of the form</p>
+
+<div class="formula">&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var>.
+</div>
+
+<p>This assertion states that, in the context of environments &Phi;,&Kappa;,&Pi;,&Sigma;, the function <var>f</var> is of type <var>w</var>. The function type <var>w</var> can be expanded as <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>, telling that the function assumes arguments of types <var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>, returns a result of type <var>q</var>, and can cause effect <var>o</var>. In addition, the type encodes its vectorizability status as boolean <var>b</var>.</p>
+
+<p>In the rules of function typing, assertions of two more shapes are used:</p>
+
+<div class="formula">&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var><br/>
+&rho;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var>
+</div>
+
+<p>The first assertion states a function typing if no local group function environment is given by the context. The second assertion assumes a substitution and states a function typing after applying this substitution to all definitions in the local group.</p>
+
+<h3>Constraint assertions</h3>
+
+<p>We use also constraint assertions of the form</p>
+
+<div class="formula">&Kappa; &#x219D; <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub>.
+</div>
+
+<p>Such assertion means that all constraints <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub> are logical consequences of the constraints in set &Kappa;. Deciding the logical implications between constraints is out of scope of this document.</p>
+
+<h2>Primitive expressions</h2>
+
+<h3>Variables, function names</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;(<var>x</var>) = <var>q</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>x</var> : <var>q</var> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/><table>
+<tr class="proof"><td>&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table></div>
+
+<p>The type of a variable is determined by the variable environment. Looking up a variable has no effect, which is reflected by the topmost in the corresponding order values <code>$pre</code>, &emptyset; and <span class="bold">tt</span>. The same holds for function names but, instead of lookup from variable environment, an assertion of function typing must be used as premise.</p>
+
+<h3>Literals</h3>
+
+<div class="formula">
+<table>
+<tr class="proof"><td><var class="meta">n</var>&in;<var class="numfamily">Z</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <span class="lit"><var class="meta">n</var></span> : <code>uint</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td><var class="meta">b</var>&in;<var class="numfamily">B</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <span class="lit"><var class="meta">b</var></span> : <code>bool</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td><var class="meta">s</var>&in;<var class="numfamily">C</var><sup>*</sup></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <span class="lit"><var class="meta">s</var></span> : <code>string</code> <code>$pre</code> <var>d</var> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table></div>
+
+<p>Integer literals and boolean literals have an integer and boolean type, respectively, with any stage and domain. The modulus <var>N</var> can be any positive integer or infinity. In other words, integer and boolean literals are stage, domain and modulus polymorphic. An integer or boolean literal has no domain or boolean effect, but it has an effect stemming from its stage. The latter fact is due to a wire of the circuit being added if the stage is <code>$post</code>.</p>
+
+<p>String literals can only be domain polymorphic because they do not depend on moduli and values on circuit wires are not interpreted as ZK-SecreC strings.</p>
+
+<h3>Tuples</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>q</var><sub>0</sub> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub> ! <var>o</var><sub><var class="meta">n</var>&minus;1</sub></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; (<var>e</var><sub>0</sub>,&hellip;,<var>e</var><sub><var class="meta">n</var>&minus;1</sub>) : <code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">n</var>&minus;1</sub></td></tr>
+</table></div>
+
+<p>Tuple typing is based on component types solely. Constructing a new tuple has no effect other than those caused by computing the components.</p>
+
+<h3>Structs</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>q</var><sub>0</sub> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub> ! <var>o</var><sub><var class="meta">n</var>&minus;1</sub></td><td><span class="mathfun">dom</span>(&Sigma;(<var>r</var>))={<var>l</var><sub>0</sub>,&hellip;,<var>l</var><sub><var class="meta">n</var>&minus;1</sub>}</td><td>&Sigma;(<var>r</var>)(<var>l</var><sub>0</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">k</var>&minus;1</sub>]=<var>q</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Sigma;(<var>r</var>)(<var>l</var><sub><var class="meta">n</var>&minus;1</sub>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">k</var>&minus;1</sub>]=<var>q</var><sub><var class="meta">n</var>&minus;1</sub></td></tr>
+<tr class="proof"><td colspan="7">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>r</var><code>{</code><var>l</var><sub>0</sub><code>:</code> <var>e</var><sub>0</sub>,&hellip;,<var>l</var><sub><var class="meta">n</var>&minus;1</sub><code>:</code> <var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>}</code> : <var>r</var>[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">k</var>&minus;1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">n</var>&minus;1</sub></td></tr>
+</table></div>
+
+<p>Struct typing is similar to tuple typing but struct field types are associated to field names in the struct environment and must conform to it.</p>
+
+<h3>Lists</h3>
+
+<div class="formula">
+<table>
+<tr class="proof"><td><code>list</code>[<var>q</var>] <code>$pre</code> <var>d</var> is well-structured</td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>[]</code> : <code>list</code>[<var>q</var>] <code>$pre</code> <var>d</var> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<code>[</code><var>e</var><sub>1</sub><code>;</code><var>e</var><sub>2</sub><code>]</code> &equiv; <code>let</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <code>for</code> <var>i</var> <code>in</code> <code>0</code> <code>..</code> <var>e</var><sub>2</sub> {<var>x</var>}<br/>
+<code>[</code><var>e</var><sub>0</sub>,&hellip;,<var>e</var><sub><var class="meta">n</var>&minus;2</sub>,<var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>]</code> &equiv; <code>for</code> <var>i</var> <code>in</code> <code>0</code> <code>..</code> <span class="lit"><var class="meta">n</var></span> {<code>if</code> (<var>i</var> <code>==</code> <code>0</code>) {<var>e</var><sub>0</sub>} <code>else if</code> &hellip;&hellip; <code>else if</code> (<var>i</var> <code>==</code> <span class="lit"><var class="meta">n</var>&minus;2</span>) {<var>e</var><sub><var class="meta">n</var>&minus;2</sub>} <code>else</code> {<var>e</var><sub><var class="meta">n</var>&minus;1</sub>}}<br/>
+<code>[</code><var>e</var><sub>1</sub> <code>..</code> <var>e</var><sub>2</sub><code>]</code> &equiv; <code>for</code> <var>i</var> <code>in</code> <var>e</var><sub>1</sub> <code>..</code> <var>e</var><sub>2</sub> {<var>i</var>}
+</div>
+
+<p>Like tuples and structs, list structure also does not redound to the circuit, but as the length of the list can be private information, the domain associated to a list type can be other than <code>@public</code>. Nevertheless, ZK-SecreC requires qualified types to be well-structured, and this must be taken into account when typing the empty list.</p>
+
+<p>ZK-SecreC supports three more special syntaxes for constructing lists. These can be rewritten equivalently using other constructs of ZK-SecreC. Therefore we do not provide special type rules for them.</p>
+
+<h2>Compound expressions</h2>
+
+<h3>Operator and function applications</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <code>()</code> <code>$pre</code> <code>@public</code> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><code>()</code> : <var>q</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <code>()</code> <code>$pre</code> <code>@public</code> <code>-&gt;</code> <var>w</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><code>()</code> : <var>w</var> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>q</var><sub>0</sub> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub> ! <var>o</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var></td><td>&Pi;(<code>ref</code>(<var>f</var>.0))=<var>b</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&Pi;(<code>ref</code>(<var>f</var>.(<var class="meta">n</var>&minus;1)))=<var>b</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&Gamma;(<code>mut</code>(<span class="mathfun">var</span> <var>e</var><sub>0</sub>))&ge;<var>b</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&Gamma;(<code>mut</code>(<span class="mathfun">var</span> <var>e</var><sub><var class="meta">n</var>&minus;1</sub>))&ge;<var>b</var><sub><var class="meta">n</var>&minus;1</sub></td></tr>
+<tr class="proof"><td colspan="10">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><code>(</code><code>ref</code><sup><var>b</var><sub>0</sub></sup> <var>e</var><sub>0</sub>,&hellip;,<code>ref</code><sup><var>b</var><sub><var class="meta">n</var>&minus;1</sub></sup> <var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>)</code> : <var>q</var> ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">n</var>&minus;1</sub>&wedge;<var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>q</var><sub>0</sub> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">m</var>&minus;1</sub> : <var>q</var><sub><var class="meta">m</var>&minus;1</sub> ! <var>o</var><sub><var class="meta">m</var>&minus;1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var></td><td><var>m</var>&lt;<var>n</var></td><td>&Pi;(<code>ref</code>(<var>f</var>.0))=<span class="bold">ff</span></td><td>&hellip;&hellip;</td><td>&Pi;(<code>ref</code>(<var>f</var>.(<var class="meta">n</var>&minus;1)))=<span class="bold">ff</span></td></tr>
+<tr class="proof"><td colspan="8">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><code>(</code><var>e</var><sub>0</sub>,&hellip;,<var>e</var><sub><var class="meta">m</var>&minus;1</sub><code>)</code> : (<var>q</var><sub><var class="meta">m</var></sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>) ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">m</var>&minus;1</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>q</var><sub>0</sub> ! <var>o</var><sub>0</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var><sub>1</sub> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; &oplus; : <var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var></td><td>&Pi;(<code>ref</code>(&oplus;.0))=<span class="bold">ff</span></td><td>&Pi;(<code>ref</code>(&oplus;.1))=<span class="bold">ff</span></td></tr>
+<tr class="proof"><td colspan="5">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub>&oplus;<var>e</var><sub>1</sub> : <var>q</var> ! <var>o</var><sub>0</sub>&wedge;<var>o</var><sub>1</sub>&wedge;<var>o</var></td></tr>
+</table></div>
+
+<p>Application of a function to empty argument collection needs special treatment since, technically, there is one argument whose type is the unit type. There are two rules for this case, depending on if the application is full or partial. In the case of full application, the effect in the function type is triggered, whereas in the case of partial application, it remains hibernated in the function type.</p>
+
+<p>In the case of full application of a function to a non-empty argument collection, application to arguments of types specified in the function type results in a value of specified result type and causes an effect specified in the function type, besides the effects that appear during computation of the arguments. Partial application has similar differences as in the case of empty argument collection. Note that the function resulting from a partial application inherits the vectorization status of the original function.</p>
+
+<p>Attention must be given to mutability of the arguments indicated by the keyword <code>ref</code>. For any expression <var>e</var>, let <code>ref</code><sup><span class="bold">ff</span></sup>(<var>e</var>) denote the expression <var>e</var> itself, whereas let <code>ref</code><sup><span class="bold">tt</span></sup>(<var>e</var>) denote the expression <var>e</var> preceded by the keyword <code>ref</code>. So the third rule tells that every argument that is going to substitute a parameter declared as mutable must be preceded by the keyword <code>ref</code>, while other arguments must not be preceded by this keyword. For an expression <var>e</var> to be passed as a mutable argument, <var>e</var> must be interpretable as an L-value and the variable through which the piece of memory is accessible must be mutable. This is established by the constraints &Gamma;(<code>mut</code>(<span class="mathfun">var</span> <var>e</var><sub><var class="meta">i</var></sub>))&ge;<var>b</var><sub><var class="meta">i</var></sub>. (In the case <span class="mathfun">var</span> <var>e</var><sub><var class="meta">i</var></sub> not being well-defined, we consider &Gamma;(<code>mut</code>(<span class="mathfun">var</span> <var>e</var><sub><var class="meta">i</var></sub>)) as <span class="bold">ff</span>.) Partial application of functions with mutable parameters is not allowed.</p>
+
+<h3>Vectorized applications</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <code>arr</code>[<var>q</var><sub>0</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> : <code>arr</code>[<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <span class="bold">tt</span></td><td><span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code></td><td>&Kappa; &#x219D; <code>Vectorization</code></td><td>&Pi;(<code>ref</code>(<var>f</var>.0))=<span class="bold">ff</span></td><td>&hellip;&hellip;</td><td>&Pi;(<code>ref</code>(<var>f</var>.(<var class="meta">n</var>&minus;1)))=<span class="bold">ff</span></td><td><var class="meta">n</var>&gt;0</td></tr>
+<tr class="proof"><td colspan="10">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><code>.(</code><var>e</var><sub>0</sub>,&hellip;,<var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>)</code> : <code>arr</code>[<var>q</var>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">n</var>&minus;1</sub>&wedge;<var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <code>arr</code>[<var>q</var><sub>0</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>arr</code>[<var>q</var><sub>1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; &oplus; : <var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <span class="bold">tt</span></td><td><span class="mathfun">atomstglub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> <var>q</var><sub>1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code></td><td>&Kappa; &#x219D; <code>Vectorization</code></td><td>&Pi;(<code>ref</code>(&oplus;.0))=<span class="bold">ff</span></td><td>&Pi;(<code>ref</code>(&oplus;.1))=<span class="bold">ff</span></td></tr>
+<tr class="proof"><td colspan="7">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub>&oplus;<code>.</code><var>e</var><sub>1</sub> : <code>arr</code>[<var>q</var>] <code>$pre</code> <code>@public</code> ! <var>o</var><sub>0</sub>&wedge;<var>o</var><sub>1</sub>&wedge;<var>o</var></td></tr>
+</table></div>
+
+<p>Vectorized application is allowed only if all parameters of the applied function are immutable and there is at least one argument vector to enable determining the length of the vectors involved. The type constraint <code>Vectorization</code> associates to the Iter plugin of Circuit-IR but, if the plugin is not supported, the compiler is able to unroll vectorized operations.</p>
+
+<h3>Lookups and slices</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>tuple</code>[<var>q</var><sub>0</sub>,&hellip;,<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var></td><td>0&le;<var>i</var>&lt;<var class="meta">n</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash;<var>e</var><code>.</code><span class="lit"><var>i</var></span> : <var>q</var><sub><var>i</var></sub> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>r</var>[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>] <code>$pre</code> <code>@public</code> ! <var>o</var></td><td>&Sigma;(<var>r</var>)(<var>l</var>)[<var>a</var><sub>0</sub>,&hellip;,<var>a</var><sub><var class="meta">m</var>&minus;1</sub>]=<var>q</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash;<var>e</var><code>.</code><var>l</var> : <var>q</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>list</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub><code>]</code> : <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>arr</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub><code>]</code> : <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>list</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>2</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>3</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>3</sub></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub> <code>..</code> <var>e</var><sub>3</sub><code>]</code> : <code>list</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub>&wedge;<var>o</var><sub>3</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>arr</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>2</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>3</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <var>s</var> <var>d</var> ! <var>o</var><sub>3</sub></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub> <code>..</code> <var>e</var><sub>3</sub><code>]</code> : <code>arr</code>[<var>q</var>] <var>s</var> <var>d</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub>&wedge;<var>o</var><sub>3</sub></td></tr>
+</table><br/>
+<var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub> <code>..</code> <code>]</code> &equiv; <code>let</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>x</var><code>[</code><var>e</var><sub>2</sub> <code>..</code> <code>length</code><code>(</code><var>x</var><code>)</code><code>]</code><br/>
+<var>e</var><sub>1</sub><code>[</code> <code>..</code> <var>e</var><sub>2</sub> <code>]</code> &equiv; <code>let</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>x</var><code>[</code><code>0</code> <code>..</code> <var>e</var><sub>2</sub><code>]</code><br/>
+<var>e</var><sub>1</sub><code>[</code> <code>..</code> <code>]</code> &equiv; <code>let</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>x</var><code>[</code><code>0</code> <code>..</code> <code>length</code><code>(</code><var>x</var><code>)</code><code>]</code><br/>
+</div>
+
+<p>Lookups by index in a tuple and lookups by field name in a struct have the corresponding component or field type. No effects other than those caused by computing the tuple or struct are observed. In the case of list and vector lookups, things are more complicated because the index can be expressed as an arbitrary expression rather than a name or literal. The data type of the index must be <code>uint</code>[<span class="lit">2<sup>64</sup></span>] which allows indices to be represented in the 64 bit integer type in Rust. Note that the stage and domain of the index coincides with that of the list or vector. The only effects that can arise are those observed during computing the list and the index.</p>
+
+<p>Besides lookups, lists and vectors also support slice syntax that allows one to denote a segment of a list or vector by specifying its lower and upper bounds. The typing rules are similar to those of list and vector lookups but the result type is the list or vector type rather than the element type. Note that the obvious equivalence <var>e</var><sub>1</sub><code>[</code><var>e</var><sub>2</sub> <code>..</code> <var>e</var><sub>3</sub><code>]</code> &equiv; <code>let</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <code>for</code> <var>i</var> <code>in</code> <var>e</var><sub>2</sub> <code>..</code> <var>e</var><sub>3</sub> {<var>x</var><code>[</code><var>i</var><code>]</code>} holds in the case of lists only, because for loops can create lists but not vectors.</p>
+
+<p>There are three more slice syntaxes that enable one to omit either the lower or the higher bound or both. A missing lower bound is interpreted as 0 whereas a missing higher bound is interpreted as the length of the list or vector.</p>
+
+<h3>Assignments</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e<var> : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>z<var> : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>2</sub>,<var>D</var><sub>2</sub>,<var>b</var><sub>2</sub></td><td>&Gamma;(<code>mut</code>(<span class="mathfun">var<span> <var>z</var>))=<span class="bold">tt</span></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>z</var> = <var>e</var> : <code>()</code> <code>$pre</code> <code>@public</code> ! <var>s</var>&wedge;<var>s</var><sub>1</sub>&wedge;<var>s</var><sub>2</sub>,&langle;<var>d</var>&rangle;&wedge;<var>D</var><sub>1</sub>&wedge;<var>D</var><sub>2</sub>,<var>b</var><sub>1</sub>&wedge;<var>b</var><sub>2</sub></td></tr>
+</table></div>
+
+<p>An assignment requires both sides to have the same qualified type. Moreover, the left-hand side must be mutable. This is determined by the variable environment which must contain evidence about mutability of the variable in the left-hand side. The value of an assignment belongs to the unit type. However, assignment adds an effect of the stage and the domain of the assigned value to those observed during evaluating the sides of the assignments.</p>
+
+<h3>Type annotations</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; (<var>e</var> <code>:</code> <var>q</var>) : <var>q</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var>) ! <var>o'</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; (<var>e</var> <code>:</code> <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>) : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var>) ! <var>o'</var></td></tr>
+</table></div>
+
+<p>ZK-SecreC strictly requires the types of formal parameters of functions to be explicit. Types of ordinary expressions do not have to be annotated but the programmer is allowed to do it. In this case, the type system requires the given type to be correct, i.e., to be able to be inferred using the typing rules. Type annotations cannot be used for type conversion. Type annotations do not cause additional effects.</p>
+
+<p>The two rules differ by the form of the type (qualified or function type). ZK-SecreC actually allows the programmer to omit one or both qualifiers (which is not reflected in the rules for simplicity). An omitted stage is inferred by the compiler, while an omitted domain in a type annotation is equivalent to being annotated as <code>@public</code>. The same applies to types of formal parameters of functions.</p>
+
+<h3>Casts</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>uint</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td><var>N</var>&sdot;<var>M</var>&in;<var class="numfamily">N</var></td><td>&Kappa; &#x219D; <code>Convertible</code>[<var>N</var>,<var>M</var>]</td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <code>uint</code>[<var>M</var>] : <code>uint</code>[<var>M</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,(<var>N</var>=<var>M</var>)&wedge;<var>b</var><sub>1</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>bool</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td><var>N</var>&sdot;<var>M</var>&in;<var class="numfamily">N</var></td><td>&Kappa; &#x219D; <code>Convertible</code>[<var>N</var>,<var>M</var>]</td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <code>bool</code>[<var>M</var>] : <code>bool</code>[<var>M</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,(<var>N</var>=<var>M</var>)&wedge;<var>b</var><sub>1</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>uint</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td><var>N</var>&sdot;<var>M</var>&notin;<var class="numfamily">N</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <code>uint</code>[<var>M</var>] : <code>uint</code>[<var>M</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,(<var>N</var>=<var>M</var>)&wedge;<var>b</var><sub>1</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>bool</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td><var>N</var>&sdot;<var>M</var>&notin;<var class="numfamily">N</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <code>bool</code>[<var>M</var>] : <code>bool</code>[<var>M</var>] <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,(<var>N</var>=<var>M</var>)&wedge;<var>b</var><sub>1</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>bool</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>o</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <code>uint</code>[<var>N</var>] : <code>uint</code>[<var>N</var>] <var>s</var> <var>d</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>t</var> <var>s</var> <var>d</var> ! <var>o</var></td><td><var>s</var>&le;<var>s'</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <var>s'</var> : <var>t</var> <var>s'</var> <var>d</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>t</var> <var>s</var> <var>d</var> ! <var>o</var></td><td><var>d</var>&le;<var>d'</var></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> <code>as</code> <var>d'</var> : <span class="mathfun">dcast</span>(<var>t</var> <var>s</var> <var>d</var>,<var>d'</var>) ! <var>o</var></td></tr>
+</table></div>
+
+<p>Type casts can change the modulus of an integer or boolean, reinterpret booleans as integers, and raise a value to a higher stage or domain. Downcasting a value to a lower stage or domain is not possible. In particular, converting a value outside the circuit to a value on wire cannot be done by type cast. Also, casting integers to booleans is not allowed. Casting of domain involves deep cast. Although the function <span class="mathfun">dcast</span> is well-defined regardless of the new domain, the cast is allowed only if the new domain is at least as high as the old one.</p>
+
+<p>Rules for converting between different moduli depend on whether both moduli are finite (<var>N</var>&sdot;<var>M</var>&in;<var class="numfamily">N</var>) or not. Conversion between finite moduli requires the <code>Convertible</code> constraint. Type casts mostly leave the existing effect as it is but changing the modulus is reflected in the boolean effect, i.e., it forces it false.</p>
+
+<h2>Statements and expressions with blocks</h2>
+
+<h3>Statements</h3>
+
+<div class="formula"><table>
+<tr class="axiom"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; &epsilon; : <code>()</code> <code>$pre</code> <code>@public</code> ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var><sub>1</sub> ! <var>o</var><sub>1</sub></td><td>{(<code>mut</code> <var>x</var> : <var>b</var>),(<var>x</var> : <var>q</var><sub>1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>q</var><sub>2</sub> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <code>mut</code><sup><var>b</var></sup> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>q</var><sub>2</sub> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var> ! <var>o</var><sub>1</sub></td><td>{(<code>mut</code> <var>x</var> : <var>b</var>),(<var>x</var> : <var>q</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <code>mut</code><sup><var>b</var></sup> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>{(<code>mut</code> <var>x</var> : <span class="bold">ff</span>),(<var>x</var> : <var>q</var><sub>1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var><sub>1</sub> ! <var>o</var><sub>1</sub></td><td>{(<code>mut</code> <var>x</var> : <span class="bold">ff</span>),(<var>x</var> : <var>q</var><sub>1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>q</var><sub>2</sub> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <code>rec</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>q</var><sub>2</sub> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>{(<code>mut</code> <var>x</var> : <span class="bold">ff</span>),(<var>x</var> : <var>q</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var> ! <var>o</var><sub>1</sub></td><td>{(<code>mut</code> <var>x</var> : <span class="bold">ff</span>),(<var>x</var> : <var>q</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <code>rec</code> <var>x</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>) ! <var>o</var><sub>1</sub></td><td>&Gamma;,{(<var>f</var> : <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>)}&cup;&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>q'</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <var>f</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>q'</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>) ! <var>o</var><sub>1</sub></td><td>&Gamma;,{(<var>f</var> : <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>)}&cup;&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>let</code> <var>f</var> <code>=</code> <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>()</code> <code>$pre</code> <code>@public</code> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>q</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>()</code> <code>$pre</code> <code>@public</code> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub><code>;</code> <var>e</var><sub>2</sub> : <var>w</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+</div>
+
+<p>In the first rule, &epsilon; denotes the empty statement. Non-empty statements can be built up using composition. In the first constituent of composition, one can define a new variable using the keyword <code>let</code>. The definition can be non-recursive or recursive, and a non-recursive definition can define a usual variable or a function name. If the first constituent of composition does not introduce a new variable then it must be of the unit type.</p>
+
+<p>The rules concerning composition come in pairs because the second constituent of the composition can have a qualified type or a function type. The difference between rules in the same pair is purely formal.</p>
+
+<p>In all cases with a new variable definition, the type of the right-hand side of the definition will become the type of the variable in the variable environment (or the type of the new function name if a function is defined) while establishing the type of the rest of the statement. Besides this typing, a mutability statement about the defined variable is added to the variable environment (unless a function is defined). In the second and the third rule, <code>mut</code><sup><span class="bold">ff</span></sup> <var>x</var> denotes the variable <var>x</var> itself, whereas <code>mut</code><sup><span class="bold">tt</span></sup> <var>x</var> denotes the variable <var>x</var> preceded by the keyword <code>mut</code>. In the case of a recursive definition which is the subject of the fourth and the fifth rule, typing of the variable must be used in typing of the first constituent of the composition, too. Recursively defined variables are not allowed to be mutable.</p>
+
+<p>In all cases of composition, the only effects are those of the constituents, regardless of the stage and domain of the new variable defined.</p>
+
+<p>Although this is not reflected in the typing rules, ZK-SecreC allows type annotations to be added to the new variables. In this case, the type given explicitly must coincide with the type derived by the rules. One qualifier or both can be omitted and, if so, the usual conventions explained about type annotations above apply. Sometimes, adding a type annotation is mandatory for successful compilation. For instance:</p>
+
+<ul>
+<li>When a struct with a finalizer is created, the compiler may be unable to find all necessary dependencies unless a type annotation is added;</li>
+<li>When a function is applied vectorized, the type of the result must usually be annotated.</li>
+</ul>
+
+<h3>Blocks</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>{</code><var>e</var><code>}</code> : <var>q</var> ! <var>o</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>w</var> ! <var>o</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>{</code><var>e</var><code>}</code> : <var>w</var> ! <var>o</var></td></tr>
+</table></div>
+
+<p>Any expression can be turned to a block by putting it into braces. This does not change the type and the effect of the expression.</p>
+
+<h3>Lambda expressions</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>fn</code> <code>()</code> <code>{</code><var>e</var><code>}</code> : (<code>()</code> &rarr; <var>q</var> ! <var>o</var> &#x2237; <span class="bold">ff</span>) ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">m</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var><sub>1</sub> &#x2237; <var>b</var>) ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>fn</code> <code>()</code> <code>{</code><var>e</var><code>}</code> : (<code>()</code> <code>-&gt;</code> <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">m</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub> &#x2237; <span class="bold">ff</span>) ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>{(<code>mut</code> <var>x</var><sub>0</sub> : <span class="bold">ff</span>),(<var>x</var><sub>0</sub> : <var>q</var><sub>0</sub>),&hellip;,(<code>mut</code> <var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <span class="bold">ff</span>),(<var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var></td><td>{<var>b</var>}&cup;&Kappa; &#x219D; <code>Sized</code>[<var>q</var><sub>0</sub>],&hellip;,<code>Sized</code>[<var>q</var><sub><var class="meta">n</var>&minus;1</sub>],<code>Sized</code>[<var>q</var>]</td><td><var>b</var> &rArr; <span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>sieve</code><sup><var>b</var></sup> <code>fn</code> <code>(<var>x</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub>)</code> <code>{</code><var>e</var><code>}</code> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var> &#x2237; <var>b</var>) ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>{(<code>mut</code> <var>x</var><sub>0</sub> : <span class="bold">ff</span>),(<var>x</var><sub>0</sub> : <var>q</var><sub>0</sub>),&hellip;,(<code>mut</code> <var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <span class="bold">ff</span>),(<var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : (<var>q'</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">m</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var><sub>1</sub> &#x2237; <var>b</var>) ! <var>o</var><sub>2</sub></td></tr>
+<tr class="proof"><td colspan="1">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>fn</code> <code>(<var>x</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub>)</code> <code>{</code><var>e</var><code>}</code> : (<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q'</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">m</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub> &#x2237; <span class="bold">ff</span>) ! <code>$pre</code>,&emptyset;,<span class="bold">tt</span></td></tr>
+</table></div>
+
+<p>For typing a lambda expression, the type of the body of the lambda expression is found in the environment where a typing of all parameters is added. Parameters of lambda expressions are immutable. Effects of the resulting function are those of the body of the lambda expression. Like for application, typing in the case of empty parameter collection must be given separately.</p>
+
+<p>In the third rule, <code>sieve</code><sup><var>b</var></sup> <code>fn</code> means <code>sieve</code> <code>fn</code> if <var>b</var>=<span class="bold">tt</span> and just <code>fn</code> if <var>b</var>=<span class="bold">ff</span>. Functions declared as <code>sieve</code> are not allowed to be applied partially or to zero arguments, hence it would not make sense to allow the <code>sieve</code> modifier in other rules.</p>
+
+<p>All parameter types and the result type of a function declared as <code>sieve</code> have to satisfy the constraint <code>Sized</code>, i.e., they must be sized types. To express this in the third typing rule, we use the boolean indicating the existence of the <code>sieve</code> modifier as a type constraint. Having the boolean <span class="bold">ff</span> there makes the whole implication vacuously true, whereas <span class="bold">tt</span> behaves as no-op. Analogously, the last premise of the third rule establishes that if a function has modifier <code>sieve</code> then its type <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> must satisfy <span class="mathfun">atomlub</span><sub>&Sigma;</sub>(<var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var>)=<code>@public</code>.</p>
+
+<p>The restriction imposed on vectorizability relies on auxiliary function <span class="mathfun">atomlub</span><sub>&Sigma;</sub> while the restriction imposed on actual vectorized application uses the auxiliary function <span class="mathfun">atomstglub</span><sub>&Sigma;</sub>. This implies that some vectorizable functions cannot be directly applied in a vectorized way. This makes sense since vectorizable functions, like other functions, can be applied partially. The result of a partial application of a vectorizable function is still vectorizable. So, for instance, a vectorizable function whose first argument has qualifiers <code>$pre @public</code> and the others are at the stage <code>$post</code> can be used for generating a new vectorizable function by applying it to one argument; the resulting function has all arguments at the stage <code>$post</code>, so it can be applied in a vectorized way.</p>
+
+<p>ZK-SecreC allows the types of parameters of the lambda expression, as well as the result type, to be annotated. This is not reflected in the typing rules. Types given explicitly must coincide with those derived using the type rules. The usual conventions apply to omitted qualifiers.</p>
+
+<h3>Conditional expressions</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>bool</code>[<var>N</var>] <code>$pre</code> <var>d'</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>2</sub>,<var>D</var><sub>2</sub>,<var>b</var><sub>2</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>3</sub> : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>3</sub>,<var>D</var><sub>3</sub>,<var>b</var><sub>3</sub></td><td>&langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>2</sub>&wedge;<var>s</var><sub>3</sub>&rangle;&wedge;&langle;<var>d</var>&rangle;&wedge;<var>D</var><sub>2</sub>&wedge;<var>D</var><sub>3</sub></td></tr>
+<tr class="proof"><td colspan="4">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>if</code> (<var>e</var><sub>1</sub>) {<var>e</var><sub>2</sub>} <code>else</code> {<var>e</var><sub>3</sub>} : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>1</sub>&wedge;<var>s</var><sub>2</sub>&wedge;<var>s</var><sub>3</sub>,<var>D</var><sub>1</sub>&wedge;<var>D</var><sub>2</sub>&wedge;<var>D</var><sub>3</sub>,<var>b</var><sub>1</sub>&wedge;<var>b</var><sub>2</sub>&wedge;<var>b</var><sub>3</sub></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,{<var>c</var>}&cup;&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <var>q</var> ! <var>o</var><sub>1</sub></td><td>&Gamma;,&Phi;,{&#x2053;<var>c</var>}&cup;&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <var>q</var> ! <var>o</var><sub>2</sub></td><td><var>c</var> &ne; <code>Vectorization</code></td></tr>
+<tr class="proof"><td colspan="3">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>if</code> (<var>c</var>) {<var>e</var><sub>1</sub>} <code>else</code> {<var>e</var><sub>2</sub>} : <var>q</var> ! <var>o</var><sub>1</sub>&wedge;<var>o</var><sub>2</sub></td></tr>
+</table><br/>
+<code>if</code> (<var>e</var>)<sub>1</sub> {<var>e</var><sub>2</sub>} &equiv; <code>if</code> (<var>e</var>)<sub>1</sub> {<var>e</var><sub>2</sub>} <code>else</code> {}</br>
+<code>if</code> (<var>c</var>) {<var>e</var>} &equiv; <code>if</code> (<var>c</var>) {<var>e</var>} <code>else</code> {}
+</div>
+
+<p>The condition of a conditional expression in ZK-SecreC can be either an ordinary expression of boolean type or a type constraint. Typing rules differ depending on the nature of the condition.</p>
+
+<p>The first typing rule captures the case with an ordinary boolean expression as condition. The boolean type can have a finite or infinite modulus. The condition must be at the stage <code>$pre</code> since the circuit is not able to do branching. The branches of the conditional must have equal qualified types. The type of the branches will become the type of the whole expression. The constraint &langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>2</sub>&wedge;<var>s</var><sub>3</sub>&rangle;&wedge;&langle;<var>d</var>&rangle;&wedge;<var>D</var><sub>2</sub>&wedge;<var>D</var><sub>3</sub> concisely establishes the following restrictions:</p>
+
+<ul>
+<li>The domain of the condition must not be higher than the domain of the branches (&langle;<var>d'</var>&rangle;&le;&langle;<var>d</var>&rangle;);</li>
+<li>The domain of the condition must not be higher than any domain in the upward closed set of domain effects of both branches (&langle;<var>d'</var>&rangle;&le;<var>D</var><sub>2</sub>&wedge;<var>D</var><sub>3</sub>);</li>
+<li>If the branches are at the stage <code>$post</code>, or any of the branches have effects at the stage <code>$post</code>, then the domain of the condition must be <code>@public</code> (&langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>2</sub>&wedge;<var>s</var><sub>3</sub>&rangle;).</li>
+</ul>
+
+<p>These are key restrictions for providing the necessary guarantees of preserving privacy. For instance, violating the first restriction would allow the value of the branch chosen to reveal the value of the condition, i.e., leaking of the value of the condition to a lower domain. Likewise, violating the second restriction would allow the value of the condition to leak via effects of the branch chosen. The third restriction is also similar since having the value or the effect of any branch at the stage <code>$post</code> means modifying the circuit which is public.</p>
+
+<p>The second typing rule deals with conditionals that use a type constraint for branching. The type constraint is added to the set of constraints when deriving the type of the first branch; analogously, the negation of the type constraint is added when deriving the type of the second branch. The conditional with a type constraint as condition does not require this kind of restriction since a type constraint does not have a domain. (Also, no branching takes place during run time.) Branching on the constraint <code>Vectorization</code> is not allowed. Since the compiler can handle vectorized operations regardless of the existence of the Iter plugin of Circuit-IR, deciding if <code>Vectorization</code> actually holds or not is not meaningfully possible.</p>
+
+<p>A conditional with else branch omitted is semantically equivalent to a conditional with an empty else branch and otherwise coinciding with the given conditional.</p>
+
+<p>The effects of the conditional are those of computing the condition and both branches.</p>
+
+<h3>For loops</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>1</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <code>$pre</code> <var>d'</var> ! <var>s</var><sub>1</sub>,<var>D</var><sub>1</sub>,<var>b</var><sub>1</sub></td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>2</sub> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <code>$pre</code> <var>d'</var> ! <var>s</var><sub>2</sub>,<var>D</var><sub>2</sub>,<var>b</var><sub>2</sub></td><td>{(<code>mut</code> <var>x</var> : <span class="bold">ff</span>),(<var>x</var> : <code>uint</code>[<span class="lit">2<sup>64</sup></span>] <code>$pre</code> <var>d'</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>3</sub> : <var>t</var> <var>s</var> <var>d</var> ! <var>s</var><sub>3</sub>,<var>D</var><sub>3</sub>,<var>b</var><sub>3</sub></td><td>&langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>3</sub>&rangle;&wedge;&langle;<var>d</var>&rangle;&wedge;<var>D</var><sub>3</sub></td></tr>
+<tr class="proof"><td colspan="4">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>for</code> <var>x</var> <code>in</code> <var>e</var><sub>1</sub> <code>..</code> <var>e</var><sub>2</sub> {<var>e</var><sub>3</sub>} : <code>list</code>[<var>t</var> <var>s</var> <var>d</var>] <code>$pre</code> <var>d'</var> ! <var>s</var><sub>1</sub>&wedge;<var>s</var><sub>2</sub>&wedge;<var>s</var><sub>3</sub>,<var>D</var><sub>1</sub>&wedge;<var>D</var><sub>2</sub>&wedge;<var>D</var><sub>3</sub>,<var>b</var><sub>1</sub>&wedge;<var>b</var><sub>2</sub>&wedge;<var>b</var><sub>3</sub></td></tr>
+</table></div>
+
+<p>The bounds of a for loop in ZK-SecreC must be integers with modulus 2<sup>64</sup>. This design choice was made for enabling the compiler to translate loops using the Rust 64-bit integer type which is faster than integers of arbitrary size. The loop index will obtain the same type and is immutable. The bounds, as well as the loop index, must be at the stage <code>$pre</code> since the circuit has no means of branching or looping. The body of the loop is typed in the environment where the typing of the loop index has been added. The loop itself is of the list type whose element type coincides with the type of the loop body and the stage and domain coincide with those of the bounds. The constraint &langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>3</sub>&rangle;&wedge;&langle;<var>d</var>&rangle;&wedge;<var>D</var><sub>3</sub> establishes the following restrictions:</p>
+
+<ul>
+<li>The domain of the bounds must not be higher than the domain of the body (&langle;<var>d'</var>&rangle;&le;&langle;<var>d</var>&rangle;);</li>
+<li>The domain of the bounds must not be higher than any domain in the upward closed set of domain effects of the body (&langle;<var>d'</var>&rangle;&le;<var>D</var><sub>3</sub>);</li>
+<li>If the body is at the stage <code>$post</code>, or the body has effects at the stage <code>$post</code>, then the domain of the bounds must be <code>@public</code> (&langle;<var>d'</var>&rangle;&le;&langle;<var>s</var>&wedge;<var>s</var><sub>3</sub>&rangle;).</li>
+</ul>
+
+<p>The purpose of these restrictions is similar to that of the restrictions in the typing rule of the conditional.</p>
+
+<p>The effects of the for loop are those of computing the bounds and the body of the loop.</p>
+
+<h3>Zip expressions</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> <code>:</code> <code>arr</code>[<var>q</var><sub>0</sub>] <code>$pre</code> <var>d</var> ! <var>o</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> <code>:</code> <code>arr</code>[<var>q</var><sub><var class="meta">n</var>&minus;1</sub>] <code>$pre</code> <var>d</var> ! <var>o</var><sub><var class="meta">n</var>&minus;1</sub></td><td>{(<code>mut</code> <var>x</var><sub>0</sub> : <span class="bold">ff</span>),(<var>x</var><sub>0</sub> : <var>q</var><sub>0</sub>),&hellip;,(<code>mut</code> <var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <span class="bold">ff</span>),(<var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q</var><sub><var class="meta">n</var>&minus;1</sub>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <var>q</var> ! <var>o</var></td><td>&Kappa; &#x219D; <code>Vectorization</code></td></tr>
+<tr class="proof"><td colspan="5">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>zip</code> <var>x</var><sub>0</sub> <code>in</code> <var>e</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub> <code>in</code> <var>e</var><sub><var class="meta">n</var>&minus;1</sub> <code>with</code> {<var>e</var>} <code>:</code> <code>arr</code>[<var>q</var>] <code>$pre</code> <var>d</var> ! <var>o</var><sub>0</sub>&wedge;&hellip;&wedge;<var>o</var><sub><var class="meta">n</var>&minus;1</sub>&wedge;<var>o</var></td></tr>
+</table></div>
+
+<p>The vectors that generate values for variables in zip expressions must have vector datatypes, i.e., types of the form <code>arr</code>[<var>q</var>] for a qualified type <var>q</var>. All vectors must be at the stage <code>$pre</code> and in the same domain which will become also the domain of the result vector. This restriction does not expand to elements of the vectors; elements of different vectors can have different stages and domains. The variables are included in the environment only for typing the body of the expression. They are not included in the environment when typing the subsequent generator vectors. The variables are immutable.</p>
+
+<p>For using a zip expression, the <code>Vectorization</code> constraint must hold. A zip expression can have effects that arise during computing the generator vectors and the body of the expression.</p>
+
+<p>The following semantic equivalence holds:</p>
+
+<div class="formula">
+<code>zip</code> <var>x</var><sub>0</sub> <code>in</code> <var>e</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub> <code>in</code> <var>e</var><sub><var class="meta">n</var>&minus;1</sub> <code>{</code><var>e</var><code>}</code> &equiv; <code>let</code> <var>f</var> <code>=</code> <code>sieve</code> <code>fn</code> <code>(</code><var>x</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub><code>)</code> <code>{</code><var>e</var><code>}</code><code>;</code> <var>f</var><code>.</code><code>(</code><var>e</var><sub>0</sub>,&hellip;,<var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>)</code>
+</div>
+
+<h3>Wire expressions</h3>
+
+<div class="formula">
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>uint</code>[<var>N</var>] <code>$pre</code> <var>d</var> ! <var>s</var>,<var>D</var>,<var>b</var></td><td>&Kappa; &#x219D; <code>Field</code>[<var>N</var>]</td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>wire</code> {<var>e</var>} : <code>uint</code>[<var>N</var>] <code>$post</code> <var>d</var> ! <code>$post</code>,<var>D</var>,(<var>d</var>&ne;<code>@verifier</code>)&wedge;<var>b</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>bool</code>[<var>N</var>] <code>$pre</code> <var>d</var> ! <var>s</var>,<var>D</var>,<var>b</var></td><td>&Kappa; &#x219D; <code>Field</code>[<var>N</var>]</td></tr>
+<tr class="proof"><td colspan="2">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>wire</code> {<var>e</var>} : <code>bool</code>[<var>N</var>] <code>$post</code> <var>d</var> ! <code>$post</code>,<var>D</var>,(<var>d</var>&ne;<code>@verifier</code>)&wedge;<var>b</var></td></tr>
+</table></div>
+
+<p>A wire expression can be applied to a block with an integer or a boolean data type at the stage <code>$pre</code>. The result has the same data type and domain but with the stage <code>$post</code>. It requires the <code>Field</code> type predicate to hold on the modulus of the value that is written on wire.</p>
+
+<p>While a wire expression does not create new domain effects, it has an effect at the stage <code>$post</code> and, if being used in the domain <code>@verifier</code>, it forces the boolean effect to false. The latter is because verifier inputs of the circuit are not allowed in the branches of match expressions.</p>
+
+<h3>Match expressions</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var> : <code>uint</code>[<var>N</var>] <code>$post</code> <var>d</var> ! <var>s</var>,<var>D</var>,<var>b</var></td><td>{(<code>mut</code> <var>p</var><sub>0</sub> : <span class="bold">ff</span>),(<var>p</var><sub>0</sub> : <code>uint</code>[<var>N</var>] <code>$post</code> <var>d</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub>0</sub> : <var>t'</var> <var>s'</var> <var>d'</var> ! <var>s</var><sub>0</sub>,<var>D</var><sub>0</sub>,<var>b</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>{(<code>mut</code> <var>p</var><sub><var class="meta">n</var>&minus;1</sub> : <span class="bold">ff</span>),(<var>p</var><sub><var class="meta">n</var>&minus;1</sub> : <code>uint</code>[<var>N</var>] <code>$post</code> <var>d</var>)}&cup;&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>e</var><sub><var class="meta">n</var>&minus;1</sub> : <var>t'</var> <var>s'</var> <var>d'</var> ! <var>s</var><sub><var class="meta">n</var>&minus;1</sub>,<var>D</var><sub><var class="meta">n</var>&minus;1</sub>,<var>b</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&Kappa; &#x219D; <code>ObliviousChoice</code></td><td>&langle;<var>d</var>&rangle;&le;&langle;<var>d'</var>&rangle;&wedge;<var>D</var><sub>0</sub>&wedge;&hellip;&wedge;<var>D</var><sub><var class="meta">n</var>&minus;1</sub></td><td><var>b</var><sub>0</sub>&wedge;&hellip;&wedge;<var>b</var><sub><var class="meta">n</var>&minus;1</sub>=<span class="bold">tt</span></td></tr>
+<tr class="proof"><td colspan="7">&Gamma;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <code>match</code> <var>e</var> <code>{</code><var>p</var><sub>0</sub> <code>=&gt;</code> <code>{</code><var>e</var><sub>0</sub><code>}</code>,&hellip;&hellip;,<var>p</var><sub><var class="meta">n</var>&minus;1</sub> <code>=&gt;</code> <code>{</code><var>e</var><sub><var class="meta">n</var>&minus;1</sub><code>}</code><code>}</code> : <var>t'</var> <var>s'</var> <var>d'</var> ! <var>s</var>&wedge;<var>s</var><sub>0</sub>&wedge;&hellip;&wedge;<var>s</var><sub><var class="meta">n</var>&minus;1</sub>,<var>D</var>&wedge;<var>D</var><sub>0</sub>&wedge;&hellip;&wedge;<var>D</var><sub><var class="meta">n</var>&minus;1</sub>,<var>b</var></td></tr>
+</table></div>
+
+<p>Match expressions enable branching according to an integer value on wire. Such branching is based on the oblivious choice feature implemented in the Disjunction plugin of Circuit-IR. In the left-hand sides of the cases, ZK-SecreC allows patterns that can be literals, variables or underscores. Variables used as patterns can be referred to in the corresponding right-hand side, where they are immutable and their type equals that of the expression matched. An underscore means wildcard pattern that matches any value but does not enable referring to it in the right-hand side. The pattern typing and the corresponding mutability statement are added to the environment but they are usable only if the pattern is a variable.</p>
+
+<p>There are three restrictions a match expression must satisfy. The first one states a match expression being valid only if the <code>ObliviousChoice</code> type constraint holds. This type constraint is associated to the availability of the Disjunction plugin of the Circuit-IR. The second restriction, &langle;<var>d</var>&rangle;&le;&langle;<var>d'</var>&rangle;&wedge;<var>D</var><sub>0</sub>&wedge;&hellip;&wedge;<var>D</var><sub><var class="meta">n</var>&minus;1</sub>, resembles the analogous constraints in the typing rules for conditionals and for loops but involves only domain effects. The issues addressed by the constraints imposed on stage effects in the other rules are here handled by the Disjunction plugin. The third restriction, <var>b</var><sub>0</sub>&wedge;&hellip;&wedge;<var>b</var><sub><var class="meta">n</var>&minus;1</sub>=<span class="bold">tt</span>, states that the right-hand sides must not produce false boolean effects.</p>
+
+<p>Match expressions do not cause effects other than those caused by computing the matched expression and the right-hand sides of the cases.</p>
+
+<h2>Function typing</h2>
+
+<p>When describing function typing, we assume that the program is divided into groups of mutually recursive functions. Typing of these groups is given separately.</p>
+
+<h3>General function typing</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Phi;(<var>f</var>) = <var>w</var></td></tr>
+<tr class="proof"><td colspan="1">&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var></td></tr>
+<tr class="proof"><td colspan="1">&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var></td></tr>
+</table></div>
+
+<p>These rules establish two ways of deriving a function typing of the form &Kappa;,&Phi;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>w</var> used above: Reading from the current local group function environment, and deriving from the global function and struct definitions. If a function within the same group of mutually recursive functions or a locally defined function is called then the type must be read from the environment, otherwise it must be derived in place.</p>
+
+<h3>Typing of functions outside the local group</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&rho;,{<var>f</var><sub>0</sub> : <var>w</var><sub>0</sub>,&hellip;,<var>f</var><sub><var class="meta">m</var>&minus;1</sub> : <var>w</var><sub><var class="meta">m</var>&minus;1</sub>},&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><sub>0</sub> : <var>w</var><sub>0</sub></td><td>&hellip;&hellip;&hellip;</td><td>&rho;,{<var>f</var><sub>0</sub> : <var>w</var><sub>0</sub>,&hellip;,<var>f</var><sub><var class="meta">m</var>&minus;1</sub> : <var>w</var><sub><var class="meta">m</var>&minus;1</sub>},&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><sub><var class="meta">m</var>&minus;1</sub> : <var>w</var><sub><var class="meta">m</var>&minus;1</sub></td><td><span class="mathfun">scc</span> &Pi; &ni; {<var>f</var><sub>0</sub>,&hellip;,<var>f</var><sub><var class="meta">m</var>&minus;1</sub>}</td><td>0&le;<var class="meta">i</var>&lt;<var class="meta">m</var></td></tr>
+<tr class="proof"><td colspan="5">&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var><sub><var class="meta">i</var></sub> : <var>w</var><sub><var class="meta">i</var></sub></td></tr>
+</table></div>
+
+<p>The only rule here establishes that, for deriving the type of a function at the global level, one must type all functions within its group of mutual recursive functions. More precisely, it states that in a program with given struct type definitions, a function can be given a specific type, provided that there exists a substitution &rho; after applying of which this function can be typed with this type within its group of mutually recursive functions. Involving an arbitrary substitution allows a function to be given different monomorphic types in different cases.</p>
+
+<p>Note the occurrence of typings of the members of the group of mutually recursive functions also in the premises. The function typings in the left-hand side are to be used for typing recursive calls in function bodies. The typing assertions do not become trivial because there is no rule that would allow the function typings in the left-hand side to be used for deducing the function types in the right-hand side directly. The first rule of the previous subsubsection does not apply as its conclusion has a different shape. Assertions of this form can be derived only using the rule described in the next subsubsection.</p>
+
+<h3>Mutually recursive functions</h3>
+
+<div class="formula"><table>
+<tr class="proof"><td>&Pi;(<var>f</var>) = <code>fn</code> <var>f</var><code>()</code> <code>-&gt;</code> <var>q</var> <code>where</code> <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub> <code>{</code><var>e</var><code>}</code></td><td>&rho;(<var>q</var>) = <var>q'</var></td><td>&rho;(<var>c</var><sub>0</sub>) = <var>c'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>c</var><sub><var class="meta">k</var>&minus;1</sub>) = <var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>&emptyset;,&Phi;,{<var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub>},&Pi;,&Sigma; &vdash; <var>e</var> : <var>q'</var> ! <var>o</var></td><td>&Kappa; &#x219D; <var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td></tr>
+<tr class="proof"><td colspan="7">&rho;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <code>()</code> <code>-&gt;</code> <var>q'</var> ! <var>o</var> &#x2237; <span class="bold">ff</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Pi;(<var>f</var>) = <code>fn</code> <var>f</var><code>()</code> <code>-&gt;</code> <var>q</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> <code>where</code> <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub> <code>{</code><var>e</var><code>}</code></td><td>&rho;(<var>q</var><sub>0</sub>) = <var>q'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) = <var>q'</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&rho;(<var>q</var>) = <var>q'</var></td><td>&rho;(<var>c</var><sub>0</sub>) = <var>c'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>c</var><sub><var class="meta">k</var>&minus;1</sub>) = <var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>&emptyset;,&Phi;,{<var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub>},&Pi;,&Sigma; &vdash; <var>e</var> : <var>q'</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q'</var> ! <var>o</var> &#x2237; <var>b</var></td><td>&Kappa; &#x219D; <var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>0&lt;<var class="meta">n</var></td></tr>
+<tr class="proof"><td colspan="11">&rho;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <code>()</code> <code>-&gt;</code> <var>q'</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q'</var> ! <var>o</var> &#x2237; <span class="bold">ff</span></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Pi;(<var>f</var>) = <code>sieve</code><sup><var>b</var></sup> <code>fn</code> <var>f</var><code>(</code><var>x</var><sub>0</sub> <code>:</code> <var>q</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub> <code>:</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub><code>)</code> <code>-&gt;</code> <var>q</var> <code>where</code> <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub> <code>{</code><var>e</var><code>}</code></td><td>&rho;(<var>q</var><sub>0</sub>) = <var>q'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) = <var>q'</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&rho;(<var>q</var>) = <var>q'</var></td><td>&rho;(<var>c</var><sub>0</sub>) = <var>c'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>c</var><sub><var class="meta">k</var>&minus;1</sub>) = <var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>{<var>x</var><sub>0</sub> : <var>q'</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">n</var>&minus;1</sub> : <var>q'</var><sub><var class="meta">n</var>&minus;1</sub>},&Phi;,{<var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub>},&Pi;,&Sigma; &vdash; <var>e</var> : <var>q'</var> ! <var>o</var></td><td>{<var>b</var>,<var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub>} &#x219D; <code>Sized</code>[<var>q</var><sub>0</sub>],&hellip;,<code>Sized</code>[<var>q</var><sub><var class="meta">n</var>&minus;1</sub>],<code>Sized</code>[<var>q</var>]</td><td><var>b</var> &rArr; <span class="mathfun">atomlub</span>(<var>q'</var><sub>0</sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q'</var>)=<code>@public</code></td><td>&Kappa; &#x219D; <var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>0&lt;<var class="meta">n</var></td></tr>
+<tr class="proof"><td colspan="13">&rho;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>q'</var><sub>0</sub> &rarr; &hellip; &rarr; <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> &rarr; <var>q'</var> ! <var>o</var> &#x2237; <var>b</var></td></tr>
+</table><br/>
+<table>
+<tr class="proof"><td>&Pi;(<var>f</var>) = <code>fn</code> <var>f</var><code>(</code><var>x</var><sub>0</sub> <code>:</code> <var>q</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">m</var>&minus;1</sub> <code>:</code> <var>q</var><sub><var class="meta">m</var>&minus;1</sub><code>)</code> <code>-&gt;</code> <var>q</var><sub><var class="meta">m</var></sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q</var> <code>where</code> <var>c</var><sub>0</sub>,&hellip;,<var>c</var><sub><var class="meta">k</var>&minus;1</sub> <code>{</code><var>e</var><code>}</code></td><td>&rho;(<var>q</var><sub>0</sub>) = <var>q'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>q</var><sub><var class="meta">n</var>&minus;1</sub>) = <var>q'</var><sub><var class="meta">n</var>&minus;1</sub></td><td>&rho;(<var>q</var>) = <var>q'</var></td><td>&rho;(<var>c</var><sub>0</sub>) = <var>c'</var><sub>0</sub></td><td>&hellip;&hellip;</td><td>&rho;(<var>c</var><sub><var class="meta">k</var>&minus;1</sub>) = <var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>{<var>x</var><sub>0</sub> : <var>q'</var><sub>0</sub>,&hellip;,<var>x</var><sub><var class="meta">m</var>&minus;1</sub> : <var>q'</var><sub><var class="meta">m</var>&minus;1</sub>},&Phi;,{<var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub>},&Pi;,&Sigma; &vdash; <var>e</var> : <var>q'</var><sub><var class="meta">m</var></sub> <code>-&gt;</code> &hellip; <code>-&gt;</code> <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> <code>-&gt;</code> <var>q'</var> ! <var>o</var> &#x2237; <var>b</var></td><td>&Kappa; &#x219D; <var>c'</var><sub>0</sub>,&hellip;,<var>c'</var><sub><var class="meta">k</var>&minus;1</sub></td><td>0&lt;<var class="meta">m</var>&lt;<var class="meta">n</var></td></tr>
+<tr class="proof"><td colspan="11">&rho;,&Phi;,&Kappa;,&Pi;,&Sigma; &vdash; <var>f</var> : <var>q'</var><sub>0</sub> &rarr; &hellip; &rarr; <var>q'</var><sub><var class="meta">n</var>&minus;1</sub> &rarr; <var>q'</var> ! <var>o</var> &#x2237; <span class="bold">ff</span></td></tr>
+</table></div>
+
+<p>The first two typing rules capture the cases with an empty collection of parameters, whereas the last two rules deal with cases with at least one parameter. Furthermore, the typing rule depends on whether the result type given in the function definition is a qualified type or a function type. In all cases, typing of functions within its group of mutually recursive functions depends on a substitution &rho; of monomorphic types for type variables. We assume that every function uses unique type variables. All rules specify that if a substitution is applied to the argument types, the return type and the constraints of the function, and the body can be typed with the resulting return type when the variable environment consists of the resulting typing of parameters and the resulting constraints are valid, then the function can be typed with the resulting function type.</p>
+
+<p>The constraints obtained by applying the substitution to those in the original type of the function must be implied by the constraint set &Kappa;. Although the constraints do not contain variables, they are not always resolvable without relying on external information such as a number being a supported field size. Such information must be given in &Kappa;. The type system is not going to search it from outside resources.</p>
+
+<p>In the third rule, the same restrictions and conventions apply as in the case of nameless (lambda) <code>sieve</code> functions.</p>
+
+<!--<table>
+<tr class="proof"><td>A</td><td>B</td></tr>
+<tr class="proof"><td colspan="2">C</td></tr>
+</table>-->
+</body>
+</html>

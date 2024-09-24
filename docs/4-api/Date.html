@@ -1,0 +1,441 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.08
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Date</h1>
+</div>
+<div>
+  <h2>Function date</h2>
+</div>
+<code>
+pub  fn date
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   year : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   month : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   day : uint[N] $S <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; Date[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>A Date object with given year, month and day.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_assert_eq</h2>
+</div>
+<code>
+pub  fn date_assert_eq
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   x : Date[$post, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Date[$post, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that given two Date objects have equal values.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_assert_ge</h2>
+</div>
+<code>
+pub  fn date_assert_ge
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first given date is later than or equal to the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_assert_gt</h2>
+</div>
+<code>
+pub  fn date_assert_gt
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first given date is later than the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_assert_le</h2>
+</div>
+<code>
+pub  fn date_assert_le
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first given date is earlier than or equal to the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_assert_lt</h2>
+</div>
+<code>
+pub  fn date_assert_lt
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that the first given date is earlier than the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_eq</h2>
+</div>
+<code>
+pub  fn date_eq
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xd : Date[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test of equality of the values of given two Date objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_ge3</h2>
+</div>
+<code>
+pub  fn date_ge3
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given date is later than or equal to the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_gt3</h2>
+</div>
+<code>
+pub  fn date_gt3
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given date is later than the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_le3</h2>
+</div>
+<code>
+pub  fn date_le3
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given date is earlier than or equal to the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_lt3</h2>
+</div>
+<code>
+pub  fn date_lt3
+[
+N : Nat
+]
+(   xd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+   yd : Date[$post, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $post, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given date is earlier than the second one. The third argument must be a SizeAsserter object suitable for comparing Date objects. Assumes that the given Date objects encode correct dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_sizeasserter_new</h2>
+</div>
+<code>
+pub  fn date_sizeasserter_new
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+() 
+-&gt; SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new SizeAsserter object suitable for comparing Date objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_to_post</h2>
+</div>
+<code>
+pub  fn date_to_post
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   d : Date[$pre, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Date[$post, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given Date object in the stage <code>$pre</code> to the stage <code>$post</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_to_pre</h2>
+</div>
+<code>
+pub  fn date_to_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   d : Date[$post, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Date[$pre, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given Date object in the stage <code>$post</code> to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_to_prover</h2>
+</div>
+<code>
+pub  fn date_to_prover
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   d : Date[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Date[$S, <span class="citation" data-cites="prover">@prover</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given Date object to the domain <code>@prover</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function date_to_string</h2>
+</div>
+<code>
+pub  fn date_to_string
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   date : Date[$pre, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The string representation of the given Date object (for debugging). In general, the result is not ISO-8601 since zeros are not added in front of one-digit months and dates.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function is_full_date</h2>
+</div>
+<code>
+pub  fn is_full_date
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   str : String[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given String object encodes a full date in the ISO 8601 format.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function parse_full_date</h2>
+</div>
+<code>
+pub  fn parse_full_date
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   full_date : String[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Date[$S, <span class="citation" data-cites="D">@D</span>, N] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>The Date object encoding the date in the given String object. Assumes that the given String object encodes a correct full date in the ISO 8601 format.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

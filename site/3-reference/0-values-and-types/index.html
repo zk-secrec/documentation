@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Values and Types - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../2-dev-guide/0-profiling/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../1-lexical-structure/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#values-and-types" class="nav-link">Values and Types</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#qualifiers" class="nav-link">Qualifiers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#primitive-data" class="nav-link">Primitive data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#data-structures" class="nav-link">Data structures</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#functions" class="nav-link">Functions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="values-and-types">Values and Types</h1>
+<p>This section provides an informal introduction to the basic concepts of ZK-SecreC programming language. The syntax is described in later sections. A more detailed introduction to the type and effect system of ZK-SecreC is provided later.</p>
+<h2 id="qualifiers">Qualifiers</h2>
+<p>All values of ZK-SecreC are divided into clearly delimited data types. In this sense, ZK-SecreC is similar to a strongly typed programming language. Unlike usual programming languages, ZK-SecreC types involve <em>qualifiers</em> related to reliability and privacy of the data in the type. All data within the same type must have the same qualifiers, hence qualifiers are indeed attributes of type.</p>
+<p>Each non-functional data type is equipped with two qualifiers called <em>stage</em> and <em>domain</em>. The first of them, the stage, determines if the values of the type belong to the circuit, or are local to a party or parties. A stage can be either <em>pre</em>, meaning the values being local, or <em>post</em>, meaning the values being on wires of the circuit. The second qualifier, the domain, determines which parties have access to the data. Possible domains are <em>prover</em>, <em>verifier</em> and <em>public</em>. Data in the prover domain are visible to the prover only. Data in the verifier domain are visible to both the prover and the verifier. Data in the public domain are known during the compile time.</p>
+<p>ZK-SecreC defines a linear subtyping order on domains, the public domain being the lowest and the prover domain being the highest. It reflects the idea of increasing privacy. All data known to the verifier can be revealed to the prover but not vice versa. All data in the public domain, i.e. that are known to ZK-SecreC compiler, are available to both the verifier and the prover, while the verifier's and the prover's data are not available to the ZK-SecreC compiler. One purpose of the type system of ZK-SecreC is preventing leakage of private data, i.e, guaranteeing that data in higher domains will not become available in lower domains during computation.</p>
+<p>Somewhat analogously, ZK-SecreC observes a subtyping order also on stages, defining the post stage as lower than the pre stage. This reflects the idea of decreasing reliability (i.e., larger in the order means less reliable). A reliable piece of data becoming available in the less reliable world makes no harm, but the converse is not true. Since circuit outcome decides the result of the ZK proof, data in the circuit used for computing must be reliable. A local computation is performed by parties and is not guaranteed to follow the ZK-SecreC program, hence its outcome is unreliable.</p>
+<p>However in practice, we consider data in the pre stage of the public and the verifier domains also reliable, because we postulate that only the prover might be motivated to cheat.</p>
+<p>Most of ZK proofs make use of expanded witnesses, i.e., additional data inputs given to the circuit by the prover. Hence moving data from the pre stage to the post stage must nevertheless be allowed, violating the subtyping order. ZK-SecreC provides no guarantees of maintaining reliability of the data in the circuit. It is up to the programmer to apply all checks necessary to ensure that the data in the circuit originally provided by the prover could not be fake.</p>
+<p>When not clear from the context, types equipped with qualifiers are called <em>qualified types</em>, while types without qualifiers are called <em>unqualified types</em>.</p>
+<h2 id="primitive-data">Primitive data</h2>
+<h3 id="integers-and-field-elements">Integers and field elements</h3>
+<p>An arithmetic circuit is assumed to compute on non-negative integers less than a fixed prime number. Overflows and underflows (i.e., negative numbers) are resolved modulo the prime number. This way, operations in the circuit and values on wires can be interpreted as operations of a finite field and field elements, respectively.</p>
+<p>More precisely, the underlying computing model can actually include multiple arithmetic circuits, each using its own modulus. ZK-SecreC has a bounded integer type for each prime number to accommodate computations in such circuits. Strictly speaking, ZK-SecreC does not check primality of the module, but the standard library of ZK-SecreC is written with the assumption that all moduli of computations on wires are prime numbers.</p>
+<p>All integer types with a prime modulus can be used with both the pre stage and the post stage, as well as with all three domains. At the pre stage, it is allowed to use computations with any (prime or composite) modulus. Loop indices and list lengths must be integers with modulus 2<sup>64</sup>. In addition, ZK-SecreC has an unbounded integer type that contains all non-negative, as well as negative integers. These integers can also be used at the pre stage only, in all three domains.</p>
+<h3 id="booleans">Booleans</h3>
+<p>ZK-SecreC supports booleans. For maintaining ability to translate booleans to circuit values, a boolean type can be equipped with a modulus, too. All boolean types contain just two values, true and false.</p>
+<p>Like integer types, booleans with prime modulus can be used at both the pre stage and the post stage, as well as in all three domains. Booleans with a composite modulus and booleans without a modulus can be used at the pre stage, in all three domains.</p>
+<h3 id="unit">Unit</h3>
+<p>There is a unit type consisting of just one value. ZK-SecreC uses the unit type as the formal return type of functions that return no meaningful value. The unit type is always qualified with the pre stage because the single unit value is not used by the circuit.</p>
+<h2 id="data-structures">Data structures</h2>
+<h3 id="tuples">Tuples</h3>
+<p>A <em>tuple</em> is a finite sequence of values of possibly different types. For every finite sequence of qualified types, there is an unqualified type of tuples of components having these types (in the corresponding order). The number of elements is thus reflected by the type. Tuple types are always qualified with the pre stage.</p>
+<p>Tuple components can be accessed by name. The name of each component is the decimal representation of its index. Component indexing starts from zero.</p>
+<h3 id="structs">Structs</h3>
+<p>Like a tuple, a <em>struct</em> is a finite sequence of values of possibly different types and the number of struct components is fixed by the type. Unlike in the case of tuples, the struct type and the struct components have names chosen by the programmer. Struct components can be accessed by these component names. The component names are also determined by the type.</p>
+<h3 id="lists">Lists</h3>
+<p>A <em>list</em> is a finite sequence of values of one and the same qualified type. The element type being qualified implies that all elements of any list must have the same stage and domain, not just the same type of data. The length (i.e., the number of elements) is a non-negative integer that is not determined by the type and does not have to be known to the compiler. Lists can be accessed by index, this is the most standard method of accessing list elements. But one can also append new elements to the end of a given list.</p>
+<p>There is an unqualified list type of every qualified element type. This way, a list type can be given qualifiers other than those of the element type. In particular, the domain of a list is the domain where the structure of the list is known, which may differ from the domain where the elements of the list are known. As any list has a linear shape, the only piece of information provided by the structure of the list is its length. All lists are at the pre stage since the circuit does not deal with the list structure.</p>
+<h3 id="vectors">Vectors</h3>
+<p>A <em>vector</em> is also a finite sequence of values of one and the same qualified type. Similarly to lists, the length of a vector is not determined by the type. Like lists, vectors can be accessed by index.</p>
+<p>Unlike lists, vectors are compiled into consecutive wire ranges in the circuit and are supposed to be processed in ways that take advantage of the special memory allocation. Also unlike the case of lists, one cannot append new elements to vectors.</p>
+<p>Vector types are parametrized and qualified similarly to list types.</p>
+<h3 id="tensors">Tensors</h3>
+<p>A <em>tensor</em> is a special form of a vector that can have 1 or more dimensions. It has the same type as a vector. The number of dimensions is not part of the type, it is determined at runtime. An ordinary vector is considered as a 1-dimensional tensor.</p>
+<p>A tensor has a fixed length in each dimension. This is in contrast with lists of lists, where each element list can have a different length. The <em>shape</em> of an <em>n</em>-dimensional tensor is a list of <em>n</em> integers [<em>m</em><sub>1</sub>,...,<em>m</em><sub>n</sub>], where <em>m</em><sub>i</sub> is the length in the <em>i</em>th dimension. The total number of elements in this tensor is <em>m</em><sub>1</sub>⋅...⋅<em>m</em><sub>n</sub>.</p>
+<h3 id="stores">Stores</h3>
+<p>ZK-SecreC also supports dictionaries called <em>stores</em>. Currently, only integers are accepted as keys and values. Both keys and values of stores must have the same stage and the same domain.</p>
+<p>In the past versions of ZK-SecreC, all stores were builtin. Now, stores in the post stage are defined as structs in the standard library but their implementation still relies on builtin stores in the pre stage.</p>
+<h2 id="functions">Functions</h2>
+<p>ZK-SecreC supports functions like most programming languages. Functions in ZK-SecreC can have one or more arguments and must have exactly one return value. The types of the arguments and the type of the return value together form the type of the function. If a function with no arguments or no return value is wanted then the unit type can be used as placeholder.</p>
+<p>Each argument type and the result type of a first-order non-curried function must be a qualified type. ZK-SecreC also supports higher-order functions, i.e., functions whose arguments are functions, and curried functions, i.e., functions whose result value is a function.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

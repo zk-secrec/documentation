@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Trait Methods - The ZK-SecreC Language Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../css/typesystem.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
+</li>
+                                    
+<li>
+    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../4-api/BigInt.html" class="dropdown-item">BigInt</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Bitextract.html" class="dropdown-item">Bitextract</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Builtin.html" class="dropdown-item">Builtin</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Char.html" class="dropdown-item">Char</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/ChrVec.html" class="dropdown-item">CheVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Date.html" class="dropdown-item">Date</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/DFA.html" class="dropdown-item">DFA</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/EC.html" class="dropdown-item">EC</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/FixedPoint.html" class="dropdown-item">FixedPoint</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Inequalities.html" class="dropdown-item">Inequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Integer.html" class="dropdown-item">Integer</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/OldInequalities.html" class="dropdown-item">OldInequalities</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Perm.html" class="dropdown-item">Perm</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Poseidon.html" class="dropdown-item">Poseidon</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Prob.html" class="dropdown-item">Prob</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/SetOp.html" class="dropdown-item">SetOp</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Std.html" class="dropdown-item">Std</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Store.html" class="dropdown-item">Store</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/StoreVec.html" class="dropdown-item">StoreVec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/String.html" class="dropdown-item">String</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Text.html" class="dropdown-item">Text</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Vec.html" class="dropdown-item">Vec</a>
+</li>
+                                    
+<li>
+    <a href="../../4-api/Waksman.html" class="dropdown-item">Waksman</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Trait Methods</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../0-interfacing-a-new-backend/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#sieveir-trait-methods" class="nav-link">SIEVEIR Trait Methods</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#arithmetic-and-boolean-operations" class="nav-link">Arithmetic and boolean operations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-instance-and-witness-streams" class="nav-link">Using instance and witness streams</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#assertions-and-field-switches" class="nav-link">Assertions and field switches</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#constants-cloning-copying-and-dropping-wires" class="nav-link">Constants, cloning, copying, and dropping wires</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#handling-wire-ranges" class="nav-link">Handling wire ranges</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sieve-functions-and-plugins" class="nav-link">Sieve functions and plugins</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#other-methods" class="nav-link">Other methods</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="sieveir-trait-methods">SIEVEIR Trait Methods</h1>
+<p>Here we will describe the methods of the SIEVEIR trait, which can be implemented when interfacing a new backend with the ZK-SecreC compiler. Some of the methods are required for all backends, some are optional.</p>
+<h2 id="arithmetic-and-boolean-operations">Arithmetic and boolean operations</h2>
+<p>All of these methods are required. The parameter <code>m</code> is the modulus of the wires, represented with the type <code>NatType</code>. Constants are of the type <code>Integer</code>, which is a type synonym for <code>BigInt</code> from <code>num_bigint</code>.</p>
+<h3 id="method-and">Method and</h3>
+<p><code>fn and(&amp;self, m: &amp;NatType, w1: &amp;Wire, w2: &amp;Wire) -&gt; Wire;</code></p>
+<p>Logical conjunction.</p>
+<h3 id="method-xor">Method xor</h3>
+<p><code>fn xor(&amp;self, m: &amp;NatType, w1: &amp;Wire, w2: &amp;Wire) -&gt; Wire;</code></p>
+<p>Logical exclusive or.</p>
+<h3 id="method-not">Method not</h3>
+<p><code>fn not(&amp;self, m: &amp;NatType, w1: &amp;Wire) -&gt; Wire;</code></p>
+<p>Logical negation.</p>
+<h3 id="method-mul">Method mul</h3>
+<p><code>fn mul(&amp;self, m: &amp;NatType, w1: &amp;Wire, w2: &amp;Wire) -&gt; Wire;</code></p>
+<p>Modular multiplication.</p>
+<h3 id="method-add">Method add</h3>
+<p><code>fn add(&amp;self, m: &amp;NatType, w1: &amp;Wire, w2: &amp;Wire) -&gt; Wire;</code></p>
+<p>Modular addition.</p>
+<h3 id="method-mulc">Method mulc</h3>
+<p><code>fn mulc(&amp;self, m: &amp;NatType, w1: &amp;Wire, c2: &amp;Integer) -&gt; Wire;</code></p>
+<p>Modular multiplication between value on wire and constant value.</p>
+<h3 id="method-addc">Method addc</h3>
+<p><code>fn addc(&amp;self, m: &amp;NatType, w1: &amp;Wire, c2: &amp;Integer) -&gt; Wire;</code></p>
+<p>Modular addition between value on wire and constant value.</p>
+<h2 id="using-instance-and-witness-streams">Using instance and witness streams</h2>
+<p>These are not strictly required but strongly recommended as otherwise instances and witnesses cannot be used.
+The methods <code>get_instance_wr</code> and <code>get_witness_wr</code> are not required if the backend does not support wire ranges.</p>
+<p>The type <code>Value</code> represents any ZK-SecreC value but here it is assumed to be a scalar <code>$pre</code> value.</p>
+<h3 id="method-add_instance">Method add_instance</h3>
+<p><code>fn add_instance(&amp;self, m: &amp;NatType, x: &amp;Value);</code></p>
+<p>Add a new value <code>x</code> to the instance stream of modulus <code>m</code>.</p>
+<h3 id="method-get_instance">Method get_instance</h3>
+<p>Add a new value <code>x</code> to the instance stream of modulus <code>m</code>.</p>
+<p><code>fn get_instance(&amp;self, m: &amp;NatType) -&gt; Wire;</code></p>
+<p>Get value of a new wire from the instance stream of modulus <code>m</code>.
+This function is called sequentially so n-th call loads the n-th value from the instance.
+The value must be added to the instance using <code>add_instance</code> before it can be read
+with <code>get_instance</code> or <code>get_instance_wr</code>.</p>
+<h3 id="method-get_instance_wr">Method get_instance_wr</h3>
+<p><code>fn get_instance_wr(&amp;self, m: &amp;NatType, n: usize) -&gt; WireRange;</code></p>
+<p>Get <code>n</code> values from instance to a new wire range.
+This is equivalent to calling <code>get_instance</code> <code>n</code> times
+but may be more efficient if the backend supports vectorized <code>get_instance</code>.
+The <code>n</code> values must be added to the instance stream using <code>add_instance</code>
+before they can be read with <code>get_instance_wr</code>.</p>
+<h3 id="method-add_witness">Method add_witness</h3>
+<p><code>fn add_witness(&amp;self, m: &amp;NatType, x: &amp;Value);</code></p>
+<p>Add a new value <code>x</code> to the witness stream of modulus <code>m</code>.</p>
+<h3 id="method-get_witness">Method get_witness</h3>
+<p><code>fn get_witness(&amp;self, m: &amp;NatType) -&gt; Wire;</code></p>
+<p>Get value of a new wire from the witness stream of modulus <code>m</code>.
+This function is called sequentially so n-th call loads the n-th value from the witness.
+The value must be added to the witness using <code>add_witness</code> before it can be read
+with <code>get_witness</code> or <code>get_witness_wr</code>.</p>
+<h3 id="method-get_witness_wr">Method get_witness_wr</h3>
+<p><code>fn get_witness_wr(&amp;self, m: &amp;NatType, n: usize) -&gt; WireRange;</code></p>
+<p>Get <code>n</code> values from witness to a new wire range.
+This is equivalent to calling <code>get_witness</code> <code>n</code> times
+but may be more efficient if the backend supports vectorized <code>get_witness</code>.
+The <code>n</code> values must be added to the witness stream using <code>add_witness</code>
+before they can be read with <code>get_witness_wr</code>.</p>
+<h2 id="assertions-and-field-switches">Assertions and field switches</h2>
+<p>Of these, only <code>assert_zero</code> and <code>assert_eq_scalar_vec</code> are required.</p>
+<h3 id="method-assert_zero">Method assert_zero</h3>
+<p><code>fn assert_zero(&amp;self, m: &amp;NatType, w: &amp;Wire);</code></p>
+<p>Assert that the value on the wire is zero.</p>
+<h3 id="method-assert_eq">Method assert_eq</h3>
+<p><code>fn assert_eq(&amp;self, m1: &amp;NatType, w1: &amp;Wire, m2: &amp;NatType, w2: &amp;Wire);</code></p>
+<p>Assert that values on two wires (of different moduli) are equal.</p>
+<h3 id="method-assert_eq_scalar_vec">Method assert_eq_scalar_vec</h3>
+<p><code>fn assert_eq_scalar_vec(&amp;self, m1: &amp;NatType, w1: &amp;Wire, m2: &amp;NatType, wires: Vec&lt;Wire&gt;);</code></p>
+<p>Assert that the value of <code>w1</code> has binary representation based on values of <code>wires</code>.</p>
+<pre><code>value(w1) = value(wires[0]) + 2*value(wires[1]) + 4*value(wires[2]) + ...
+</code></pre>
+<p>Used for more efficiently implemementing boolean circuit evaluation.</p>
+<h3 id="method-bool2int">Method bool2int</h3>
+<p><code>fn bool2int(&amp;self, m: &amp;NatType, w1: &amp;Wire, output_modulus: &amp;NatType) -&gt; Wire;</code></p>
+<p>Convert a boolean wire of modulus <code>m</code> to an integer wire of modulus <code>output_modulus</code>.</p>
+<h3 id="method-int_field_switch">Method int_field_switch</h3>
+<p><code>fn int_field_switch(&amp;self, m: &amp;NatType, w1: &amp;Wire, output_modulus: &amp;NatType) -&gt; Wire;</code></p>
+<p>Switch the field of <code>w1</code> to new modulus <code>m</code>.
+For conversion of boolean to uint we use <code>bool2int</code> calls instead.</p>
+<h2 id="constants-cloning-copying-and-dropping-wires">Constants, cloning, copying, and dropping wires</h2>
+<p>Of these methods, <code>const_bool</code>, <code>zero_wire</code>, <code>clone_wire</code>, and <code>drop_wire</code> are required.</p>
+<h3 id="method-const_bool">Method const_bool</h3>
+<p><code>fn const_bool(&amp;self, m: &amp;NatType, b: bool) -&gt; Wire;</code></p>
+<p>Load a constant boolean onto a fresh wire.</p>
+<h3 id="method-const_uint">Method const_uint</h3>
+<p><code>fn const_uint(&amp;self, m: &amp;NatType, x: &amp;Value) -&gt; Wire;</code></p>
+<p>Load a constant integer onto a fresh wire.
+Similar to <code>add_instance + get_instance</code> and <code>add_witness + get_witness</code> but for public values.</p>
+<h3 id="method-zero_wire">Method zero_wire</h3>
+<p><code>fn zero_wire(&amp;self, m: &amp;NatType) -&gt; Wire;</code></p>
+<p>Construct wire that won't be used.</p>
+<h3 id="method-clone_wire">Method clone_wire</h3>
+<p><code>fn clone_wire(&amp;self, w1: &amp;Wire) -&gt; Wire;</code></p>
+<p>Clone a wire.
+Both input and output wire will be deallocated separately.
+If the underlying wire representation is a raw pointer the clone will have
+to either copy the pointed data or deal with reference counting.
+Input and output have the same modulus.</p>
+<h3 id="method-copy_bool">Method copy_bool</h3>
+<p><code>fn copy_bool(&amp;self, m: &amp;NatType, w1: &amp;Wire) -&gt; Wire;</code></p>
+<p>Semantically identical to <code>clone_wire</code> where wires have modulus <code>2</code>.
+Internally used to make sure that textual IR1 output is identical to our earlier versions.</p>
+<h3 id="method-drop_wire">Method drop_wire</h3>
+<p><code>fn drop_wire(&amp;self, wire: &amp;mut Wire);</code></p>
+<p>Deallocate a wire.
+Called automatically when the wire goes out of scope.
+This method should free any memory that is not freed automatically.</p>
+<h2 id="handling-wire-ranges">Handling wire ranges</h2>
+<p>The methods <code>declare_new_wire_range</code> and <code>declare_delete_wire_range</code> are optional and are not called from the frontend, they are intended to be called from the backend itself. They are used only by
+backends that implement <code>AllocationTrait</code>.</p>
+<p>The other methods are required only if the backend supports wire ranges.</p>
+<h3 id="method-zero_wire_range">Method zero_wire_range</h3>
+<p><code>fn zero_wire_range(&amp;self, m: &amp;NatType, n: usize) -&gt; WireRange;</code></p>
+<p>Construct a wire range of length n that won't be used.</p>
+<h3 id="method-clone_wire_range">Method clone_wire_range</h3>
+<p><code>fn clone_wire_range(&amp;self, wr: &amp;WireRange) -&gt; WireRange;</code></p>
+<p>Clone a range of wires.</p>
+<h3 id="method-index_wire_range">Method index_wire_range</h3>
+<p><code>fn index_wire_range(&amp;self, wr: &amp;WireRange, i: usize) -&gt; Wire;</code></p>
+<p>Index a range of wires, returning the wire with index <code>i</code>. The first wire in a range has index <code>0</code>.</p>
+<h3 id="method-slice_wire_range">Method slice_wire_range</h3>
+<p><code>fn slice_wire_range(&amp;self, wr: &amp;WireRange, ir: &amp;IndexRange) -&gt; WireRange;</code></p>
+<p>Slice a range of wires. The struct <code>IndexRange</code> is defined in <code>sieve.rs</code> as follows:</p>
+<pre><code>pub struct IndexRange {
+    pub first: usize,
+    pub length: usize,
+}
+</code></pre>
+<p>giving the index of the first wire and the length of the slice.</p>
+<h3 id="method-wire_to_wire_range">Method wire_to_wire_range</h3>
+<p><code>fn wire_to_wire_range(&amp;self, w: &amp;Wire) -&gt; WireRange;</code></p>
+<p>Convert a wire into a length-1 wire range.</p>
+<h3 id="method-drop_wire_range">Method drop_wire_range</h3>
+<p><code>fn drop_wire_range(&amp;self, wr: &amp;mut WireRange);</code></p>
+<p>Drop a wire range. Called automatically when the wire range goes out of scope.
+This method should free any memory that is not freed automatically.</p>
+<h3 id="method-create_vector">Method create_vector</h3>
+<p><code>fn create_vector(&amp;self, m: &amp;NatType, wocs: Vec&lt;WireOrConst&gt;) -&gt; WireRange;</code></p>
+<p>Copy wires or constant values to fresh wires in a wire range,
+so that they can be used in vectorized operations.</p>
+<h3 id="method-declare_new_wire_range">Method declare_new_wire_range</h3>
+<p><code>fn declare_new_wire_range(&amp;self, alloc: &amp;Allocation);</code></p>
+<p>Allocate a range of wires.</p>
+<h3 id="method-declare_delete_wire_range">Method declare_delete_wire_range</h3>
+<p><code>fn declare_delete_wire_range(&amp;self, alloc: &amp;Allocation);</code></p>
+<p>Deallocate a range of wires.</p>
+<h2 id="sieve-functions-and-plugins">Sieve functions and plugins</h2>
+<p>These methods are optional.</p>
+<p>Functions defined with the <code>sieve</code> keyword in ZK-SecreC code are defined in the backend by first calling the method <code>begin_function</code>, then calling the methods corresponding to the body of the
+function, and then calling the method <code>end_function</code>. The backend should not execute the methods called between <code>begin_function</code> and <code>end_function</code> calls immediately but save them as a function
+definition and execute them when the defined function is later called using <code>apply</code>, <code>vectorized_apply</code>, or <code>switch_apply</code>. If necessary, the backend may use a different implementation of <code>WireTrait</code>
+for wires inside a function definition than for ordinary wires, as is done in the dummy backend.</p>
+<p>Plugins (<code>extended_arithmetic</code>, <code>vectors</code>, <code>permutation_check</code>) can be supported through the methods <code>plugin_apply</code> and <code>plugin_apply_wr</code>.
+The semantics and a sample implementation of those plugins can be seen in the code of the dummy backend.</p>
+<p>The <code>disjunction</code> plugin is special and uses the method <code>switch_apply</code> instead, also requiring support for sieve functions.
+The <code>iter</code> plugin is also special and uses <code>vectorized_apply</code>.</p>
+<h3 id="method-begin_function">Method begin_function</h3>
+<p><code>fn begin_function(&amp;self, sieve_fn: &amp;String, output_moduli: &amp;Vec&lt;&amp;NatType&gt;, input_moduli: Vec&lt;&amp;NatType&gt;) -&gt; (Vec&lt;Wire&gt;, usize);</code></p>
+<p>Begin a sieve function definition.
+Returns wires corresponding to the inputs
+and a UID for the sieve function (which must be different each time <code>begin_function</code> is called).</p>
+<h3 id="method-end_function">Method end_function</h3>
+<p><code>fn end_function(&amp;self, wires_res: Vec&lt;WireOrConst&gt;);</code></p>
+<p>End a sieve function definition.
+<code>wires_res</code> contains for each return value the wire where it was computed or a constant if this return value is constant.</p>
+<h3 id="method-apply">Method apply</h3>
+<p><code>fn apply(&amp;self, uid: usize, output_moduli: Vec&lt;&amp;NatType&gt;, input_wires: Vec&lt;&amp;Wire&gt;) -&gt; Vec&lt;Wire&gt;;</code></p>
+<p>Apply a sieve function with the given uid in a non-vectorized way
+to the values on the input wires.</p>
+<h3 id="method-vectorized_apply">Method vectorized_apply</h3>
+<p><code>fn vectorized_apply(&amp;self, uid: usize, output_moduli: Vec&lt;&amp;NatType&gt;, input_moduli: Vec&lt;&amp;NatType&gt;, env_moduli: &amp;Vec&lt;NatType&gt;, env_wires: Vec&lt;&amp;Wire&gt;, wrs: Vec&lt;&amp;WireRange&gt;) -&gt; Vec&lt;WireRange&gt;;</code></p>
+<p>Apply a sieve function with the given uid in a vectorized way to the values on the input wire ranges <code>wrs</code>.
+The function is first partially applied to the wires in <code>env_wires</code> and resulting function is then applied in a vectorized way to <code>wrs</code>.</p>
+<p>Each wire range in <code>wrs</code> has the same length and the output wire ranges must also have the same length.
+The values of the <em>i</em>th elements of the output wire ranges are obtained by applying the sieve function to the values of the wires in <code>env_wires</code> and the values of the <em>i</em>th elements of the wire ranges
+in <code>wrs</code>.</p>
+<h3 id="method-switch_apply">Method switch_apply</h3>
+<p><code>fn switch_apply(&amp;self, sieve_fns: &amp;Vec&lt;usize&gt;, default_sieve_fn: usize, ints: &amp;Vec&lt;Integer&gt;, w_modulus: &amp;NatType, output_moduli: Vec&lt;&amp;NatType&gt;, input_moduli: Vec&lt;&amp;NatType&gt;, w: &amp;Wire, wires: Vec&lt;&amp;Wire&gt;, witness_count: u64) -&gt; Vec&lt;Wire&gt;;</code></p>
+<p>Apply one of the sieve functions with uids in <code>sieve_fns</code> in a non-vectorized way
+to the values on the input wires.
+The disjunction plugin is used to choose which function to apply according to
+which value in <code>ints</code> (if any) the value on wire <code>w</code> is equal to.
+If it is not equal to any, the default function (with uid <code>default_sieve_fn</code>) is chosen.</p>
+<p><code>witness_count</code> is the maximum number of witness values used by any of the given functions. If the chosen function uses fewer witness values then the witness stream has been padded with arbitrary
+values (e.g. zeroes) so that the number of values in the witness stream does not leak the chosen branch. The implementation of <code>switch_apply</code> must also remove those extra values from the witness stream,
+not just the witness values actually used by the chosen function.</p>
+<h3 id="method-plugin_apply">Method plugin_apply</h3>
+<p><code>fn plugin_apply(&amp;self, plugin: &amp;str, operation: &amp;str, params: Vec&lt;&amp;str&gt;, modulus: &amp;NatType, num_outputs: usize, input_wires: Vec&lt;&amp;Wire&gt;) -&gt; Vec&lt;Wire&gt;;</code></p>
+<p>Apply a plugin operation that uses a single modulus and has single wires as inputs and outputs.</p>
+<h3 id="method-plugin_apply_wr">Method plugin_apply_wr</h3>
+<p><code>fn plugin_apply_wr(&amp;self, plugin: &amp;str, operation: &amp;str, params: Vec&lt;&amp;str&gt;, modulus: &amp;NatType, output_counts: Vec&lt;usize&gt;, input_wrs: Vec&lt;&amp;WireRange&gt;) -&gt; Vec&lt;WireRange&gt;;</code></p>
+<p>Apply a plugin operation that uses a single modulus and has wire ranges as inputs and outputs.</p>
+<h2 id="other-methods">Other methods</h2>
+<p>These are optional.</p>
+<h3 id="method-write_headers">Method write_headers</h3>
+<p><code>fn write_headers(&amp;self, ns: &amp;Vec&lt;NatType&gt;, supported_conversions: Vec&lt;(&amp;NatType, &amp;NatType)&gt;, supported_plugins: Vec&lt;&amp;str&gt;);</code></p>
+<p>Write IR headers if they could not be written yet
+when the struct implementing this trait was allocated.
+<code>ns</code> is the list of fields used in the circuit.
+<code>supported_conversions</code> is the list of conversions between fields supported in the circuit,
+the first element of the pair is the input field and the second element is the output field of the conversion.
+<code>supported_plugins</code> is the list of names of supported plugins.</p>
+<h3 id="method-get_next_wire_number">Method get_next_wire_number</h3>
+<p><code>fn get_next_wire_number(&amp;self) -&gt; u64;</code></p>
+<p>For profiling how many wires are used in each part of the code.</p>
+<h3 id="method-get_rel_file_size">Method get_rel_file_size</h3>
+<p><code>fn get_rel_file_size(&amp;self) -&gt; u64;</code></p>
+<p>For profiling how many lines of relation file are generated in each part of the code.</p>
+<h3 id="method-flush">Method flush</h3>
+<p><code>fn flush(&amp;self);</code></p>
+<p>Flush output.
+Useful for text-based implementations like IR output.</p>
+<h3 id="method-finalize">Method finalize</h3>
+<p><code>fn finalize(&amp;self);</code></p>
+<p>Signal that code execution is finished.</p>
+<h3 id="method-current_status">Method current_status</h3>
+<p><code>fn current_status(&amp;self) -&gt; bool;</code></p>
+<p>This does not seem to be used anywhere.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,262 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.08
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Bitextract</h1>
+</div>
+<div>
+  <h2>Function bitextract</h2>
+</div>
+<code>
+pub  fn bitextract
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   bw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Little-endian binary representation of the integer given as the first argument, using the number of digits given as the second argument. If this number of digits is not enough, the digits of higher units are omitted.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bitextract_list</h2>
+</div>
+<code>
+pub  fn bitextract_list
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   xs : list[uint[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   bw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[list[bool[N] $post <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The list of little-endian binary representations of all elements of the given list, using always the number of digits given as the second argument. If this number of digits is not enough, the digits of higher units are omitted. Equivalent to applying <code>bitextract</code> to every element of the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bitextract_pre</h2>
+</div>
+<code>
+pub  fn bitextract_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   bw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[bool[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Little-endian binary representation of the integer in the stage <code>$pre</code> given as the first argument, using the number of digits given as the second argument. If this number of digits is not enough, the digits of higher units are omitted.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bits_to_uint</h2>
+</div>
+<code>
+pub  fn bits_to_uint
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   bits : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The integer whose little-endian binary representation is given.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bytes_to_uints</h2>
+</div>
+<code>
+pub  fn bytes_to_uints
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   bytes : list[list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The list of integers whose little-endian binary representations are in the given list, in the same order. Equivalent to applying <code>bitsToUInt</code> to every element of the given list.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bytextract_pre</h2>
+</div>
+<code>
+pub  fn bytextract_pre
+[
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   byt_width : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   byt_val : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[uint[N] $pre <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Little-endian representation of the integer in the stage <code>$pre</code> given as the first argument on base given as the third argument, using the number of digits given as the second argument. If this number of digits is not enough, the digits of higher units are omitted.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function byts_to_uint</h2>
+</div>
+<code>
+pub  fn byts_to_uint
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   byts : list[uint[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   byt_val : uint $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The integer whose little-endian representation on base given as the second argument is given as the first argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function pow</h2>
+</div>
+<code>
+pub  fn pow
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   g : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   e : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   ebw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The integer given as the first argument raised to the power given as the second argument. A variant of the fast exponentiation algorithm is used for computation. The third argument is the public length of bits to fit the binary representation of the exponent.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function pow’</h2>
+</div>
+<code>
+pub  fn pow’
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   g : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   e : list[bool[N] $S <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ebw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The integer given as the first argument raised to the power whose little-endian binary representation is given as the second argument. The length of the significant initial part of the binary representation is given as the third argument.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

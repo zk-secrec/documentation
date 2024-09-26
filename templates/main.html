@@ -1,0 +1,27 @@
+$for(include-before)$
+$include-before$
+$endfor$
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+$header.html()$
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+    $for(toc)$
+      <a class="$toc.level$" href="$toc.path$">$toc.name$</a>
+    $endfor$
+    </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+$if(api)$
+$api.html()$
+$endif$
+$body$
+  </div>
+</div>
+$for(include-after)$
+$include-after$
+$endfor$

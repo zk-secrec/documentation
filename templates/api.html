@@ -1,0 +1,51 @@
+$for(api)$
+$if(api.module)$
+<div>
+  <h1>Module $api.module$</h1>
+</div>
+$endif$
+$if(api.function)$
+<div>
+  <h2>Function $api.function.name$</h2>
+</div>
+<code>
+$if(api.function.effect)$
+unchecked eff $api.function.effect$<br>
+$endif$
+pub $api.function.modifier$ fn $api.function.name$
+$if(api.function.typeArgs)$
+[
+$for(api.function.typeArgs/allbutlast)$
+$it$,
+$endfor$
+$for(api.function.typeArgs/last)$
+$it$
+$endfor$
+]
+$endif$
+($if(api.function.args)$
+$for(api.function.args/allbutlast)$
+  $it.modifier$ $it.name$ : $it.type$,
+$endfor$
+$for(api.function.args/last)$
+  $it.modifier$ $it.name$ : $it.type$
+$endfor$
+$endif$) 
+$if(api.function.return)$
+-&gt; $api.function.return$
+$endif$
+$if(api.function.constraints)$
+<br>where
+$for(api.function.constraints/allbutlast)$
+<br>&nbsp;&nbsp;$it$,
+$endfor$
+$for(api.function.constraints/last)$
+<br>&nbsp;&nbsp;$it$
+$endfor$
+$endif$
+</code>
+<div>
+  $api.function.description$
+</div>
+$endif$
+$endfor$

@@ -1,8 +1,14 @@
-# ZK-SecreC Compiler, Language and Standard Library Documentation
+# Documentation on the ZK-SecreC Compiler, Language and Standard Library
 
-This documentation can be served using the `mkdocs` utility. It has been tested with version 1.6.0. As during the development, another server, Pandora, was used for serving the documentation, some details may be displayed suboptimally with `mkdocs`.
+This documentation can be served using the Pandora server that is also developed in Cybernetica. Nevertheless, it is possible to get it work with `mkdocs`. We have uploaded the `site` directory produced by `mkdocs` along with its contents, so the user can in principle open the documentation HTML files directly with a web browser.
 
-We have uploaded the `site` directory and its contents along with the source files, so the user can in principle open the documentation HTML files directly with a web browser.
+Having the Pandora server installed, serving the documentation can be done by just running the `pandora` program in the root folder of this project and entering `localhost:8000` to the address bar of the web browser.
+
+## Pandora
+
+Pandora is a web server for serving static content. It uses the Haskell Pandoc library to convert between different document formats.
+
+To build Pandora, first download the latest version of Stack (see [the Stack manual](https://docs.haskellstack.org/en/stable/README/#how-to-install)). Run `stack install` in the root folder of the project to build an executable. Make sure that the PATH varibale points to the directory where Stack installs programs.
 
 ## Acknowledgements
 

@@ -1,6 +1,6 @@
 # Documentation on the ZK-SecreC Compiler, Language and Standard Library
 
-This documentation can be served using the Pandora server that is also developed in Cybernetica. Nevertheless, it is possible to get it work with `mkdocs`. We have uploaded the `site` directory produced by `mkdocs` along with its contents, so the user can in principle open the documentation HTML files directly with a web browser.
+This documentation can be served using the Pandora server that is also developed in Cybernetica. Nevertheless, it is possible to get it work with `mkdocs`. We have uploaded the `docs` directory produced by `mkdocs` along with its contents, so the user can in principle open the documentation HTML files directly with a web browser.
 
 Having the Pandora server installed, serving the documentation can be done by just running the `pandora` program in the root folder of this project and entering `localhost:8000` to the address bar of the web browser.
 

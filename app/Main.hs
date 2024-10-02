@@ -23,6 +23,7 @@ import Data.Tree
 import qualified Data.Map.Strict as M
 import Data.List
 import Data.Maybe
+import Data.String (IsString(..))
 
 import Network.Wai
 import Network.Wai.Handler.Warp (run)
@@ -79,6 +80,17 @@ type PandoraM a = ReaderT PandoraState PandocIO a
 
 runPandora :: PandoraM a -> PandoraState -> IO a
 runPandora x st = runIOorExplode $ runReaderT x st
+
+sourceDir
+  = "docs-md"
+fontsDir
+  = "fonts"
+styleDir
+  = "css"
+templateDir
+  = "templates"
+targetDir
+  = "build"
 
 capitalize
   :: T.Text -> T.Text
@@ -173,7 +185,7 @@ buildTree :: Tree FilePath -> PandoraM ()
 buildTree tree = do
   let filePath = rootLabel tree
   liftIO . putStrLn $ "Compling: " <> filePath
-  let buildPath = joinPath . ("build":) . drop 1 $ splitPath filePath
+  let buildPath = joinPath . (targetDir :) . drop 1 $ splitPath filePath
   liftIO . putStrLn $ "Build path: " <> buildPath
   let isDir = not . null $ subForest tree
   if isDir
@@ -183,8 +195,9 @@ buildTree tree = do
 
 loadTemplate :: IO (Template T.Text)
 loadTemplate = do
-  template <- BS.readFile "templates/main.html"
-  res <- compileTemplate "templates/" (decodeUtf8 template)
+  let mainFile = templateDir </> "main.html"
+  template <- BS.readFile mainFile
+  res <- compileTemplate (dropFileName mainFile) (decodeUtf8 template)
   either die return res
 
 pandoraExtensions = pandocExtensions <> extensionsFromList
@@ -249,21 +262,21 @@ app req respond = do
         then respond $ responseFile status404 pandoraHeader page404 Nothing
         else respond $ responseFile status404 pandoraHeader path Nothing
   where
-    path = joinPath $ T.unpack <$> "build" : pathInfo req
-    page404 = "build/404.html"
+    path = joinPath $ targetDir : fmap T.unpack (pathInfo req)
+    page404 = targetDir </> "404.html"
 
 compileAll :: PandoraOptions -> IO ()
 compileAll opts = do
-  tree <- dirTree "docs"
+  tree <- dirTree sourceDir
   let state = PandoraState tree opts
 
-  createDirectoryIfMissing False "build"
+  createDirectoryIfMissing False targetDir
 
-  cssDirExists <- doesDirectoryExist "css"
-  when cssDirExists $ copyDirectory "css" "build/css"
+  cssDirExists <- doesDirectoryExist styleDir
+  when cssDirExists $ copyDirectory styleDir (targetDir </> styleDir)
 
-  fontDirExists <- doesDirectoryExist "fonts"
-  when fontDirExists $ copyDirectory "fonts" "build/fonts"
+  fontDirExists <- doesDirectoryExist fontsDir
+  when fontDirExists $ copyDirectory fontsDir (targetDir </> fontsDir)
 
   runPandora (buildTree tree) state
 
@@ -273,9 +286,9 @@ runWatcher opts = void . TW.run $ do
         putStrLn $ "File changed: " <> p
         putStrLn "Recompiling everything.."
         compileAll opts
-  "docs/**/*.md"  |> rebuildAll
-  "docs/**/*.tex" |> rebuildAll
-  "css/**/*.css"  |> rebuildAll
+  fromString (sourceDir </> "**/*.md")  |> rebuildAll
+  fromString (sourceDir </> "**/*.tex") |> rebuildAll
+  fromString (styleDir </> "**/*.css")  |> rebuildAll
 
 main :: IO ()
 main = do

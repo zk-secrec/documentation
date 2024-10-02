@@ -1,0 +1,727 @@
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
+    
+  </div>
+  <div>
+    2024.09
+  </div>
+</header>
+</div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs Md</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/Ratio.html">Ratio</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Ratio</h1>
+</div>
+<div>
+  <h2>Function add_ratio</h2>
+</div>
+<code>
+pub  fn add_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The sum of the given two rational numbers in <code>$pre</code>. Fails if the numerator and the denominator of the result do not fit to the limit of the first summand.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function add_ratio3</h2>
+</div>
+<code>
+pub  fn add_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The sum of the given two rational numbers. Fails if the numerator and the denominator of the result do not fit to the limit of the first summand. The given SizeAsserter object is used for checking this.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function eq_ratio</h2>
+</div>
+<code>
+pub  fn eq_ratio
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given two rational numbers have the same value.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_from_ratio</h2>
+</div>
+<code>
+pub  fn fixed_from_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The closest lower approximation of the given rational number in <code>$pre</code> in the form of a fixed-point number, provided that the number of bits and the number of bits after the binary point are given as the second and the third parameter. Fails if the integral value does not fit to the required number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_from_ratio3</h2>
+</div>
+<code>
+pub  fn fixed_from_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserters : list[SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The closest lower approximation of the given rational number in the form of a fixed-point number, provided that the number of bits and the number of bits after the binary point are given as the second and the third parameter. The fourth argument must be a list of SizeAsserter objects as produced by <code>Inequalities::sizeasserters_new</code>. Fails if the integral value does not fit to the required number of bits or the list of SizeAsserter objects is too short to contain one with required number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_to_ratio</h2>
+</div>
+<code>
+pub  fn fixed_to_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   lim : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number in <code>$pre</code> to a rational number. Fails if the integral value of the fixed-point number does not fit to the limit given as the second argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_to_ratio3</h2>
+</div>
+<code>
+pub  fn fixed_to_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   lim : uint[N] $S <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number to a rational number. Fails if the integral value of the fixed-point number does not fit to the limit given as the second argument. The given SizeAsserter object is used for checking this condition.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge_ratio</h2>
+</div>
+<code>
+pub  fn ge_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number in <code>$pre</code> is greater than or equal to the second one. Fails if the limits of the given two numbers differ.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge_ratio3</h2>
+</div>
+<code>
+pub  fn ge_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number is greater than or equal to the second one. Fails if the limits of the given two numbers differ. The given SizeAsserter object is used for comparison.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt_ratio</h2>
+</div>
+<code>
+pub  fn gt_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number in <code>$pre</code> is greater than the second one. Fails if the limits of the given two numbers differ.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt_ratio3</h2>
+</div>
+<code>
+pub  fn gt_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number is greater than the second one. Fails if the limits of the given two numbers differ. The given SizeAsserter object is used for comparison.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le_ratio</h2>
+</div>
+<code>
+pub  fn le_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number in <code>$pre</code> is less than or equal to the second one. Fails if the limits of the given two numbers differ.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le_ratio3</h2>
+</div>
+<code>
+pub  fn le_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number is less than or equal to the second one. Fails if the limits of the given two numbers differ. The given SizeAsserter object is used for comparison.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function limit</h2>
+</div>
+<code>
+pub  fn limit
+[
+N : Nat,
+$S
+]
+() 
+-&gt; uint[N] $S <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A field element suitable for using as the value of <code>lim</code> in Ratio objects.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_ratio</h2>
+</div>
+<code>
+pub  fn lt_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number in <code>$pre</code> is less than the second one. Fails if the limits of the given two numbers differ.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_ratio3</h2>
+</div>
+<code>
+pub  fn lt_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given rational number is less than the second one. Fails if the limits of the given two numbers differ. The given SizeAsserter object is used for comparison.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mult_ratio</h2>
+</div>
+<code>
+pub  fn mult_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two rational numbers in <code>$pre</code>. Fails if the numerator and the denominator of the result do not fit to the limit of the first factor.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mult_ratio3</h2>
+</div>
+<code>
+pub  fn mult_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two rational numbers. Fails if the numerator and the denominator of the result do not fit to the limit of the first factor. The given SizeAsserter object is used for checking this.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function negate_ratio</h2>
+</div>
+<code>
+pub  fn negate_ratio
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The additive inverse of the given rational number. Fails if the given rational number is the smallest one with its denominator fitting to the limit (then the additive inverse does not fit to the limit).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function neq_ratio</h2>
+</div>
+<code>
+pub  fn neq_ratio
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given two rational numbers have distinct values.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ratio</h2>
+</div>
+<code>
+pub  fn ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   m : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+   lim : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The rational number with the given numerator, denominator and limit in $pre. Fails if the numerator and denominator do not fit to the limit.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ratio3</h2>
+</div>
+<code>
+pub  fn ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   m : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+   lim : uint[N] $S <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The rational number with the given numerator, denominator and limit. Fails if the numerator and denominator do not fit to the limit. The given SizeAsserter object is used for checking this condition.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ratio_to_pre</h2>
+</div>
+<code>
+pub  fn ratio_to_pre
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given rational number to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ratio_to_string</h2>
+</div>
+<code>
+pub  fn ratio_to_string
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>The string representation of the given rational number.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_ratio</h2>
+</div>
+<code>
+pub  fn sub_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The difference of the given two rational numbers in <code>$pre</code>. Fails if either the second addend is the smallest one with its denominator fitting to the limit or the numerator and the denominator of the result do not fit to the limit of the first summand.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_ratio3</h2>
+</div>
+<code>
+pub  fn sub_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   yr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The difference of the given two rational numbers. Fails if either the second addend is the smallest one with its denominator fitting to the limit or the numerator and the denominator of the result do not fit to the limit of the first summand. The given SizeAsserter object is used for checking the latter condition.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_to_ratio</h2>
+</div>
+<code>
+pub  fn uint_to_ratio
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   lim : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The rational number whose value equals the given integer in <code>$pre</code>, with the given limit in <code>$pre</code>. Fails if the value does not fit to the limit.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_to_ratio3</h2>
+</div>
+<code>
+pub  fn uint_to_ratio3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   lim : uint[N] $S <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The rational number whose value equals the given integer, with the given limit. Fails if the value does not fit to the limit. The given SizeAsserter object is used for checking this.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function with_denominator</h2>
+</div>
+<code>
+pub  fn with_denominator
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   n : uint[N] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The closest lower approximation of the given rational number in <code>$pre</code> that has the given denominator. Fails if the numerator and the denominator of the result do not fit to the limit of the given rational number.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function with_denominator3</h2>
+</div>
+<code>
+pub  fn with_denominator3
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   xr : Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   n : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+  ref sizeasserter : SizeAsserter[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Ratio[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The closest lower approximation of the given rational number that has the given denominator. Fails if the numerator and the denominator of the result do not fit to the limit of the given rational number. The given SizeAsserter object is used for checking this.</p>
+  </blockquote>
+</div>
+
+  </div>
+</div>

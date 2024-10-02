@@ -1,326 +1,832 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Vec - The ZK-SecreC Language Documentation</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/fontawesome.min.css" rel="stylesheet">
-        <link href="../../css/brands.min.css" rel="stylesheet">
-        <link href="../../css/solid.min.css" rel="stylesheet">
-        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <link href="../../css/typesystem.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="../.." class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
-</li>
-                                    
-<li>
-    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../BigInt.html" class="dropdown-item">BigInt</a>
-</li>
-                                    
-<li>
-    <a href="../Bitextract.html" class="dropdown-item">Bitextract</a>
-</li>
-                                    
-<li>
-    <a href="../Builtin.html" class="dropdown-item">Builtin</a>
-</li>
-                                    
-<li>
-    <a href="../Char.html" class="dropdown-item">Char</a>
-</li>
-                                    
-<li>
-    <a href="../ChrVec.html" class="dropdown-item">CheVec</a>
-</li>
-                                    
-<li>
-    <a href="../Date.html" class="dropdown-item">Date</a>
-</li>
-                                    
-<li>
-    <a href="../DFA.html" class="dropdown-item">DFA</a>
-</li>
-                                    
-<li>
-    <a href="../EC.html" class="dropdown-item">EC</a>
-</li>
-                                    
-<li>
-    <a href="../FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
-</li>
-                                    
-<li>
-    <a href="../FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
-</li>
-                                    
-<li>
-    <a href="../FixedPoint.html" class="dropdown-item">FixedPoint</a>
-</li>
-                                    
-<li>
-    <a href="../Inequalities.html" class="dropdown-item">Inequalities</a>
-</li>
-                                    
-<li>
-    <a href="../Integer.html" class="dropdown-item">Integer</a>
-</li>
-                                    
-<li>
-    <a href="../IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
-</li>
-                                    
-<li>
-    <a href="../OldInequalities.html" class="dropdown-item">OldInequalities</a>
-</li>
-                                    
-<li>
-    <a href="../Perm.html" class="dropdown-item">Perm</a>
-</li>
-                                    
-<li>
-    <a href="../Poseidon.html" class="dropdown-item">Poseidon</a>
-</li>
-                                    
-<li>
-    <a href="../Prob.html" class="dropdown-item">Prob</a>
-</li>
-                                    
-<li>
-    <a href="../SetOp.html" class="dropdown-item">SetOp</a>
-</li>
-                                    
-<li>
-    <a href="../Std.html" class="dropdown-item">Std</a>
-</li>
-                                    
-<li>
-    <a href="../Store.html" class="dropdown-item">Store</a>
-</li>
-                                    
-<li>
-    <a href="../StoreVec.html" class="dropdown-item">StoreVec</a>
-</li>
-                                    
-<li>
-    <a href="../String.html" class="dropdown-item">String</a>
-</li>
-                                    
-<li>
-    <a href="../Text.html" class="dropdown-item">Text</a>
-</li>
-                                    
-<li>
-    <a href="../Vec.html" class="dropdown-item">Vec</a>
-</li>
-                                    
-<li>
-    <a href="../Waksman.html" class="dropdown-item">Waksman</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
-</li>
-                                    
-<li>
-    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
-
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
-
+  </div>
+  <div>
+    2024.09
+  </div>
+</header>
 </div>
-            </div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="../../js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../js/base.js"></script>
-        <script src="../../search/main.js"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs Md</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/Ratio.html">Ratio</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module Vec</h1>
+</div>
+<div>
+  <h2>Function abs_uv</h2>
+</div>
+<code>
+pub  fn abs_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The absolute values of the elements in the given vector on wires, all values being considered as signed integers with the number of bits given as the second argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function add_preuint_uv</h2>
+</div>
+<code>
+pub  fn add_preuint_uv
+[
+N : Nat
+]
+(   c : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Adding the constant in <code>$pre</code> to all elements of the vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function add_uint_uv</h2>
+</div>
+<code>
+pub  fn add_uint_uv
+[
+N : Nat
+]
+(   c : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Adding the fixed value on wire to all elements of the vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function and_uv</h2>
+</div>
+<code>
+pub  fn and_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise logical conjunction of given two vectors on wires, 1 meaning true and 0 meaning false.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_eq_uv</h2>
+</div>
+<code>
+pub  fn assert_eq_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of terms in each pair of corresponding elements of two given vectors on wires being equal.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_lt_uv</h2>
+</div>
+<code>
+pub  fn assert_lt_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of every element in the first vector on wires being less than the corresponding element in the second vector on wire. All values are considered as unsigned integers with the number of bits given as the third argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_one_uv</h2>
+</div>
+<code>
+pub  fn assert_one_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of all elements of given vector on wires being equal to one.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function assert_zero_uv</h2>
+</div>
+<code>
+pub  fn assert_zero_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Assertion of all elements of given vector on wires being zeros.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function bitextract_uv</h2>
+</div>
+<code>
+pub  fn bitextract_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The little endian binary representations of the integers in the given vector on wires. The second argument is the public length of the resulting list of vectors on wires. Every vector in the resulting list contains the corresponding bit in each representation. If any of the integers cannot be represented by the expected number of bits then a run time error occurs.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function check_bit_uv</h2>
+</div>
+<code>
+pub  fn check_bit_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Assertion that all elements of the given vector on wires are bits (either 0 or 1).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge_uv</h2>
+</div>
+<code>
+pub  fn ge_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise greater-than-or-equal-to relation of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge_uv_uint</h2>
+</div>
+<code>
+pub  fn ge_uv_uint
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Greater-than-or-equal-to relation applied to each element of the given vector on wires and the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt_uv</h2>
+</div>
+<code>
+pub  fn gt_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise greater-than relation of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt_uv_uint</h2>
+</div>
+<code>
+pub  fn gt_uv_uint
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Greater-than relation applied to each element of the given vector on wires and the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function is_nonnegative_uv</h2>
+</div>
+<code>
+pub  fn is_nonnegative_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The signs of the elements in the given vector on wires, all considered as signed integers with the number of bits given as the second argument. In the result, 1 means non-negative and 0 means negative.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le_uv</h2>
+</div>
+<code>
+pub  fn le_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise less-than-or-equal-to relation of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le_uv_uint</h2>
+</div>
+<code>
+pub  fn le_uv_uint
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Less-than-or-equal-to relation applied to each element of the given vector on wires and the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_uv</h2>
+</div>
+<code>
+pub  fn lt_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise less-than relation of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_uv_uint</h2>
+</div>
+<code>
+pub  fn lt_uv_uint
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Less-than relation applied to each element of the given vector on wires and the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument. In the result, 1 means true (in relation), 0 means false (not in relation).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function max_uint_uv</h2>
+</div>
+<code>
+pub  fn max_uint_uv
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Maximum of each element of the given vector on wires with the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function max_uv</h2>
+</div>
+<code>
+pub  fn max_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise maximum of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function min_uint_uv</h2>
+</div>
+<code>
+pub  fn min_uint_uv
+[
+N : Nat
+]
+(   x : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Minimum of each element of the given vector on wires with the fixed value on wire. All values are considered as unsigned integers with the number of bits given as the third argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function min_uv</h2>
+</div>
+<code>
+pub  fn min_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise minimum of two vectors on wires, all values being considered as unsigned integers with the number of bits given as the third argument.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mul_preuint_uv</h2>
+</div>
+<code>
+pub  fn mul_preuint_uv
+[
+N : Nat
+]
+(   c : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Multiplying all elements of the vector on wires with the constant in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mul_uint_uv</h2>
+</div>
+<code>
+pub  fn mul_uint_uv
+[
+N : Nat
+]
+(   c : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Multiplying all elements of the vector on wires with the fixed value on wire.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function negate_uv</h2>
+</div>
+<code>
+pub  fn negate_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Negating all elements of the vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function not_uv</h2>
+</div>
+<code>
+pub  fn not_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise logical negation of given vector on wires, 1 meaning true and 0 meaning false.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function or_uv</h2>
+</div>
+<code>
+pub  fn or_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise logical disjunction of given two vectors on wires, 1 meaning true and 0 meaning false.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function prod_uv</h2>
+</div>
+<code>
+unchecked eff [*] -&gt; * ! &lt;$post&gt;<br>
+pub  fn prod_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The product of all elements of a vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function scalar_prod_uv</h2>
+</div>
+<code>
+pub  fn scalar_prod_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The scalar (dot) product of two vectors on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_preuint_uv</h2>
+</div>
+<code>
+pub  fn sub_preuint_uv
+[
+N : Nat
+]
+(   c : uint[N] $pre <span class="citation" data-cites="public">@public</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Subtracting all elements of a vector on wires from a constant in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_uint_uv</h2>
+</div>
+<code>
+pub  fn sub_uint_uv
+[
+N : Nat
+]
+(   c : uint[N] $post <span class="citation" data-cites="prover">@prover</span>,
+   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Subtracting all elements of a vector on wires from a fixed value on wire.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_uv</h2>
+</div>
+<code>
+pub  fn sub_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Subtracting the second vector on wires from the first one pointwise. More efficient than vectorized subtraction due to negation being done via multiplying by constant -1 in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sum_uv</h2>
+</div>
+<code>
+unchecked eff [*] -&gt; * ! &lt;$post&gt;<br>
+pub  fn sum_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $post <span class="citation" data-cites="prover">@prover</span>
+<br>where
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>The sum of all elements of a vector on wires.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function vectorized_bitextracts</h2>
+</div>
+<code>
+pub  fn vectorized_bitextracts
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; list[arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>A synonym of <code>bitextract_uv</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function xor_uv</h2>
+</div>
+<code>
+pub  fn xor_uv
+[
+N : Nat
+]
+(   xs : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   ys : arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; arr[uint[N] $post <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N],
+<br>&nbsp;&nbsp;Vectorization
+</code>
+<div>
+  <blockquote>
+  <p>Pointwise xor of given two vectors on wires, 1 meaning true and 0 meaning false.</p>
+  </blockquote>
 </div>
 
-    </body>
-</html>
+  </div>
+</div>

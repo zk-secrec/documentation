@@ -1,326 +1,849 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>FastFixedPoint - The ZK-SecreC Language Documentation</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/fontawesome.min.css" rel="stylesheet">
-        <link href="../../css/brands.min.css" rel="stylesheet">
-        <link href="../../css/solid.min.css" rel="stylesheet">
-        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <link href="../../css/typesystem.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../..">The ZK-SecreC Language Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="../.." class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">User Guide</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../1-user-guide/0-installation/" class="dropdown-item">Installation</a>
-</li>
-                                    
-<li>
-    <a href="../../1-user-guide/1-getting-started/" class="dropdown-item">Getting Started</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Developer Guide</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../2-dev-guide/0-profiling/" class="dropdown-item">Profiling</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Reference</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../3-reference/0-values-and-types/" class="dropdown-item">Values and Types</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/1-lexical-structure/" class="dropdown-item">Lexical Structure</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/2-type-level-expressions/" class="dropdown-item">Type Level Expressions</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/3-expressions/" class="dropdown-item">Expressions</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/4-top-level/" class="dropdown-item">Top Level</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/5-type-system.html" class="dropdown-item">Type System</a>
-</li>
-                                    
-<li>
-    <a href="../../3-reference/6-boxed-and-unboxed-types/" class="dropdown-item">Boxed and Unboxed Types</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../BigInt.html" class="dropdown-item">BigInt</a>
-</li>
-                                    
-<li>
-    <a href="../Bitextract.html" class="dropdown-item">Bitextract</a>
-</li>
-                                    
-<li>
-    <a href="../Builtin.html" class="dropdown-item">Builtin</a>
-</li>
-                                    
-<li>
-    <a href="../Char.html" class="dropdown-item">Char</a>
-</li>
-                                    
-<li>
-    <a href="../ChrVec.html" class="dropdown-item">CheVec</a>
-</li>
-                                    
-<li>
-    <a href="../Date.html" class="dropdown-item">Date</a>
-</li>
-                                    
-<li>
-    <a href="../DFA.html" class="dropdown-item">DFA</a>
-</li>
-                                    
-<li>
-    <a href="../EC.html" class="dropdown-item">EC</a>
-</li>
-                                    
-<li>
-    <a href="../FastFixedPoint.html" class="dropdown-item">FastFixedPoint</a>
-</li>
-                                    
-<li>
-    <a href="../FastFixedPointVec.html" class="dropdown-item">FastFixedPointVec</a>
-</li>
-                                    
-<li>
-    <a href="../FixedPoint.html" class="dropdown-item">FixedPoint</a>
-</li>
-                                    
-<li>
-    <a href="../Inequalities.html" class="dropdown-item">Inequalities</a>
-</li>
-                                    
-<li>
-    <a href="../Integer.html" class="dropdown-item">Integer</a>
-</li>
-                                    
-<li>
-    <a href="../IsFromFirst.html" class="dropdown-item">IsFromFirst</a>
-</li>
-                                    
-<li>
-    <a href="../OldInequalities.html" class="dropdown-item">OldInequalities</a>
-</li>
-                                    
-<li>
-    <a href="../Perm.html" class="dropdown-item">Perm</a>
-</li>
-                                    
-<li>
-    <a href="../Poseidon.html" class="dropdown-item">Poseidon</a>
-</li>
-                                    
-<li>
-    <a href="../Prob.html" class="dropdown-item">Prob</a>
-</li>
-                                    
-<li>
-    <a href="../SetOp.html" class="dropdown-item">SetOp</a>
-</li>
-                                    
-<li>
-    <a href="../Std.html" class="dropdown-item">Std</a>
-</li>
-                                    
-<li>
-    <a href="../Store.html" class="dropdown-item">Store</a>
-</li>
-                                    
-<li>
-    <a href="../StoreVec.html" class="dropdown-item">StoreVec</a>
-</li>
-                                    
-<li>
-    <a href="../String.html" class="dropdown-item">String</a>
-</li>
-                                    
-<li>
-    <a href="../Text.html" class="dropdown-item">Text</a>
-</li>
-                                    
-<li>
-    <a href="../Vec.html" class="dropdown-item">Vec</a>
-</li>
-                                    
-<li>
-    <a href="../Waksman.html" class="dropdown-item">Waksman</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Backend Interface</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../5-backend-interface/0-interfacing-a-new-backend/" class="dropdown-item">Interfacing a New Backend</a>
-</li>
-                                    
-<li>
-    <a href="../../5-backend-interface/1-trait-methods/" class="dropdown-item">Trait Methods</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
-
+<link rel="stylesheet" type="text/css" href="/css/site.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/typesystem.css" media="screen "/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miltonian" />
+<div>
+<header class="layout-row bb layout-align-center px-1">
+  <div>
+    <h1><a href="/index.html">ZK-SecreC Documentation</a></h1>
+  </div>
+  <div class="flex">
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
-
+  </div>
+  <div>
+    2024.09
+  </div>
+</header>
 </div>
-            </div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="../../js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../js/base.js"></script>
-        <script src="../../search/main.js"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+<div class="layout-row flex">
+  <aside class="br visible">
+    <nav class="px-2 layout-col">
+          <a class="toc-level-0" href="/1-user-guide/0-installation.html">Docs Md</a>
+          <a class="toc-level-1" href="/1-user-guide/0-installation.html">User Guide</a>
+          <a class="toc-level-2" href="/1-user-guide/0-installation.html">Installation</a>
+          <a class="toc-level-2" href="/1-user-guide/1-getting-started.html">Getting Started</a>
+          <a class="toc-level-1" href="/2-dev-guide/0-profiling.html">Dev Guide</a>
+          <a class="toc-level-2" href="/2-dev-guide/0-profiling.html">Profiling</a>
+          <a class="toc-level-1" href="/3-reference/0-values-and-types.html">Reference</a>
+          <a class="toc-level-2" href="/3-reference/0-values-and-types.html">Values and Types</a>
+          <a class="toc-level-2" href="/3-reference/1-lexical-structure.html">Lexical Structure</a>
+          <a class="toc-level-2" href="/3-reference/2-type-level-expressions.html">Type Level Expressions</a>
+          <a class="toc-level-2" href="/3-reference/3-expressions.html">Expressions</a>
+          <a class="toc-level-2" href="/3-reference/4-top-level.html">Top Level</a>
+          <a class="toc-level-2" href="/3-reference/5-type-system.html">Type System</a>
+          <a class="toc-level-2" href="/3-reference/6-boxed-and-unboxed-types.html">Boxed and Unboxed Types</a>
+          <a class="toc-level-1" href="/4-api/BigInt.html">Api</a>
+          <a class="toc-level-2" href="/4-api/BigInt.html">BigInt</a>
+          <a class="toc-level-2" href="/4-api/Bitextract.html">Bitextract</a>
+          <a class="toc-level-2" href="/4-api/Builtin.html">Builtin</a>
+          <a class="toc-level-2" href="/4-api/Char.html">Char</a>
+          <a class="toc-level-2" href="/4-api/ChrVec.html">ChrVec</a>
+          <a class="toc-level-2" href="/4-api/Date.html">Date</a>
+          <a class="toc-level-2" href="/4-api/DFA.html">DFA</a>
+          <a class="toc-level-2" href="/4-api/EC.html">EC</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPoint.html">FastFixedPoint</a>
+          <a class="toc-level-2" href="/4-api/FastFixedPointVec.html">FastFixedPointVec</a>
+          <a class="toc-level-2" href="/4-api/FixedPoint.html">FixedPoint</a>
+          <a class="toc-level-2" href="/4-api/Inequalities.html">Inequalities</a>
+          <a class="toc-level-2" href="/4-api/Integer.html">Integer</a>
+          <a class="toc-level-2" href="/4-api/IsFromFirst.html">IsFromFirst</a>
+          <a class="toc-level-2" href="/4-api/OldInequalities.html">OldInequalities</a>
+          <a class="toc-level-2" href="/4-api/Perm.html">Perm</a>
+          <a class="toc-level-2" href="/4-api/Poseidon.html">Poseidon</a>
+          <a class="toc-level-2" href="/4-api/Prob.html">Prob</a>
+          <a class="toc-level-2" href="/4-api/Ratio.html">Ratio</a>
+          <a class="toc-level-2" href="/4-api/SetOp.html">SetOp</a>
+          <a class="toc-level-2" href="/4-api/Std.html">Std</a>
+          <a class="toc-level-2" href="/4-api/Store.html">Store</a>
+          <a class="toc-level-2" href="/4-api/StoreVec.html">StoreVec</a>
+          <a class="toc-level-2" href="/4-api/String.html">String</a>
+          <a class="toc-level-2" href="/4-api/Text.html">Text</a>
+          <a class="toc-level-2" href="/4-api/Vec.html">Vec</a>
+          <a class="toc-level-2" href="/4-api/Waksman.html">Waksman</a>
+          <a class="toc-level-1" href="/5-backend-interface/0-interfacing-a-new-backend.html">Backend Interface</a>
+          <a class="toc-level-2" href="/5-backend-interface/0-interfacing-a-new-backend.html">Interfacing a New Backend</a>
+          <a class="toc-level-2" href="/5-backend-interface/1-trait-methods.html">Trait Methods</a>
+        </nav>
+  </aside>
+  <div class="px-2 pb-5 body">
+<div>
+  <h1>Module FastFixedPoint</h1>
+</div>
+<div>
+  <h2>Function add_fixed</h2>
+</div>
+<code>
+pub  fn add_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The sum of the given two fixed-point numbers. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers. Does not check that the sum fits to this number of bits. Use <code>check_fixed</code> to check it manually when necessary.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function check_fixed</h2>
+</div>
+<code>
+pub  fn check_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; () $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Check that a fixed-point number fits in its required number of bits. Can be used after an operation or a series of operations that do not do this check. Some operations (e.g. <code>add_fixed</code>, <code>sub_fixed</code>, <code>negate_fixed</code>) have left out this check for efficiency, so that several such operations can be done in row before calling <code>check_fixed</code>. This is safe if the intermediate results do not overflow the modulus (but they do not have to fit into <code>len</code> bits). For example, three fixed-point numbers can be added together by <code>{let w = add_fixed(x, add_fixed(y, z)); check_fixed(w); w}</code>, calling <code>check_fixed</code> only once rather than twice. This is safe if <code>3*(2^len - 1) &lt; N</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function coef_div_pre</h2>
+</div>
+<code>
+pub  fn coef_div_pre
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $pre <span class="citation" data-cites="D">@D</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>A helper function used to implement division in both <code>FastFixedPoint</code> and <code>FastFixedPointVec</code> modules. Intended for standard library programmers only.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function div_fixed</h2>
+</div>
+<code>
+pub  fn div_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The ratio of the given two fixed-point numbers. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers or the ratio does not fit to this number of bits. Also fails if the second operand is zero.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function eq_fixed</h2>
+</div>
+<code>
+pub  fn eq_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given two fixed-point numbers are equal. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed</h2>
+</div>
+<code>
+pub  fn fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   coef : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new fixed-point number with the given parameters (the integral value that ignores binary point; the number of bits; the number of bits following the binary point). Fails if the integral value does not fit to the required number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_cond</h2>
+</div>
+<code>
+pub  fn fixed_cond
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   b : bool[N] $S <span class="citation" data-cites="D">@D</span>,
+   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Oblivious choice according to the given boolean between the given two fixed-point numbers. Assumes that the numbers are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_nonnegative</h2>
+</div>
+<code>
+pub  fn fixed_nonnegative
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   coef : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new fixed-point number with the given parameters (the integral value that ignores binary point; the number of bits; the number of bits following the binary point). Fails if the new fixed-point number would be negative, or if the integral value does not fit to the required number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_post</h2>
+</div>
+<code>
+pub  fn fixed_post
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $post, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number to the stage <code>$post</code>, putting it on a wire if it is in <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_pre</h2>
+</div>
+<code>
+pub  fn fixed_pre
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   f : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number to the stage <code>$pre</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_prover</h2>
+</div>
+<code>
+pub  fn fixed_prover
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="prover">@prover</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number to the domain <code>@prover</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_to_bitstring</h2>
+</div>
+<code>
+pub  fn fixed_to_bitstring
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Representing the given fixed-point number as a bit string (for testing purposes).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_to_string</h2>
+</div>
+<code>
+pub  fn fixed_to_string
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   f : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; string $pre <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Representing the given fixed-point number in decimal (for testing purposes).</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function fixed_verifier</h2>
+</div>
+<code>
+pub  fn fixed_verifier
+[
+N : Nat,
+$S
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="public">@public</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="verifier">@verifier</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Conversion of the given fixed-point number from the domain <code>@public</code> to the domain <code>@verifier</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function ge_fixed</h2>
+</div>
+<code>
+pub  fn ge_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given fixed-point number is greater than or equal to the second one. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function gt_fixed</h2>
+</div>
+<code>
+pub  fn gt_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given fixed-point number is less than the second one. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function increase_len_fixed</h2>
+</div>
+<code>
+pub  fn increase_len_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   new_len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Increases the number of bits of a fixed-point number, without changing its value. Fails if the new <code>len</code> is less than the old <code>len</code>. Does not check that the new <code>len</code> fits in the modulus.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function le_fixed</h2>
+</div>
+<code>
+pub  fn le_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given fixed-point number is less than or equal to the second one. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_fixed</h2>
+</div>
+<code>
+pub  fn lt_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the first given fixed-point number is less than the second one. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function lt_signed</h2>
+</div>
+<code>
+pub  fn lt_signed
+[
+$S,
+<span class="citation" data-cites="D">@D</span>,
+N : Nat
+]
+(   x : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   y : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   bw : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Signed comparison of two integers in <code>uint[N]</code>, i.e. <code>x</code> and <code>y</code> are interpreted as bw-bit signed integers in the range <code>-2^(bw-1) .. 2^(bw-1)-1</code>. Tests if <code>x</code> is less than <code>y</code>.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function max_fixed</h2>
+</div>
+<code>
+pub  fn max_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Find the maximum of two fixed-point numbers. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function min_fixed</h2>
+</div>
+<code>
+pub  fn min_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Find the minimum of two fixed-point numbers. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mult_fixed</h2>
+</div>
+<code>
+pub  fn mult_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two fixed-point numbers. Assumes that they are correctly formed. The result is rounded to the same number of bits after the binary point as the arguments. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers or the product does not fit to this number of bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mult_fixed_alternative</h2>
+</div>
+<code>
+pub  fn mult_fixed_alternative
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>An alternative implementation of <code>mult_fixed</code>, using <code>mult_fixed_exact</code>, followed by <code>round_down_fixed</code>. Should have same semantics and similar performance.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function mult_fixed_exact</h2>
+</div>
+<code>
+pub  fn mult_fixed_exact
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The product of the given two fixed-point numbers. Does not round the result, instead the <code>len</code> and <code>pplen</code> of the result are the sum of the <code>len</code> and <code>pplen</code> of the arguments, respectively. This is much faster than <code>mult_fixed</code>. If the modulus is not large enough to fit numbers with new <code>len</code> bits then it fails. If the inputs are correctly formed (fit in the required number of bits) then the result is as well.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function negate_fixed</h2>
+</div>
+<code>
+pub  fn negate_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Negation of the given fixed-point number. If the given number is the smallest one representable within the number of bits and the number of bits after the binary point, then overflow will occur which is not checked. Use <code>check_fixed</code> to check it manually when necessary.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function neq_fixed</h2>
+</div>
+<code>
+pub  fn neq_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; bool[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Test if the given two fixed-point numbers are distinct. Assumes that they are correctly formed. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function round_down_fixed</h2>
+</div>
+<code>
+pub  fn round_down_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   new_len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   new_pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Reduces <code>pplen</code> by rounding towards minus infinity. The arguments specify both a new <code>len</code> and a new <code>pplen</code>. Fails if the new <code>pplen</code> is greater than the old one or if the rounded result does not fit in the new <code>len</code> bits or if adding the rounded-down bits back to the new <code>len</code> would overflow the modulus. The input fixed-point number does not have to fit in its <code>len</code> bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function round_down_fixed_to_int</h2>
+</div>
+<code>
+pub  fn round_down_fixed_to_int
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Rounds a fixed-point number down to the nearest integer less than or equal to it, i.e. it takes the floor of the fixed-point number. Fails if the input does not fit into its <code>len</code> bits.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function round_fixed_to_nearest_int</h2>
+</div>
+<code>
+pub  fn round_fixed_to_nearest_int
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Rounds a fixed-point number to the nearest integer, either up or down whichever is closer. <code>n + 0.5</code>, for an integer <code>n</code>, is rounded to <code>n + 1</code>, even for negative <code>n</code>. Fails if the output does not fit into its <code>len</code> bits, which can also occur for correctly formed inputs that are so close to the maximum allowed value that rounding up to an integer overflows the required number of bits. If the input is slightly below the minimum allowed value but after rounding up fits in the required number of bits then it does not fail.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function round_up_fixed_to_int</h2>
+</div>
+<code>
+pub  fn round_up_fixed_to_int
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; uint[N] $S <span class="citation" data-cites="D">@D</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Rounds a fixed-point number up to the nearest integer greater than or equal to it, i.e. it takes the ceiling of the fixed-point number. Fails if the output does not fit into its <code>len</code> bits, which can also occur for correctly formed inputs that are so close to the maximum allowed value that rounding up to an integer overflows the required number of bits. If the input is slightly below the minimum allowed value but after rounding up fits in the required number of bits then it does not fail.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function signed_uintN_to_uint</h2>
+</div>
+<code>
+pub  fn signed_uintN_to_uint
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : uint[N] $pre <span class="citation" data-cites="D">@D</span>
+) 
+-&gt; uint $pre <span class="citation" data-cites="D">@D</span>
+</code>
+<div>
+  <blockquote>
+  <p>Convert a <code>uint[N]</code> integer in <code>$pre</code> into a <code>uint</code>, interpreting the <code>uint[N]</code> as a value in the range <code>-N/2 .. N-N/2-1</code> instead of <code>0 .. N-1</code>. E.g. <code>N-1</code> is converted to <code>-1</code>, etc.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sqrt_fixed</h2>
+</div>
+<code>
+unchecked eff [<em>,</em>,*] -&gt; [<em>,</em>,*] ! &lt;$S&gt;<br>
+pub  fn sqrt_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Square root of the given fixed-point number. Assumes that the number is correctly formed. Fails if the given fixed-point number is negative.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sqrt_fixed_pre</h2>
+</div>
+<code>
+pub  fn sqrt_fixed_pre
+[
+N : Nat,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $pre, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>Square root of the given fixed-point number in <code>$pre</code>. Assumes that the number is correctly formed. Fails if the given fixed-point number is negative.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function sub_fixed</h2>
+</div>
+<code>
+pub  fn sub_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   x : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>,
+   y : Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>The difference of the given two fixed-point numbers. Fails if the numbers of bits or the numbers of bits after the binary point differ in the given fixed-point numbers. Does not check that the sum fits to this number of bits. Use <code>check_fixed</code> to check it manually when necessary.</p>
+  </blockquote>
+</div>
+<div>
+  <h2>Function uint_to_fixed</h2>
+</div>
+<code>
+pub  fn uint_to_fixed
+[
+N : Nat,
+$S,
+<span class="citation" data-cites="D">@D</span>
+]
+(   n : uint[N] $S <span class="citation" data-cites="D">@D</span>,
+   len : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>,
+   pplen : uint[18446744073709551616] $pre <span class="citation" data-cites="public">@public</span>
+) 
+-&gt; Fixed[N, $S, <span class="citation" data-cites="D">@D</span>] $pre <span class="citation" data-cites="public">@public</span>
+<br>where
+<br>&nbsp;&nbsp;Field[N]
+</code>
+<div>
+  <blockquote>
+  <p>A new fixed-point number whose value is the integer given as the first argument, with the number of bits and the number of bits after the binary point given as the second and the third arguments. Fails if the integral value (along with zeros after the binary point) does not fit to the required number of bits but does not check that it fits into the modulus (if overflowing the modulus wraps it around to a value that fits in the number of bits then it is not detected).</p>
+  </blockquote>
 </div>
 
-    </body>
-</html>
+  </div>
+</div>

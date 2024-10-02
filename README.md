@@ -1,6 +1,6 @@
 # Documentation on the ZK-SecreC Compiler, Language and Standard Library
 
-This documentation can be served using the Pandora server that is also developed in Cybernetica. Nevertheless, it is possible to get it work with MkDocs. We have uploaded the `docs` directory produced by MkDocs along with its contents, so the user can in principle open the documentation HTML files directly with a web browser. (As MkDocs does not understand the yaml encoding of API description, the files in the `4-api` subdirectory have been replaced by those produced by Pandora and made all links work by redirecting them using `sed -Ei`.)
+This documentation can be served using the Pandora server that is also developed in Cybernetica. Nevertheless, it is possible to get it work with MkDocs. We have uploaded the `docs` directory produced by MkDocs along with its contents, so the user can in principle open the documentation HTML files directly with a web browser. (As MkDocs does not understand the yaml encoding of API description, the files in the `4-api` subdirectory have been replaced by those produced by Pandora and all links have been made correct by redirecting them using `sed -Ei`.)
 
 Having the Pandora server installed, serving the documentation can be done by just running the `pandora` program in the root folder of this project and entering `localhost:8000` to the address bar of the web browser.
 

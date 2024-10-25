@@ -2,6 +2,11 @@
 
 ![ZK-SecreC](https://raw.githubusercontent.com/zk-secrec/.github/main/profile/img/banner.png)
 
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+  <a href="https://github.com/zk-secrec"><img src="https://badgen.net/badge/GitHub/ZK-SecreC?icon=github&color=red" alt="ZK-SecreC on GitHub" width=200></a> 
+  <a href="mailto:zk-secrec@cyber.ee"><i class="fa-regular fa-envelope"></i> zk-secrec@cyber.ee</a>
+</div>
+
 Zero-Knowledge (ZK) Proofs are a cryptographic technology used to convince Relying Parties that a statement holds, while not revealing them the evidence that makes that statement hold. While ZK Proofs are already widely used in certain real-world applications, and even more ubiquitously as subroutines in cryptographic functionalities, we believe that a well-design programming language will simplify their even more general uptake. Hence we have introduced the domain-specific language ZK-SecreC.
 
 The power of ZK-SecreC ultimately derives from its type system, which is described and justified in the following research paper:
